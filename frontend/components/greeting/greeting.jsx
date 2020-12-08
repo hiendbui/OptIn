@@ -18,9 +18,6 @@ export default class Greeting extends React.Component {
 
                 <img src="https://static-exp3.licdn.com/sc/h/3m4tgpbdz7gbldapvl63mrnxz" id="work-img"/>
                 <br/>
-                <br/>
-                <br/>
-                <br/>
                 <h2>Conversations today could lead to opportunity tomorrow</h2>
                 <h3>OptIn to your network and strengthen relationships as you take the next step in your career</h3>
                 <br/>    

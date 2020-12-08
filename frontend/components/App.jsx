@@ -3,7 +3,7 @@ import Greeting from "./greeting/greeting";
 import LoginFormContainer from "./session_form/login_form_container";
 import SignUpFormContainer from "./session_form/signup_form_container";
 import  NewsFeedContainer  from './news_feed/news_feed_container';
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { LoggedInAuthRoute, LoggedOutAuthRoute } from '../util/route_util';
 
 
