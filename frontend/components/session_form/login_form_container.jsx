@@ -6,7 +6,6 @@ const mapStateToProps = state => ({
     errors: state.errors.session,
     formType: 'login',
     header: 'Welcome Back'
-    header: 
 })
 
 const mapDispatchToProps = dispatch => ({

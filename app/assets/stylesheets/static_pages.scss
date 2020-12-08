@@ -5,8 +5,16 @@
 #logo {
     display: inline-block;
     margin-left: 25px;
-    width: 10%;
+    width: 8.5%;
     height: auto;
+}
+
+#work-img {
+    width: 50%;
+    height: auto;
+    float: right;
+    position: relative;
+    right: -75px;
 }
 
 h1, h2, h3 {
@@ -26,6 +34,11 @@ h1  {
 
 h2 {
     font-size: 35px;
+}
+
+#bottom {
+    display:flex;
+    align-content: bottom; 
 }
 
 .form-buttons {
