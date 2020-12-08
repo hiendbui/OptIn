@@ -22,8 +22,8 @@ export default class SessionForm extends React.Component {
         this.props.processForm(this.state);
     }
 
-    clearErrors(e) {
-        this.props.errors = [];
+    componentDidMount() {
+        if (this.props.errors.length !== 0) this.props.clearErrors()
     }
 
     render() {
@@ -51,6 +51,7 @@ export default class SessionForm extends React.Component {
                 <p>
                     {this.props.message[0] + '\xa0'}<Link 
                                                         to={`/${this.props.message[1]}`} 
+                                                        onClick={this.clearErrors}
                                                         className='link'>
                                                         {this.props.message[2]}
                                                     </Link>
