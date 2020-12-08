@@ -14,7 +14,7 @@
     height: auto;
     float: right;
     position: relative;
-    right: -75px;
+    right: -60px;
 }
 
 h1, h2, h3 {
@@ -43,8 +43,9 @@ h2 {
 
 .form-buttons {
     position: absolute; 
-    right: 0px;
-    top:0px;
+        right: 0px;
+        top:0px;
+
     button {
         font-family: Sans-Serif;
         background-color: transparent;
@@ -57,10 +58,66 @@ h2 {
         padding-right: 15px;
         border-radius:50px;
         margin: 10px;
+        
     }
-    :hover {
+
+    button:hover {
         border-width: 2px;
         background-color:  #e3eefa;
         cursor: pointer;
+    }
+}
+
+#logo-form {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 8%;
+    height: auto;
+}
+
+.session-form {
+    padding: 100px;
+    font-family: sans-serif;
+    h2, h3, form > input, p {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+    form > label  {
+        font-size: 18px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-right: 95px;
+        input {
+        width: 35%;
+        padding: 12px 20px;
+        margin: -7.5px 0;
+        border-width: 1px;
+        border-radius: 3px;
+        }
+    }
+    #submit-form {
+        color:white;
+        background:  #2977c9;
+        width: 250px;
+        padding: 15px;
+        border-width: 0px;
+        border-radius: 20px;
+        font-weight: bold;
+        
+    }
+
+    #submit-form:hover {
+            background-color: #12549b;
+            cursor: pointer;
+    }
+    
+    .link {
+        color: #2977c9;
+        font-weight: bold;
+        text-decoration: none;
     }
 }
