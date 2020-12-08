@@ -12,7 +12,11 @@ export default class SessionForm extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-
+    
+    componentDidMount() {
+        if (this.props.errors.length !== 0) this.props.clearErrors()
+    }
+    
     handleChange(field) {
         return (e) => this.setState({[field]: e.target.value})
     }
@@ -20,10 +24,6 @@ export default class SessionForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.processForm(this.state);
-    }
-
-    componentDidMount() {
-        if (this.props.errors.length !== 0) this.props.clearErrors()
     }
 
     render() {
@@ -47,12 +47,11 @@ export default class SessionForm extends React.Component {
                     <p>{this.props.errors[0]}</p>
                     <input id="submit-form" type="submit" value={this.props.formType}/>
                 </form>
-                    <button>Demo User</button>
+                    <button onClick={this.props.loginDemoUser}>Demo User</button>
                 <br/>
                 <p>
                     {this.props.message[0] + '\xa0'}<Link 
                                                         to={`/${this.props.message[1]}`} 
-                                                        onClick={this.clearErrors}
                                                         className='link'>
                                                         {this.props.message[2]}
                                                     </Link>
