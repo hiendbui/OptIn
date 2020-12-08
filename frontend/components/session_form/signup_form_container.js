@@ -4,12 +4,13 @@ import SessionForm from './session_form';
 
 const mapStateToProps = state => ({
     errors: state.errors.session,
-    formType: 'signup',
-    header: ['Make the most of your professional life']
+    formType: 'Sign up',
+    header: ['Make the most of your professional life'],
+    message: ['Already on OptIn?', 'login', 'Sign in']
 })
 
 const mapDispatchToProps = dispatch => ({
-    processForm: (user) => signup(user)
+    processForm: (user) => dispatch(signup(user))
 })
-const SignupFormContainer = connect(mapStateToProps, mapDispatchToProps)(SessionForm);
+const SignUpFormContainer = connect(mapStateToProps, mapDispatchToProps)(SessionForm);
 export default SignUpFormContainer;

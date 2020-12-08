@@ -8,8 +8,10 @@ export default class Greeting extends React.Component {
             <div>
                 <img src={logo} id="logo" />
                 <section className='form-buttons'>
-                    <button><Link to='/signup'></Link>Join Now</button>
-                    <button><Link to='/login'></Link>Sign In</button>
+                    <Link to='/signup'><button>Join Now</button></Link>
+                    <Link to='/login'><button>Sign In</button></Link>
+                    
+                    
                 </section>
                 
                 <h1>Welcome to your professional community</h1>
