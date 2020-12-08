@@ -1,11 +1,23 @@
 import { Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import React from 'react';
 
-const Auth = ({ component: Component, path, loggedIn, exact }) => (
+const LoggedInAuth = ({ component: Component, path, loggedIn, exact }) => (
     <Route
         path={path}
         exact={exact}
         render={props =>
-            loggedIn ? <Component {...props} /> /* Change to news feed component later*/ : <Redirect to="/" />
+            loggedIn ? <Component {...props} /> : <Redirect to="/" />
+        }
+    />
+);
+
+const LoggedOutAuth = ({ component: Component, path, loggedIn, exact }) => (
+    <Route
+        path={path}
+        exact={exact}
+        render={props =>
+            loggedIn ? <Redirect to="/feed" /> : <Component {...props} />
         }
     />
 );
@@ -14,4 +26,5 @@ const mapStateToProps = state => {
     return { loggedIn: Boolean(state.session.id) };
 };
 
-export const AuthRoute = withRouter(connect(mapStateToProps)(Auth));
+export const LoggedInAuthRoute = withRouter(connect(mapStateToProps)(LoggedInAuth));
+export const LoggedOutAuthRoute = withRouter(connect(mapStateToProps)(LoggedOutAuth));

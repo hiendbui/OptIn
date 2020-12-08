@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         store = configureStore();
     }
-
+    window.dispatch = store.dispatch
+    window.logout = SessionAction.logout
     const rootEl = document.getElementById("root");
     ReactDOM.render(<Root store={store}/>, rootEl);
 });
