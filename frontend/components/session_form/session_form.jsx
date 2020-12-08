@@ -47,6 +47,7 @@ export default class SessionForm extends React.Component {
                     <p>{this.props.errors[0]}</p>
                     <input id="submit-form" type="submit" value={this.props.formType}/>
                 </form>
+                    <button>Demo User</button>
                 <br/>
                 <p>
                     {this.props.message[0] + '\xa0'}<Link 

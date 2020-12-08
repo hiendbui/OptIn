@@ -79,7 +79,7 @@ h2 {
 .session-form {
     padding: 100px;
     font-family: sans-serif;
-    h2, h3, form > input, p {
+    h2, h3, form > input, p, button {
         text-align: center;
         display: flex;
         justify-content: center;
@@ -93,7 +93,7 @@ h2 {
         justify-content: center;
         margin-right: 95px;
         input {
-        width: 35%;
+        width: 250px;
         padding: 12px 20px;
         margin: -7.5px 0;
         border-width: 1px;
@@ -105,19 +105,20 @@ h2 {
         font-size:14px;
         color: red;
     }
-    #submit-form {
+    #submit-form, button {
         color:white;
-        background:  #2977c9;
+        background:  #2072ca;
         width: 250px;
         padding: 15px;
         border-width: 0px;
         border-radius: 20px;
         font-weight: bold;
-        
+        margin-top: 5px;
+        margin-bottom: 5px;;
     }
 
-    #submit-form:hover {
-            background-color: #12549b;
+    #submit-form:hover, button:hover {
+            background-color: #12447a;
             cursor: pointer;
     }
     
