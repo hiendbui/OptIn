@@ -5,11 +5,15 @@ import SessionForm from './session_form';
 const mapStateToProps = state => ({
     errors: state.errors.session,
     formType: 'login',
-    header: 'Welcome Back'
+    header: [
+        'Welcome Back', 
+        `Don't miss your next opportunity. Sign in to stay updated on your professional world.`
+    ]
 })
 
 const mapDispatchToProps = dispatch => ({
     processForm: (user) => login(user)
 })
+
 const LoginFormContainer = connect(mapStateToProps,mapDispatchToProps)(SessionForm);
 export default LoginFormContainer;
