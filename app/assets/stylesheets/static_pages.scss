@@ -1,3 +1,39 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#logo {
+    display: inline-block;
+    align: left;
+    width: 10%;
+    height: auto;
+}
+
+h1 {
+    font-family: Sans-Serif;
+    font-weight: lighter;
+    color: #2977c9;
+}
+
+h1:first-of-type  {
+    font-size: 50px;
+}
+
+.form-buttons {
+    position: absolute; 
+    right: 0px;
+    top:0px;
+    button {
+        font-family: Sans-Serif;
+        background-color: transparent;
+        color: #2977c9;
+        font-weight: bolder;
+        border-color: #2977c9;
+        border-width: 1px;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius:50px;
+        margin: 10px;
+    }
+}

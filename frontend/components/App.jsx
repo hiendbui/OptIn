@@ -1,9 +1,10 @@
 import React from "react";
 import GreetingContainer from "./greeting/greeting_container"
+import logo from '../images/optin_logo.png'
 
 const App = () => (
     <div>
-        <h1>OptIn</h1>
+        <img src={logo} id="logo" />
         <GreetingContainer />
     </div>
 );

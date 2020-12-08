@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/hiendbui/OptIn/issues"
   },
-  "homepage": "https://github.com/hiendbui/OptIn#readme"
+  "homepage": "https://github.com/hiendbui/OptIn#readme",
+  "devDependencies": {
+    "file-loader": "^6.2.0"
+  }
 }
