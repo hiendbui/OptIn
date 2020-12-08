@@ -19,27 +19,31 @@ export default class SessionForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const user = Object.assign({}, this.state);
-        this.props.processForm(user);
+        this.props.processForm(this.state);
     }
 
     render() {
         return (
             <div className="session-form">
                 <img src={logo} id="logo-form" />
-                <h1>{this.props.header[0]}</h1>
-                <h2>{this.props.header[1]}</h2>
+                <br/>
+                <h2>{this.props.header[0]}</h2>
+                <h3>{this.props.header[1]}</h3>
+                <br/>
+                <br/>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Email:
+                    <label>​​{'\xa0\xa0\xa0\xa0\xa0'} Email:{'\xa0'}
                         <input type="text" value={this.props.email} onChange={this.handleChange('email')}/>
                     </label>
                     <br/>
-                    <label>Password:
-                        <input type="password" value={this.props.password} onChange={this.handleChange('email')} />
+                    <label>Password:{'\xa0'}
+                        <input type="password" value={this.props.password} onChange={this.handleChange('password')} />
                     </label>
-                    <input type="submit" value={this.props.formType}/>
+                    <br/>
+                    <input id="submit-form" type="submit" value={this.props.formType}/>
                 </form>
-                <p>{this.props.message[0]}</p> <Link to={`/${this.props.message[1]}`}><button>{this.props.message[2]}</button></Link>
+                <br/>
+                <p>{this.props.message[0] + '\xa0'}<Link to={`/${this.props.message[1]}`} className='link'>{this.props.message[2]}</Link></p>
             </div>
         )
     }    
