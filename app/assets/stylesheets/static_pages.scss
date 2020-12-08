@@ -1,3 +1,142 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#logo {
+    display: inline-block;
+    margin-left: 25px;
+    width: 80px;
+    height: auto;
+}
+
+#work-img {
+    width: 50%;
+    height: auto;
+    float: right;
+    position: relative;
+    right: -60px;
+}
+
+h1, h2, h3 {
+    margin-left: 25px;
+    font-family: Sans-Serif;
+    font-weight: lighter;
+    color: #2977c9;
+}
+
+h3 {
+    color: black;
+}
+
+h1  {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+#bottom {
+    display:flex;
+    align-content: bottom; 
+}
+
+.form-buttons {
+    position: absolute; 
+        right: 0px;
+        top:0px;
+
+    button {
+        font-family: Sans-Serif;
+        background-color: transparent;
+        color: #2977c9;
+        font-weight: bolder;
+        border-color: #2977c9;
+        border-width: 1px;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius:50px;
+        margin: 10px;
+        
+    }
+
+    button:hover {
+        border-width: 2px;
+        background-color:  #e3eefa;
+        cursor: pointer;
+    }
+}
+
+#logo-form {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 75px;
+    height: auto;
+}
+
+.session-form {
+    padding: 100px;
+    font-family: sans-serif;
+    h2, h3, form > input, p, button {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+
+    h2 {
+        font-size: 23px;
+        color: black;
+        font-weight: 450;
+        margin-top: 7.5px;
+        margin-bottom: 7.5px;
+    }
+
+    h3 {
+        color: rgb(104, 104, 104);
+    }
+    form > label  {
+        font-size: 18px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-right: 95px;
+        margin-bottom: 5px;
+        input {
+        width: 250px;
+        padding: 12px 20px;
+        margin: -7.5px 0;
+        border-width: 1px;
+        border-radius: 3px;
+        }
+    }
+
+    form > p {
+        font-size:14px;
+        color: red;
+    }
+    #submit-form, button {
+        color:white;
+        background:  #2072ca;
+        width: 285px;
+        padding: 15px;
+        border-width: 0px;
+        border-radius: 20px;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-bottom: 5px;;
+    }
+
+    #submit-form:hover, button:hover {
+            background-color: #12447a;
+            cursor: pointer;
+    }
+    
+    .link {
+        color: #2977c9;
+        font-weight: bold;
+        text-decoration: none;
+    }
+}
