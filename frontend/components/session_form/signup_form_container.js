@@ -5,7 +5,7 @@ import SessionForm from './session_form';
 const mapStateToProps = state => ({
     errors: state.errors.session,
     formType: 'Sign up',
-    header: ['Make the most of your professional life'],
+    header: ['Make the most of your professional life', 'OptIn to your network now.'],
     message: ['Already on OptIn?', 'login', 'Sign in']
 })
 
