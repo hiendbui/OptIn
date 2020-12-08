@@ -85,6 +85,7 @@ h2 {
         justify-content: center;
         margin: auto;
     }
+
     form > label  {
         font-size: 18px;
         text-align: center;
@@ -98,6 +99,11 @@ h2 {
         border-width: 1px;
         border-radius: 3px;
         }
+    }
+
+    form > p {
+        font-size:14px;
+        color: red;
     }
     #submit-form {
         color:white;

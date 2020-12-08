@@ -22,6 +22,10 @@ export default class SessionForm extends React.Component {
         this.props.processForm(this.state);
     }
 
+    clearErrors(e) {
+        this.props.errors = [];
+    }
+
     render() {
         return (
             <div className="session-form">
@@ -40,10 +44,17 @@ export default class SessionForm extends React.Component {
                         <input type="password" value={this.props.password} onChange={this.handleChange('password')} />
                     </label>
                     <br/>
+                    <p>{this.props.errors[0]}</p>
                     <input id="submit-form" type="submit" value={this.props.formType}/>
                 </form>
                 <br/>
-                <p>{this.props.message[0] + '\xa0'}<Link to={`/${this.props.message[1]}`} className='link'>{this.props.message[2]}</Link></p>
+                <p>
+                    {this.props.message[0] + '\xa0'}<Link 
+                                                        to={`/${this.props.message[1]}`} 
+                                                        className='link'>
+                                                        {this.props.message[2]}
+                                                    </Link>
+                </p>
             </div>
         )
     }    
