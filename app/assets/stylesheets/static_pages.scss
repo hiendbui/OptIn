@@ -4,19 +4,28 @@
 
 #logo {
     display: inline-block;
-    align: left;
+    margin-left: 25px;
     width: 10%;
     height: auto;
 }
 
-h1 {
+h1, h2, h3 {
+    margin-left: 25px;
     font-family: Sans-Serif;
     font-weight: lighter;
     color: #2977c9;
 }
 
-h1:first-of-type  {
+h3 {
+    color: black;
+}
+
+h1  {
     font-size: 50px;
+}
+
+h2 {
+    font-size: 35px;
 }
 
 .form-buttons {
@@ -35,5 +44,10 @@ h1:first-of-type  {
         padding-right: 15px;
         border-radius:50px;
         margin: 10px;
+    }
+    :hover {
+        border-width: 2px;
+        background-color:  #e3eefa;
+        cursor: pointer;
     }
 }

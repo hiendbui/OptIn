@@ -16,7 +16,7 @@ export default class Greeting extends React.Component {
                 <h2>Conversations today could lead to opportunity tomorrow</h2>
                 <h3>Sending messages to people you know is a great way to strengthen 
                     relationships as you take the next step in your career</h3>
-                <h1>Join your colleagues, classmates, and friends on OptIn.</h1>
+                <h2>Join your colleagues, classmates, and friends on OptIn.</h2>
 
             </div>
         )
