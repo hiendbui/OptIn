@@ -11,9 +11,17 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-class Profile < ApplicationRecord
-    validates :user_id, :full_name, :headline, :location, presence: true
-    validates :user_id, uniqueness: true
 
-    belongs_to :user
-end
+one:
+  user_id: 1
+  full_name: MyString
+  headline: MyString
+  location: MyString
+  description: MyText
+
+two:
+  user_id: 1
+  full_name: MyString
+  headline: MyString
+  location: MyString
+  description: MyText
