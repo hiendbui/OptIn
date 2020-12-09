@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
+gem 'jquery-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -45,7 +45,7 @@ gem 'binding_of_caller'
 gem 'pry-rails'
 gem 'annotate'
 gem 'byebug'
-gem 'jquery-rails'
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
