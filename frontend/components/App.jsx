@@ -11,11 +11,11 @@ import { LoggedInAuthRoute, LoggedOutAuthRoute } from '../util/route_util';
 const App = () => (
     <div>  
         <Switch>
-            <LoggedInAuthRoute path="/feed" component={LoggedIn} />
             <LoggedOutAuthRoute path="/login" component={LoginFormContainer} />
             <LoggedOutAuthRoute path="/signup" component={SignUpFormContainer} />
             <LoggedOutAuthRoute path='/' component={Greeting} /> 
         </Switch>
+        <LoggedInAuthRoute path="/" component={LoggedIn} />
     </div>
 );
 
