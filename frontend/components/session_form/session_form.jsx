@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/optin_logo.png';
 
 export default class SessionForm extends React.Component {
     constructor(props) {
@@ -29,7 +28,7 @@ export default class SessionForm extends React.Component {
     render() {
         return (
             <div className="session-form">
-                <img src={logo} id="logo-form" />
+                <img src={window.logo} id="logo-form" />
                 <br/>
                 <h2>{this.props.header[0]}</h2>
                 <h3>{this.props.header[1]}</h3>

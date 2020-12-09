@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/optin_logo.png'
 
 export default class Greeting extends React.Component {
     render () {
         return(
             <div>
-                <img src={logo} id="logo" />
+                <img src={window.logo} id="logo" />
                 <section className='form-buttons'>
                     <Link to='/signup'><button>Join Now</button></Link>
                     <Link to='/login'><button>Sign In</button></Link>
