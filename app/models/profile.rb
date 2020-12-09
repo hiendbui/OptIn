@@ -16,4 +16,6 @@ class Profile < ApplicationRecord
     validates :user_id, uniqueness: true
 
     belongs_to :user
+
+    has_one_attached :profile_pic
 end
