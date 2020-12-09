@@ -1,0 +1,15 @@
+.nav-bar {
+    button {
+        background-color: transparent;
+        border-width: 0px;
+        color: #666666;
+        
+    }
+    button:hover {
+        cursor: pointer;
+        > *{
+            color: black;
+        }
+    }
+
+}
