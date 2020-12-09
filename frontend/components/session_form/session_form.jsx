@@ -36,7 +36,7 @@ export default class SessionForm extends React.Component {
                 <br/>
                 <form onSubmit={this.handleSubmit}>
                     <label>​​{'\xa0\xa0\xa0\xa0\xa0'} Email:{'\xa0'}
-                        <input type="text" value={this.props.email} onChange={this.handleChange('email')}/>
+                        <input type="email" value={this.props.email} onChange={this.handleChange('email')}/>
                     </label>
                     <br/>
                     <label>Password:{'\xa0'}
