@@ -10,8 +10,8 @@ export default class NavBar extends React.Component {
     render() {
         return (
             <div className="nav-bar">
-                <img src={window.logo} id="logo-navbar" />
-                <IconContext.Provider value={{ style: { fontSize: '25px'} }}>
+                <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>
+                <IconContext.Provider value={{ style: { fontSize: '23px'} }}>
                     <button>
                         <BsPersonFill />
                         <br />
