@@ -29,7 +29,7 @@ export const createProfile = profile => dispatch => {
 export const updateProfile = profile => dispatch => {
     return APIUtil.updateProfile(profile)
         .then(
-            (savedProfile) => dispatch(receiveCurrentUser(savedProfile)),
+            (savedProfile) => dispatch(receiveProfile(savedProfile)),
             (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
         );
 };
