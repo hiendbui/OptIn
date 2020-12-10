@@ -1,4 +1,4 @@
-import { RECEIVE_CURRENT_USER } from '../../actions/user_auth_actions/session_actions';
+import { RECEIVE_CURRENT_USER, REMOVE_USER } from '../../actions/user_auth_actions/session_actions';
 
 const usersReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -6,8 +6,11 @@ const usersReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_CURRENT_USER:
-            newState[action.user.id] = action.user
+            newState[action.user.id] = action.user;
             return newState;
+        case REMOVE_USER:
+            delete newState[action.user.id];
+            return newState
         default:
             return state;
     }
