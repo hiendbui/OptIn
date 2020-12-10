@@ -14,7 +14,7 @@ export const updateProfile = (profile) => (
     })
 )
 
-//sample AJAX request
+//sample AJAX requests
 // $.ajax({ 
 //     method: 'POST', 
 //     url: 'api/profiles', 
@@ -24,3 +24,10 @@ export const updateProfile = (profile) => (
 //         location: 'San Francisco Bay Area', 
 //         description: null 
 //     } } })
+
+// $.ajax({
+//     method:'PATCH', 
+//     url: '/api/profiles/3', 
+//     data: {profile: 
+//         {full_name:'Hien Duy Bui'
+//     }}})
