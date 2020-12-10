@@ -45,23 +45,42 @@ export default class SessionForm extends React.Component {
                 <br/>
                 <form onSubmit={this.handleSubmit} className={this.props.formType.split(" ").join('-').toLowerCase()}>
                     <label className='hide'>Full Name:{'\xa0\xa0'}
-                        <input type="text" onChange={this.handleChange('profile','full_name')} placeholder="Sui Generis" />
+                        <input 
+                            type="text" 
+                            onChange={this.handleChange('profile','full_name')} 
+                            placeholder="Sui Generis" 
+                        />
                     </label>
                     <br className='hide'/>
                     <label className='hide'>Location:{'\xa0\xa0'}
-                        <input type="text"  onChange={this.handleChange('profile','location')} placeholder="San Francisco Bay Area" />
+                        <input 
+                            type="text"  
+                            onChange={this.handleChange('profile','location')} 
+                            placeholder="San Francisco Bay Area" 
+                        />
                     </label>
                     <br className='hide'/>
                     <label className='hide'>Headline:{'\xa0\xa0'}
-                        <input type="text" onChange={this.handleChange('profile','headline')} placeholder="Software Engineer at Cogito" />
+                        <input 
+                            type="text" 
+                            onChange={this.handleChange('profile','headline')} 
+                            placeholder="Software Engineer at Cogito" 
+                        />
                     </label>
                     <br className='hide'/>
                     <label>​​{'\xa0\xa0\xa0\xa0\xa0'}Email:{'\xa0\xa0'}
-                        <input type="email" onChange={this.handleChange('user','email')} placeholder="tabula_rasa@gmail.com"/>
+                        <input 
+                            type="email" 
+                            onChange={this.handleChange('user','email')} 
+                            placeholder="tabula_rasa@gmail.com"
+                        />
                     </label>
                     <br/>
                     <label>Password:{'\xa0\xa0'}
-                        <input type="password" onChange={this.handleChange('user','password')} placeholder="••••••••"/>
+                        <input 
+                            type="password" 
+                            onChange={this.handleChange('user','password')} 
+                            placeholder="••••••••"/>
                     </label>
                     <br />
                     <p>{this.props.errors[0]}</p>
