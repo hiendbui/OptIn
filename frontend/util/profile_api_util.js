@@ -14,17 +14,17 @@ export const updateProfile = (profile) => (
     })
 )
 
-export const fetchProfile = (profile) => {
+export const fetchProfile = (profile) => (
     $.ajax({
-        url: `/api/profiles/${profile.id}`,
+        url: `/api/profiles/${profile.id}`
     })
-}
+)
 
-export const fetchProfiles = () => {
+export const fetchProfiles = () => ()
     $.ajax({
         url: '/api/profiles',
     })
-}
+)
 
 //sample AJAX requests
 // $.ajax({ 

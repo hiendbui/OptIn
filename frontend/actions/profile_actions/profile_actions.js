@@ -36,6 +36,7 @@ export const updateProfile = profile => dispatch => {
 };
 
 export const fetchProfile = profile => dispatch => {
+    
     return APIUtil.fetchProfile(profile)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),

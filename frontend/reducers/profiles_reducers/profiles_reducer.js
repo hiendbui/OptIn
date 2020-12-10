@@ -7,10 +7,10 @@ const profilesReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_PROFILE:
-            newState[action.profile.id] = action.profile
+            newState[action.profile.id] = {...newState[action.profile.id],...action.profile}
             return newState;
         case RECEIVE_CURRENT_USER:
-            newState[action.user.profile.id] = action.user.profile;
+            if (!(action.user.profile.id in newState)) newState[action.user.profile.id] = action.user.profile;
             return newState;
         default:
             return state;

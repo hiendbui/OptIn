@@ -1,7 +1,7 @@
 class Api::ProfilesController < ApplicationController
     def index
         @profiles = Profile.all
-        render :index
+        render 'api/profiles/index'
     end
     def create
         @profile = Profile.new(profile_params)

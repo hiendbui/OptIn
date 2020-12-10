@@ -1,5 +1,5 @@
 import * as APIUtil from '../../util/session_api_util';
-import { createProfile } from '../profile_actions/profile_actions'
+import { createProfile, fetchProfile } from '../profile_actions/profile_actions'
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
@@ -35,8 +35,10 @@ export const login = user => dispatch => {
         .then(
             (savedUser) => dispatch(receiveCurrentUser(savedUser)),
             (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
-        );
+        )
 };
+
+
 
 export const logout = () => dispatch => {
     return APIUtil.logout()
