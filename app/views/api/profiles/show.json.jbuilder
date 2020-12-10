@@ -1,1 +1,1 @@
-json.partial! "api/profiles/profile", profile: @user
+json.extract! @profile, :id, :full_name, :headline, :location, :description
