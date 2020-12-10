@@ -25,6 +25,8 @@ export default class SessionForm extends React.Component {
         this.props.processForm(this.state);
     }
 
+    
+
     render() {
         return (
             <div className="session-form">
@@ -34,19 +36,31 @@ export default class SessionForm extends React.Component {
                 <h3>{this.props.header[1]}</h3>
                 <br/>
                 <br/>
-                <form onSubmit={this.handleSubmit}>
-                    <label>​​{'\xa0\xa0\xa0\xa0\xa0'} Email:{'\xa0'}
-                        <input type="email" value={this.props.email} onChange={this.handleChange('email')}/>
+                <form onSubmit={this.handleSubmit} className={this.props.formType.split(" ").join('-').toLowerCase()}>
+                    <label className='hide'>Full Name:{'\xa0\xa0'}
+                        <input type="text" value={this.props.password} onChange={this.handleChange('password')} placeholder="Sui Generis" />
+                    </label>
+                    <br className='hide'/>
+                    <label className='hide'>Location:{'\xa0\xa0'}
+                        <input type="text" value={this.props.password} onChange={this.handleChange('password')} placeholder="San Francisco Bay Area" />
+                    </label>
+                    <br className='hide'/>
+                    <label className='hide'>Headline:{'\xa0\xa0'}
+                        <input type="text" value={this.props.password} onChange={this.handleChange('password')} placeholder="Software Engineer at Cogito" />
+                    </label>
+                    <br className='hide'/>
+                    <label>​​{'\xa0\xa0\xa0\xa0\xa0'}Email:{'\xa0\xa0'}
+                        <input type="email" value={this.props.email} onChange={this.handleChange('email')} placeholder="hello@gmail.com"/>
                     </label>
                     <br/>
-                    <label>Password:{'\xa0'}
-                        <input type="password" value={this.props.password} onChange={this.handleChange('password')} />
+                    <label>Password:{'\xa0\xa0'}
+                        <input type="password" value={this.props.password} onChange={this.handleChange('password')} placeholder="••••••••"/>
                     </label>
-                    <br/>
+                    <br />
                     <p>{this.props.errors[0]}</p>
                     <input id="submit-form" type="submit" value={this.props.formType}/>
                 </form>
-                    <button onClick={this.props.loginDemoUser}>Demo User</button>
+                    <button onClick={this.props.loginDemoUser}>Sign in as Demo User</button>
                 <br/>
                 <p>
                     {this.props.message[0] + '\xa0'}<Link 
