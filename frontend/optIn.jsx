@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
         
     }
+    window.state = store.getState()
     window.dispatch = store.dispatch;
     window.createProfile = createProfile;
     window.updateProfile = updateProfile;
