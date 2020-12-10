@@ -34,3 +34,11 @@ export const updateProfile = profile => dispatch => {
             (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
         );
 };
+
+export const fetchProfile = profile => dispatch => {
+    return APIUtil.fetchProfile(profile)
+        .then(
+            (savedProfile) => dispatch(receiveProfile(savedProfile)),
+            (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
+        );
+}
