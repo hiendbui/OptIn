@@ -22,9 +22,9 @@ export const logout = () => (
 )
 
 
-export const destroy = (user) => (
+export const destroy = (userId) => (
     $.ajax({
         method: 'DELETE',
-        url: `/api/users/${user.id}`
+        url: `/api/users/${userId}`
     })
 )

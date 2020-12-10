@@ -21,9 +21,9 @@ const receiveSessionErrors = errors => ({
     errors
 });
 
-const removeUser = user => ({
+const removeUser = userId => ({
     type: REMOVE_USER,
-    user
+    userId
 })
 
 export const clearSessionErrors = () => ({
@@ -57,10 +57,10 @@ export const signup = (user,profile) => dispatch => {
         );
 };
 
-export const destroy = (user) => dispatch => {
-    return APIUtil.destroy(user)
+export const destroy = (userId) => dispatch => {
+    return APIUtil.destroy(userId)
         .then(
-            () => dispatch(removeUser()),
+            () => dispatch(removeUser(userId)),
             (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
         );
 };

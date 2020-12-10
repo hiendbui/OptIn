@@ -10,9 +10,9 @@ export default class SessionForm extends React.Component {
                 password: ""
             },
             profile: {
-                full_name: "",
-                location: "",
-                headline: ""
+                full_name: " ",
+                location: " ",
+                headline: " "
             }
         };
 
@@ -47,7 +47,8 @@ export default class SessionForm extends React.Component {
                     <label className='hide'>Full Name:{'\xa0\xa0'}
                         <input 
                             type="text" 
-                            onChange={this.handleChange('profile','full_name')} 
+                            onChange={this.handleChange('profile','full_name')}
+                            required="required" 
                             placeholder="Sui Generis" 
                         />
                     </label>
@@ -56,6 +57,7 @@ export default class SessionForm extends React.Component {
                         <input 
                             type="text"  
                             onChange={this.handleChange('profile','location')} 
+                            required="required"
                             placeholder="San Francisco Bay Area" 
                         />
                     </label>
@@ -64,6 +66,7 @@ export default class SessionForm extends React.Component {
                         <input 
                             type="text" 
                             onChange={this.handleChange('profile','headline')} 
+                            required="required"
                             placeholder="Software Engineer at Cogito" 
                         />
                     </label>
