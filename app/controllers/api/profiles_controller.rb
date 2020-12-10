@@ -9,10 +9,19 @@ class Api::ProfilesController < ApplicationController
             render json: @profile.errors.full_messages, status: 422
         end
     end
+
+    def update
+        @profile = Profile.find(params[:id])
+        if @profile.update(profile_params)
+            render "api/profiles/show"
+        else
+            render json: @profile.errors.full_messages, status: 422
+        end
+    end
     
     private
     
     def profile_params
-        params.require(:profile).permit(:full_name, :headline, :location)
+        params.require(:profile).permit(:full_name, :headline, :location, :description)
     end
 end
