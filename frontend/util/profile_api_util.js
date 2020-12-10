@@ -14,6 +14,12 @@ export const updateProfile = (profile) => (
     })
 )
 
+export const fetchProfiles = () => {
+    $.ajax({
+        url: '/api/profiles',
+    })
+}
+
 //sample AJAX requests
 // $.ajax({ 
 //     method: 'POST', 
