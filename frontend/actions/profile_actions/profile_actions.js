@@ -3,6 +3,7 @@ import * as APIUtil from '../../util/profile_api_util';
 export const RECEIVE_PROFILE = 'RECEIVE_PROFILE';
 export const RECEIVE_PROFILE_ERRORS = 'RECEIVE_PROFILE_ERRORS';
 export const CLEAR_PROFILE_ERRORS = 'CLEAR_PROFILE_ERRORS';
+export const RECEIVE_ALL_PROFILES = 'RECEIVE_ALL_PROFILES'
 
 const receiveProfile = profile => ({
     type: RECEIVE_PROFILE,
