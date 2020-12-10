@@ -1,6 +1,6 @@
 import NewsFeed from './news_feed';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/session_actions';
+import { logout } from '../../actions/user_auth_actions/session_actions';
 
 
 const mapStateToProps = state => ({
