@@ -7,5 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.delete_all
+Profile.delete_all
 
 User.create([{email: 'demo_user@gmail.com', password: 'password'}])
+Profile.create([{user_id: User.first.id, full_name: 'Tabula Rasa', location: 'The Cloud', headline: 'I am you'}])
