@@ -8,11 +8,10 @@ import { IconContext } from "react-icons"
 
 export default class NavBar extends React.Component {
     componentDidMount() {
-        console.log(this.props.currentUser.profile)
-        if (!this.props.userProfile) this.props.fetchProfile(this.props.currentUser.profile)
+        if (!this.props.session) this.props.fetchProfile(this.props.users[this.props.session.id].profile)
     }
     render() {
-        const url = this.props.userProfile ? this.props.userProfile.photoUrl : 'https://i.stack.imgur.com/l60Hf.png'
+        const url = this.props.session && this.props.users[this.props.session.id].profile ? this.props.users[this.props.session.id].profile.photoUrl : 'https://i.stack.imgur.com/l60Hf.png'
         
         return (
             <div className="nav-bar">

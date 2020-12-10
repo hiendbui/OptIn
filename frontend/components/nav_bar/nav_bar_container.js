@@ -4,8 +4,8 @@ import { fetchProfile } from '../../actions/profile_actions/profile_actions'
 import NavBar from './nav_bar';
 
 const mapStateToProps = state => ({
-    currentUser: state.entities.users[state.session.id],
-    userProfile: state.entities.profiles[state.entities.users[state.session.id].profile.id]
+    session: state.session,
+    users: state.entities.users
 })
 
 const mapDispatchToProps = dispatch => ({
