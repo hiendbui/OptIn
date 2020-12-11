@@ -5,7 +5,8 @@ import NavBar from './nav_bar';
 
 const mapStateToProps = state => ({
     session: state.session,
-    users: state.entities.users
+    users: state.entities.users,
+    profiles: state.entities.profiles
 })
 
 const mapDispatchToProps = dispatch => ({
