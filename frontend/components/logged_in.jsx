@@ -9,8 +9,10 @@ import Test from './nav_bar/test';
 const LoggedIn = () => (
     <div>
         <NavBarContainer />
+        <div id='gap'></div>
         <Switch>
-            <Route path="/test" component={Test} />
+            {/* <Route path="/in/:fullNameuserId" component={ProfileContainer} />  */}
+            {/* :fullNameuserId refers to user's fullname + userId (no spaces)*/}
             <Route path="/feed" component={NewsFeedContainer} />
         </Switch>
     </div>

@@ -1,65 +1,75 @@
-#logo {
-    display: inline-block;
-    margin-left: 25px;
-    width: 80px;
-    height: auto;
-}
-
-#work-img {
-    width: 50%;
-    height: auto;
-    float: right;
-    position: relative;
-    right: -60px;
-}
-
-h1, h2, h3 {
-    margin-left: 25px;
-    font-family: Sans-Serif;
-    font-weight: lighter;
-    color: #2977c9;
-}
-
-h3 {
-    color: black;
-}
-
-h1  {
-    font-size: 50px;
-}
-
-h2 {
-    font-size: 35px;
-}
-
-#bottom {
-    display:flex;
-    align-content: bottom; 
-}
-
-.form-buttons {
-    position: absolute; 
-        right: 0px;
-        top:0px;
-
-    button {
-        font-family: Sans-Serif;
-        background-color: transparent;
-        color: #2977c9;
-        font-weight: bolder;
-        border-color: #2977c9;
-        border-width: 1px;
-        padding: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
-        border-radius:50px;
-        margin: 10px;
-        
+.landing {
+    background-color: white;
+    #logo {
+        display: block;
+        padding-left: 60px;
+        padding-top: 14px;
+        width: 95px;
+        height: auto;
     }
 
-    button:hover {
-        border-color:  #1f5c9c;
-        background-color:  #e3eefa;
-        cursor: pointer;
+    #work-img {
+        width: 50%;
+        height: auto;
+        float: right;
+        position: relative;
+        margin-top: 40px;
+    }
+
+    h1, h2, h3 {
+        margin-left: 60px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-family: Sans-Serif;
+        font-weight: lighter;
+        color: #2977c9;
+    }
+
+    h3 {
+        color: black;
+    }
+
+    h1  {
+        font-size: 50px;
+        display:inline-block;
+    }
+
+    h2 {
+        font-size: 35px;
+    }
+
+    #bottom {
+        display:flex;
+        align-content: bottom; 
+    }
+
+    .form-buttons {
+        position: absolute; 
+            right: 20px;
+            top:4px;
+
+        button {
+            font-family: Sans-Serif;
+            background-color: transparent;
+            color: #2977c9;
+            font-weight: bold;
+            border-color: #2977c9;
+            border-width: 1px;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-radius:50px;
+            margin: 10px;
+
+        }
+
+        button:hover {
+            border-color:  #1f5c9c;
+            background-color:  #e3eefa;
+            cursor: pointer;
+        }
+    }
+    :last:child {
+        margin: -10px 0px 0px -180px
     }
 }

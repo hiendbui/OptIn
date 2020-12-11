@@ -4,16 +4,15 @@ import { Link } from 'react-router-dom';
 export default class Greeting extends React.Component {
     render () {
         return(
-            <div>
+            <div className='landing'>
                 <img src={window.logo} id="logo" />
                 <section className='form-buttons'>
                     <Link to='/signup'><button>Join Now</button></Link>
-                    <Link to='/login'><button>Sign In</button></Link>
-                    
-                    
+                    <Link to='/login'><button>Sign In</button></Link> 
                 </section>
                 
-                <h1>Welcome to your professional community</h1>
+                <h1>Welcome to your <br/>
+                    professional community</h1>
 
                 <img src="https://static-exp3.licdn.com/sc/h/3m4tgpbdz7gbldapvl63mrnxz" id="work-img"/>
                 <br/>
