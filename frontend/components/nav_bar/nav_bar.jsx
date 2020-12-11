@@ -45,12 +45,6 @@ export default class NavBar extends React.Component {
                         <span>Home</span>
                     </button>
                 </IconContext.Provider>
-                <div class="dropdown">
-                    <span>Mouse over me</span>
-                    <div class="dropdown-content">
-                        <p>Hello World!</p>
-                    </div>
-                </div>
             </div>
         )
     }
