@@ -10,5 +10,5 @@ User.delete_all
 Profile.delete_all
 
 User.create([{email: 'demo_user@gmail.com', password: 'password'}])
-Profile.create([{user_id: User.first.id, full_name: 'Tabula Rasa', location: 'The Cloud', headline: 'I am you'}])
+Profile.create([{user_id: User.first.id, full_name: 'Tabula Rasa', location: 'The Cloud', headline: 'Demo User at OptIn'}])
 Profile.last.profile_pic.attach(io: open("https://optin-dev.s3-us-west-1.amazonaws.com/3vGwZcA6dzTsc3DGGCBkbLgt"), filename: "demo_user.png")

@@ -3,10 +3,9 @@ import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from '../../actions/user_au
 const sessionReducer = (state = {id: null}, action) => {
     Object.freeze(state);
     const newState = { ...state }
-
     switch (action.type) {
         case RECEIVE_CURRENT_USER:
-            newState['id'] = action.user.id;
+            newState.id = action.user.id;
             return newState;
         case LOGOUT_CURRENT_USER:
             return {id: null}
