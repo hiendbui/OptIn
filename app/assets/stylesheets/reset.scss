@@ -42,6 +42,11 @@ input[type="submit"] {
   border: 1px solid ;
 }
 
+button {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
 input {
     border: 1px solid;
 }

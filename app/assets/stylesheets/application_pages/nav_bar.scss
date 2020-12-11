@@ -6,14 +6,14 @@
     width: 100%;
     height: 55px;
     background:white;
-    border-bottom: .5px solid rgb(224, 224, 224);
+    border-bottom: 1px solid rgb(230, 230, 230);
     
 
     button { 
         text-align: center;
         float: right;
         margin-top: 6px;
-        margin-right: 20px;
+        margin-right: 30px;
         display: block;
         background-color: transparent;
         border-width: 0px;
@@ -21,11 +21,14 @@
         span {
             font-size: 12.5px;
         }
+        // cursor: pointer;
     }
+
     button:hover {
-        cursor: pointer;
+        
         > *{
             color: black;
+            cursor: pointer;
         }
     }
 
@@ -45,5 +48,33 @@
     display: block;
     width: 100%;
     top: 0;
-    height: 30px;
+    height: 70px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}
+
+.revealed {
+    text-align: left;
+    float: left;
+    span {
+        float: right;
+        font-size: 20px;
+    }
+    display: block;
+    position: absolute;
+    right: -10px;
+    top: 55px;
+    background-color: white;
+    color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
 }
