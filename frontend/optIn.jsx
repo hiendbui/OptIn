@@ -4,7 +4,7 @@ import configureStore from './store/store';
 import Root from './components/root';
 import { createProfile, updateProfile } from './actions/profile_actions/profile_actions'
 import { destroy } from './actions/user_auth_actions/session_actions'
-import { logout } from './actions/user_auth_actions/session_actions'
+import { login } from './actions/user_auth_actions/session_actions'
 import {fetchProfile} from './util/profile_api_util'
 
 
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.dispatch = store.dispatch;
     window.createProfile = createProfile;
     window.updateProfile = updateProfile;
-    window.logout = logout
+    window.login = login
     window.destroy = destroy;
     window.fetchProfile = fetchProfile
     const rootEl = document.getElementById("root");

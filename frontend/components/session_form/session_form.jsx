@@ -10,9 +10,9 @@ export default class SessionForm extends React.Component {
                 password: ""
             },
             profile: {
-                full_name: " ",
-                location: " ",
-                headline: " "
+                full_name: "",
+                location: "",
+                headline: ""
             }
         };
 
@@ -35,6 +35,7 @@ export default class SessionForm extends React.Component {
     
 
     render() {
+        const required = this.props.formType === 'Sign up' ? true : false
         return (
             <div className="session-form">
                 <img src={window.logo} id="logo-form" />
@@ -48,7 +49,7 @@ export default class SessionForm extends React.Component {
                         <input 
                             type="text" 
                             onChange={this.handleChange('profile','full_name')}
-                            required="required" 
+                            required={required}
                             placeholder="Sui Generis" 
                         />
                     </label>
@@ -57,16 +58,16 @@ export default class SessionForm extends React.Component {
                         <input 
                             type="text"  
                             onChange={this.handleChange('profile','location')} 
-                            required="required"
+                            required={required}
                             placeholder="San Francisco Bay Area" 
                         />
                     </label>
                     <br className='hide'/>
                     <label className='hide'>Headline:{'\xa0\xa0'}
                         <input 
-                            type="text" 
+                            type="text"
                             onChange={this.handleChange('profile','headline')} 
-                            required="required"
+                            required={required}
                             placeholder="Software Engineer at Cogito" 
                         />
                     </label>
