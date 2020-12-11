@@ -10,6 +10,16 @@ class Api::UsersController < ApplicationController
         end
     end
     
+    def destroy
+        @user = current_user
+        if @user
+            logout
+            @user.destroy
+        else
+            render json: ["User is not signed in"], status: 404
+        end
+    end
+
     private
     
     def user_params

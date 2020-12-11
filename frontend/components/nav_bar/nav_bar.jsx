@@ -8,12 +8,14 @@ import { IconContext } from "react-icons"
 
 export default class NavBar extends React.Component {
     render() {
+        const url = this.props.session && this.props.users[this.props.session.id].profile ? this.props.users[this.props.session.id].profile.photoUrl : '/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1b846884aeee7052ebf63c9a13131d732c80762b/demo_user.png'
         return (
             <div className="nav-bar">
                 <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>
                 <IconContext.Provider value={{ style: { fontSize: '23px'} }}>
                     <button>
-                        <BsPersonFill />
+                        {/* <BsPersonFill /> */}
+                        <img src={url} width="23" height="23"/>
                         <br />
                         <span>Me ▾</span>
                     </button>

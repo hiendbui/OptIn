@@ -20,3 +20,11 @@ export const logout = () => (
         url: '/api/session'
     })
 )
+
+
+export const destroy = (userId) => (
+    $.ajax({
+        method: 'DELETE',
+        url: `/api/users/${userId}`
+    })
+)

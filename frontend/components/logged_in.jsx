@@ -1,18 +1,17 @@
 import React from "react";
-import NavBar from './nav_bar/nav_bar';
+import NavBarContainer from './nav_bar/nav_bar_container';
 import NewsFeedContainer from './news_feed/news_feed_container';
-import { Switch } from "react-router-dom";
-import { LoggedInAuthRoute  } from '../util/route_util';
+import { Switch,Route } from "react-router-dom";
 import Test from './nav_bar/test';
 
 
 
 const LoggedIn = () => (
     <div>
-        <NavBar />
+        <NavBarContainer />
         <Switch>
-            <LoggedInAuthRoute path="/test" component={Test} />
-            <LoggedInAuthRoute path="/feed" component={NewsFeedContainer} />
+            <Route path="/test" component={Test} />
+            <Route path="/feed" component={NewsFeedContainer} />
         </Switch>
     </div>
 );

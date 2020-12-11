@@ -5,8 +5,15 @@ export default class SessionForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
-            password: ""
+            user: {
+                email: "",
+                password: ""
+            },
+            profile: {
+                full_name: " ",
+                location: " ",
+                headline: " "
+            }
         };
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -16,14 +23,16 @@ export default class SessionForm extends React.Component {
         if (this.props.errors.length !== 0) this.props.clearErrors()
     }
     
-    handleChange(field) {
-        return (e) => this.setState({[field]: e.target.value})
+    handleChange(key, field) {
+        return (e) => this.setState({[key]: {...this.state[key], [field]: e.target.value}})
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.processForm(this.state);
+        this.props.processForm(this.state.user,this.state.profile);
     }
+
+    
 
     render() {
         return (
@@ -34,19 +43,53 @@ export default class SessionForm extends React.Component {
                 <h3>{this.props.header[1]}</h3>
                 <br/>
                 <br/>
-                <form onSubmit={this.handleSubmit}>
-                    <label>​​{'\xa0\xa0\xa0\xa0\xa0'} Email:{'\xa0'}
-                        <input type="email" value={this.props.email} onChange={this.handleChange('email')}/>
+                <form onSubmit={this.handleSubmit} className={this.props.formType.split(" ").join('-').toLowerCase()}>
+                    <label className='hide'>Full Name:{'\xa0\xa0'}
+                        <input 
+                            type="text" 
+                            onChange={this.handleChange('profile','full_name')}
+                            required="required" 
+                            placeholder="Sui Generis" 
+                        />
+                    </label>
+                    <br className='hide'/>
+                    <label className='hide'>Location:{'\xa0\xa0'}
+                        <input 
+                            type="text"  
+                            onChange={this.handleChange('profile','location')} 
+                            required="required"
+                            placeholder="San Francisco Bay Area" 
+                        />
+                    </label>
+                    <br className='hide'/>
+                    <label className='hide'>Headline:{'\xa0\xa0'}
+                        <input 
+                            type="text" 
+                            onChange={this.handleChange('profile','headline')} 
+                            required="required"
+                            placeholder="Software Engineer at Cogito" 
+                        />
+                    </label>
+                    <br className='hide'/>
+                    <label>​​{'\xa0\xa0\xa0\xa0\xa0'}Email:{'\xa0\xa0'}
+                        <input 
+                            type="email" 
+                            onChange={this.handleChange('user','email')} 
+                            placeholder="tabula_rasa@gmail.com"
+                        />
                     </label>
                     <br/>
-                    <label>Password:{'\xa0'}
-                        <input type="password" value={this.props.password} onChange={this.handleChange('password')} />
+                    <label>Password:{'\xa0\xa0'}
+                        <input 
+                            type="password" 
+                            onChange={this.handleChange('user','password')} 
+                            placeholder="••••••••"/>
                     </label>
-                    <br/>
+                    <br />
                     <p>{this.props.errors[0]}</p>
                     <input id="submit-form" type="submit" value={this.props.formType}/>
                 </form>
-                    <button onClick={this.props.loginDemoUser}>Demo User</button>
+                    <button onClick={this.props.loginDemoUser}>Sign in as Demo User</button>
                 <br/>
                 <p>
                     {this.props.message[0] + '\xa0'}<Link 
