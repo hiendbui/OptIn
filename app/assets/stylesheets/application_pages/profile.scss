@@ -15,18 +15,33 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }
-    :nth-child(3) {
-        display:inline;
-        position: absolute;
-        right:30px;
-        top: 220px;
-        color: grey;
-        width: 35px;
-        height: 35px;
-    }
+    // :nth-child(3):hover {
+    //     background-color: rgb(230, 230, 230);
+    //     cursor: pointer;
+    // }
+    :nth-child(3)  {
 
-    :nth-child(3):hover {
-        background-color: lightgrey;
+        position: absolute;
+        right:20px;
+        top: 210px;
+        color: grey;
+        // width: 40px;
+        // height: 40px;
+        // border-radius: 50%;
+        >*{
+            width: 40px;
+            height: 40px;
+            >* {
+                margin: 10px;
+            }
+        }
+        
+    }
+    
+    :nth-child(3) >*:hover {
+        border-radius: 50%;
+        background-color: rgb(230, 230, 230);
+        cursor: pointer;
     }
     .profile-info {
         position: absolute;
@@ -52,7 +67,7 @@
             font-size: 25px;
         }
         :nth-child(3) {
-            margin-top: 5px;
+            margin-top: 15px;
             left: 0px;
             font-size: 18px;
             color: black;

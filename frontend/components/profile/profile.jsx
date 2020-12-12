@@ -16,11 +16,11 @@ export default class Profile extends React.Component {
                         <p>{this.props.profile.location}</p>
                         <p>{this.props.profile.headline}</p>
                     </div>
-                    <IconContext.Provider value={{ style: { fontSize: '20px', margin: '10px' } }}>
-                        <div>
-                            <ImPencil />
-                        </div>
+                    <div>
+                    <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
+                            <div><ImPencil /></div>
                     </IconContext.Provider>
+                    </div>
                 </div>
                 <div className='about'>
                     <br/>
