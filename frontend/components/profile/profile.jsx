@@ -16,10 +16,12 @@ export default class Profile extends React.Component {
                     </div>
                 </div>
                 <div className='about'>
+                    <br/>
                     <label>About</label>
-
+                    <br/>
                     <p>{this.props.profile.description}</p>
                 </div>
+                <br/>
             </div>
         )
     }

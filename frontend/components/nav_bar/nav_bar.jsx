@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { ImHome3 } from 'react-icons/im';
 import { IoMdPeople, IoMdNotifications } from 'react-icons/io'; 
 import { BsFillBriefcaseFill, BsPersonFill } from 'react-icons/bs';
@@ -42,7 +42,7 @@ export default class NavBar extends React.Component {
                             <img src={url} width="45" height="45"/>
                             <p>{fullName}</p>
                             <p>{headline}</p>
-                            <div><Link to={`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><span>View Profile</span></Link></div>
+                                <div><Link to={`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><div> <span>View Profile</span></div></Link></div>
                             <p>{'\xa0'}</p>
                             <div onClick={() => this.props.logout()}><span>Log out</span></div>
                         </div>
@@ -69,7 +69,7 @@ export default class NavBar extends React.Component {
                         <br/>
                         <span>My Network</span>
                     </button>
-                    <button>
+                    <button>  
                         <ImHome3 />
                         <br/>
                         <span>Home</span>

@@ -9,6 +9,7 @@
     border-width: 3px;
     border-color: grey;
     background-color: white;
+    box-shadow: .3px .3px rgba(0, 0, 0, 0.2);
     img {
         width: 100%;
         border-top-left-radius: 10px;
@@ -44,12 +45,17 @@
 }
 
 .about {
-    display: block;
+    box-shadow: .3px .3px rgba(0, 0, 0, 0.2);
+    display: inline-block;
     position: absolute;
     margin-top: 430px;
     left: 50px;
-    width: 800px;
-    height: 400px;
+    width: 775px;
+    min-height: 200px;
     border-radius: 10px;
     background-color: white;
+    padding-left: 25px;
+    label {
+        font-size: 22px;
+    }
 }

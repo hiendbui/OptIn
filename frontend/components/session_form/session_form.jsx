@@ -50,7 +50,7 @@ export default class SessionForm extends React.Component {
                             type="text" 
                             onChange={this.handleChange('profile','full_name')}
                             required={required}
-                            placeholder="Tabula Rasa" 
+                            placeholder="Stephen Curry" 
                         />
                     </label>
                     <br className='hide'/>
@@ -68,7 +68,7 @@ export default class SessionForm extends React.Component {
                             type="text"
                             onChange={this.handleChange('profile','headline')} 
                             required={required}
-                            placeholder="Software Engineer at OptIn" 
+                            placeholder="Guard for Golden State Warriors" 
                         />
                     </label>
                     <br className='hide'/>
@@ -76,7 +76,7 @@ export default class SessionForm extends React.Component {
                         <input 
                             type="email" 
                             onChange={this.handleChange('user','email')} 
-                            placeholder="cogito@gmail.com"
+                            placeholder="chefcurry@gmail.com"
                         />
                     </label>
                     <br/>
