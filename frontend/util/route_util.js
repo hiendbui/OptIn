@@ -19,7 +19,7 @@ const LoggedOutAuth = ({ component: Component, path, loggedIn, exact }) => (
         path={path}
         exact={exact}
         render={props => 
-            loggedIn ? <Redirect to="/feed"/> : <Component {...props} />
+            loggedIn  ? <Redirect to='/in'/> : <Component {...props} />
         }
     />
 );

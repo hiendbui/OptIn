@@ -11,9 +11,8 @@ const LoggedIn = () => (
         <NavBarContainer />
         <div id='gap'></div>
         <Switch>
-            <Route path="/in/:fullNameuserId" component={ProfileContainer} /> 
-            {/* :fullNameuserId refers to user's fullname + userId (no spaces)*/}
-            <Route path="/feed" component={NewsFeedContainer} />
+            <Route path="/in/feed" component={NewsFeedContainer} />
+            <Route path="/in/:fullNameuserId" component={ProfileContainer} /> {/* :fullNameuserId refers to user's fullname + userId (no spaces)*/}
         </Switch>
     </div>
 );

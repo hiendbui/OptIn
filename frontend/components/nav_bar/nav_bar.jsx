@@ -69,11 +69,13 @@ export default class NavBar extends React.Component {
                         <br/>
                         <span>My Network</span>
                     </button>
+                    <Link to={'/in/feed'}> 
                     <button>  
                         <ImHome3 />
                         <br/>
                         <span>Home</span>
                     </button>
+                    </Link>
                 </IconContext.Provider>
             </div>
         )

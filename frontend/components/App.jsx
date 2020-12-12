@@ -13,9 +13,9 @@ const App = () => (
         <Switch>
             <LoggedOutAuthRoute path="/login" component={LoginFormContainer} />
             <LoggedOutAuthRoute path="/signup" component={SignUpFormContainer} />
+            <LoggedInAuthRoute path='/in' component={LoggedIn}/>   
             <LoggedOutAuthRoute path='/' component={Greeting} /> 
         </Switch>
-        <LoggedInAuthRoute path='/' component={LoggedIn}/>   
     </div>
 );
 
