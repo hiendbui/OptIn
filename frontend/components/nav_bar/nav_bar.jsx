@@ -26,7 +26,7 @@ export default class NavBar extends React.Component {
             fullName = this.state.profile.fullName;
             headline = this.state.profile.headline
         }
-        const url = this.props.session && this.state.profile && this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/3vGwZcA6dzTsc3DGGCBkbLgt'
+        const url = this.props.session && this.state.profile && this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/favpng_user-profile-2018-in-sight-user-conference-expo-business-default.png'
         return (
             <div className="nav-bar">
                 <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>

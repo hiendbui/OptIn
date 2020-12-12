@@ -15,10 +15,24 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }
+    :nth-child(3) {
+        display:inline;
+        position: absolute;
+        right:30px;
+        top: 220px;
+        color: grey;
+        width: 35px;
+        height: 35px;
+    }
+
+    :nth-child(3):hover {
+        background-color: lightgrey;
+    }
     .profile-info {
         position: absolute;
         top: 105px;
         left: 30px;
+        width: 100%;
         img {
             height: 160px;
             width: 160px;
@@ -32,14 +46,20 @@
             margin-bottom: 5px;
             font-family: "Helvetica Neue";
         }
+    
+
         :nth-child(2) {
             font-size: 25px;
         }
         :nth-child(3) {
-            font-size: 20px;
+            margin-top: 5px;
+            left: 0px;
+            font-size: 18px;
+            color: black;
+            width: 100%;
         }
         :nth-child(4) {
-            font-size: 18px;
+            font-size: 20px;
         }
     }
 }

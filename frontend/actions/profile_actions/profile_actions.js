@@ -19,7 +19,7 @@ export const clearProfileErrors = () => ({
     type: CLEAR_PROFILE_ERRORS
 })
 
-export const createProfile = profile => dispatch => { //need to chain login action to have current session id
+export const createProfile = profile => dispatch => { 
     return APIUtil.createProfile(profile)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),
@@ -27,7 +27,7 @@ export const createProfile = profile => dispatch => { //need to chain login acti
         );
 };
 
-export const updateProfile = profile => dispatch => { //need to chain login action to have current session id
+export const updateProfile = profile => dispatch => { 
     return APIUtil.updateProfile(profile)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),
@@ -35,7 +35,7 @@ export const updateProfile = profile => dispatch => { //need to chain login acti
         );
 };
 
-export const fetchProfile = profile => dispatch => { //need to chain login action to have current session id
+export const fetchProfile = profile => dispatch => { 
     return APIUtil.fetchProfile(profile)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),
