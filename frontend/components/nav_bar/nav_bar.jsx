@@ -16,6 +16,7 @@ export default class NavBar extends React.Component {
     handleClick(e) {
         e.preventDefault()
         this.state.dropdown === 'hidden' ? this.setState({ dropdown: 'revealed'}) : this.setState({ dropdown: 'hidden'})
+        this.setState({ profile: this.props.users[this.props.session.id].profile})
     }
 
     render() {
@@ -42,7 +43,7 @@ export default class NavBar extends React.Component {
                             <span>{fullName}</span>
                             <br/>
                             <span>{headline}</span>
-                            <Link to={`/in/${this.state.profile.fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><span>View Profile</span></Link> 
+                            <Link to={`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><span>View Profile</span></Link> 
                             <p onClick={() => this.props.logout()}>Log out</p>
                         </div>
                         </div>
