@@ -39,12 +39,12 @@ export default class NavBar extends React.Component {
                         <br />
                         <span>Me ▾</span> 
                         <div className={this.state.dropdown}>
-                            <img src={url} width="40" height="40"/>
-                            <span>{fullName}</span>
-                            <br/>
-                            <span>{headline}</span>
-                            <Link to={`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><span>View Profile</span></Link> 
-                            <p onClick={() => this.props.logout()}>Log out</p>
+                            <img src={url} width="45" height="45"/>
+                            <p>{fullName}</p>
+                            <p>{headline}</p>
+                            <div><Link to={`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><span>View Profile</span></Link></div>
+                            <p>{'\xa0'}</p>
+                            <div onClick={() => this.props.logout()}><span>Log out</span></div>
                         </div>
                         </div>
                     </button>

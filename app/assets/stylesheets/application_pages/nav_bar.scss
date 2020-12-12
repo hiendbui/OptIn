@@ -61,20 +61,53 @@
 }
 
 .revealed {
+    border-radius: 5px;
+    border-top-right-radius: 0px;
     text-align: left;
-    float: left;
-    span {
-        float: right;
-        font-size: 20px;
-    }
-    display: block;
+    font-family: helvetica, arial;
+    display: inline-block;
+    min-width: 200px;
     position: absolute;
     right: -10px;
     top: 55px;
     background-color: white;
     color: black;
-    min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
-}
+
+    img {
+        float: left;
+        padding-right: 5px;
+    }
+    :nth-child(2) {
+        font-size: 15px;
+        font-weight: 550;
+        padding-bottom: 3px;
+    }
+    :nth-child(3) {
+        font-size: 14px;
+        padding-bottom: 15px;
+    }
+    :nth-child(4), :nth-child(6) {
+        border-style:solid;
+        border-color: #2072ca;
+        border-width: 1px;
+        border-radius: 10px;
+        padding:2px 10px;
+        width: 90%;
+        margin: auto;
+        text-align: center;
+        font-size: 14px;
+        color: #2072ca;
+        font-weight: bolder;
+    }
+    :nth-child(4):hover, :nth-child(6):hover {
+        border-width: 2px;
+        margin: -1px;
+        background-color:  #e3eefa
+    }
+    :nth-child(5) {
+        font-size: 5px;
+    }
+} 
