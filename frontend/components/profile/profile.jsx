@@ -9,13 +9,16 @@ export default class Profile extends React.Component {
     }
     
     componentDidMount() {
-        this.props.fetchAllProfiles(this.props.currentUser);
+        this.props.fetchAllProfiles(this.props.currentUser)
+            .then(() => this.props.fetchProfile(this.props.profile))
+            .then(() => this.setState(this.props.profile))
     }
     
     showForm() {
         
     }
     render() {
+        console.log(this.props.profile)
         if (!this.state) {
             this.state = {
                 fullName: '',
