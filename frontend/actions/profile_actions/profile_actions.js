@@ -5,7 +5,7 @@ export const RECEIVE_PROFILE_ERRORS = 'RECEIVE_PROFILE_ERRORS';
 export const CLEAR_PROFILE_ERRORS = 'CLEAR_PROFILE_ERRORS';
 export const RECEIVE_ALL_PROFILES = 'RECEIVE_ALL_PROFILES'
 
-const receiveProfile = profile => ({
+const receiveProfile = profile => ({ 
     type: RECEIVE_PROFILE,
     profile
 });
@@ -19,7 +19,7 @@ export const clearProfileErrors = () => ({
     type: CLEAR_PROFILE_ERRORS
 })
 
-export const createProfile = profile => dispatch => {
+export const createProfile = profile => dispatch => { 
     return APIUtil.createProfile(profile)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),
@@ -27,7 +27,7 @@ export const createProfile = profile => dispatch => {
         );
 };
 
-export const updateProfile = profile => dispatch => {
+export const updateProfile = profile => dispatch => { 
     return APIUtil.updateProfile(profile)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),
@@ -35,7 +35,7 @@ export const updateProfile = profile => dispatch => {
         );
 };
 
-export const fetchProfile = profile => dispatch => {
+export const fetchProfile = profile => dispatch => { 
     return APIUtil.fetchProfile(profile)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),

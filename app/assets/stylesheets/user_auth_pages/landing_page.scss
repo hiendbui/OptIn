@@ -64,8 +64,12 @@
         }
 
         button:hover {
-            border-color:  #1f5c9c;
+            border-color:  #2977c9;
             background-color:  #e3eefa;
+            border-width: 2px;
+            margin: -1px;
+            margin-left: 9px;
+            margin-right: 9px;
             cursor: pointer;
         }
     }

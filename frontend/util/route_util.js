@@ -1,6 +1,7 @@
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
+import LoggedIn from '../components/logged_in'
 
 
 const LoggedInAuth = ({ component: Component, path, loggedIn, exact }) => (
@@ -18,7 +19,7 @@ const LoggedOutAuth = ({ component: Component, path, loggedIn, exact }) => (
         path={path}
         exact={exact}
         render={props => 
-            loggedIn  ? <Redirect to="/feed" /> : <Component {...props} />
+            loggedIn  ? <Redirect to='/in'/> : <Component {...props} />
         }
     />
 );

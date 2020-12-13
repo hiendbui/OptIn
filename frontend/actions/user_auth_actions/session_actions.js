@@ -56,7 +56,10 @@ export const signup = (user,profile) => dispatch => {
         )
             .then(
             () => dispatch(createProfile(profile))
-        );
+            )
+                .then(
+                    () => dispatch(login(user))
+                )
 };
 
 export const destroy = (userId) => dispatch => {

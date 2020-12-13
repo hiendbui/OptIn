@@ -5,8 +5,6 @@ export default class NewsFeed extends React.Component {
         return (
             <div className='news-feed'>
                 
-                
-                <button onClick={()=>this.props.logout()}>Log out</button>
             </div>
         )
     }

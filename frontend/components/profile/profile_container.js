@@ -1,15 +1,14 @@
 import { connect } from 'react-redux';
 import Profile from './profile';
+import { updateProfile } from '../../actions/profile_actions/profile_actions'
 
-const mapStateToProps = (state,ownProps) => ({
-    
+const mapStateToProps = (state, ownProps) => ({
+    profile: state.entities.users[ownProps.match.params.fullNameuserId.split('-').slice(-1)[0]].profile
 })
 
 const mapDispatchToProps = dispatch => ({
-    processForm: (user) => dispatch(login(user)),
-    loginDemoUser: () => dispatch(login({ email: 'demo_user@gmail.com', password: 'password' })),
-    clearErrors: () => dispatch(clearSessionErrors())
+    updateProfile: (profile) => dispatch(updateProfile(profile))
 })
 
-const LoginFormContainer = connect(mapStateToProps, mapDispatchToProps)(SessionForm);
-export default LoginFormContainer;
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default ProfileContainer;

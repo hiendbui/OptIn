@@ -2,7 +2,7 @@ import React from "react";
 import NavBarContainer from './nav_bar/nav_bar_container';
 import NewsFeedContainer from './news_feed/news_feed_container';
 import { Switch,Route } from "react-router-dom";
-import Test from './nav_bar/test';
+import ProfileContainer from './profile/profile_container'
 
 
 
@@ -11,9 +11,8 @@ const LoggedIn = () => (
         <NavBarContainer />
         <div id='gap'></div>
         <Switch>
-            {/* <Route path="/in/:fullNameuserId" component={ProfileContainer} />  */}
-            {/* :fullNameuserId refers to user's fullname + userId (no spaces)*/}
-            <Route path="/feed" component={NewsFeedContainer} />
+            <Route path="/in/feed" component={NewsFeedContainer} />
+            <Route path="/in/:fullNameuserId" component={ProfileContainer} /> {/* :fullNameuserId refers to user's fullname + userId (no spaces)*/}
         </Switch>
     </div>
 );
