@@ -13,4 +13,6 @@
 #
 class Achievement < ApplicationRecord
         validates :profile_id, :title, presence: true
+
+        belongs_to :profile
 end

@@ -15,4 +15,6 @@
 #
 class Education < ApplicationRecord
         validates :profile_id, :school, presence: true
+
+        belongs_to :profile
 end
