@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profile_id: 1
+  title: MyString
+  issuer: MyString
+  year: 1
+  description: MyText
+
+two:
+  profile_id: 1
+  title: MyString
+  issuer: MyString
+  year: 1
+  description: MyText
