@@ -55,7 +55,7 @@ export const signup = (user,profile) => dispatch => {
             (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
         )
             .then(
-            () => dispatch(createProfile(profile))
+                () => dispatch(createProfile(profile))
             )
                 .then(
                     () => dispatch(login(user))
