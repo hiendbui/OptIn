@@ -3,6 +3,14 @@ import { ImPencil} from 'react-icons/im';
 import { IconContext } from "react-icons"
 
 export default class Profile extends React.Component {
+    constructor (props) {
+        super(props);
+
+    }
+
+    showForm() {
+
+    }
     render() {
         console.log(this.props.profile)
         return (
@@ -18,7 +26,7 @@ export default class Profile extends React.Component {
                     </div>
                     <div>
                     <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
-                            <div><ImPencil /></div>
+                            <div onClick={this.showForm}><ImPencil /></div>
                     </IconContext.Provider>
                     </div>
                 </div>
@@ -27,6 +35,11 @@ export default class Profile extends React.Component {
                     <label>About</label>
                     <br/>
                     <p>{this.props.profile.description}</p>
+                    <div>
+                        <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
+                            <div onClick={this.showForm}><ImPencil /></div>
+                        </IconContext.Provider>
+                    </div>
                 </div>
                 <br/>
             </div>

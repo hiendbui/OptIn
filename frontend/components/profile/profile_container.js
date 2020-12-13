@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    updateProfile: () => dispatch(updateProfile)
+    updateProfile: (profile) => dispatch(updateProfile(profile))
 })
 
 const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);

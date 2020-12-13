@@ -93,4 +93,31 @@
     label {
         font-size: 22px;
     }
+    :last-child  {
+
+        position: absolute;
+        right:10px;
+        top: 10px;
+        color: #2072ca;
+        // width: 40px;
+        // height: 40px;
+        // border-radius: 50%;
+        >*{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            >* {
+                border-radius: 0%;
+                width: 20px;
+                height: 20px;
+                margin-left: 10px;
+            }
+        }
+        
+    }
+    
+    :last-child >*:hover {
+        background-color:#eef7ff;
+        cursor: pointer;
+    }
 }
