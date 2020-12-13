@@ -28,6 +28,7 @@ export default class NavBar extends React.Component {
         }
         const url = this.props.session && this.state.profile && this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/favpng_user-profile-2018-in-sight-user-conference-expo-business-default.png'
         return (
+            <div>
             <div className="nav-bar">
                 <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>
                 <IconContext.Provider value={{ style: { fontSize: '23px'} }}>
@@ -42,7 +43,7 @@ export default class NavBar extends React.Component {
                             <img src={url} width="45" height="45"/>
                             <p>{fullName}</p>
                             <p>{headline}</p>
-                                <div><Link to={`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><div> <span>View Profile</span></div></Link></div>
+                                <div><Link to={{pathname:`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`, state: {users: this.props.users}}} ><div> <span>View Profile</span></div></Link></div>
                             <p>{'\xa0'}</p>
                             <div onClick={() => this.props.logout()}><span>Log out</span></div>
                         </div>
@@ -77,6 +78,8 @@ export default class NavBar extends React.Component {
                     </button>
                     </Link>
                 </IconContext.Provider>
+            </div>
+            <div id="gap"></div>
             </div>
         )
     }

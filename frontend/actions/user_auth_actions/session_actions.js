@@ -12,6 +12,10 @@ const receiveCurrentUser = user => ({
     user
 });
 
+const receiveUserNProfile = user => dispatch => {
+    dispatch(receiveCurrentUser(user));
+    dispatch(fetchProfile(user.profile));
+}
 const logoutCurrentUser = () => ({
     type: LOGOUT_CURRENT_USER
 });
@@ -33,7 +37,7 @@ export const clearSessionErrors = () => ({
 export const login = user => dispatch => {
     return APIUtil.login(user)
         .then(
-            (savedUser) => dispatch(receiveCurrentUser(savedUser)),
+            (savedUser) => dispatch(receiveUserNProfile(savedUser)),
             (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
         )
 };

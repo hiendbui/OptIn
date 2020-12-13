@@ -9,7 +9,7 @@ const LoggedInAuth = ({ component: Component, path, loggedIn, exact }) => (
         path={path}
         exact={exact}
         render={props => 
-            loggedIn  ? <Component {...props} /> : <Redirect to="/" />
+            loggedIn ? <Component {...props} /> : <Redirect to="/" />
         }
     />
 );
@@ -19,7 +19,7 @@ const LoggedOutAuth = ({ component: Component, path, loggedIn, exact }) => (
         path={path}
         exact={exact}
         render={props => 
-            loggedIn  ? <Redirect to='/in'/> : <Component {...props} />
+            loggedIn  ? <Redirect to="/in/feed"/> : <Component {...props} />
         }
     />
 );

@@ -10,6 +10,11 @@ const receiveProfile = profile => ({
     profile
 });
 
+const receiveAllProfiles = profiles => ({
+    type: RECEIVE_ALL_PROFILES,
+    profiles
+})
+
 const receiveProfileErrors = errors => ({
     type: RECEIVE_PROFILE_ERRORS,
     errors
@@ -42,3 +47,12 @@ export const fetchProfile = profile => dispatch => {
             (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
         );
 }
+
+export const fetchAllProfiles = () => dispatch => {
+    return APIUtil.fetchAllProfiles()
+        .then(
+            (profiles) => dispatch(receiveAllProfiles(profiles)),
+            (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
+        )
+}
+

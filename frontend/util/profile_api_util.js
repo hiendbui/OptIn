@@ -20,7 +20,7 @@ export const fetchProfile = (profile) => (
     })
 )
 
-export const fetchProfiles = () => (
+export const fetchAllProfiles = () => (
     $.ajax({
         url: '/api/profiles',
     })
