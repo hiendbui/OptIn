@@ -70,7 +70,7 @@ export default class NavBar extends React.Component {
                         <br/>
                         <span>My Network</span>
                     </button>
-                    <Link to={'/in/feed'}> 
+                    <Link to={'/feed'}> 
                     <button>  
                         <ImHome3 />
                         <br/>

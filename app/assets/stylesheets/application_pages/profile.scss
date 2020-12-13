@@ -20,15 +20,13 @@
     //     cursor: pointer;
     // }
     :nth-child(3)  {
-
         position: absolute;
         right:20px;
         top: 210px;
         color: grey;
-        // width: 40px;
-        // height: 40px;
-        // border-radius: 50%;
+   
         >*{
+            // display: none; // put display none when profile is not current user's
             width: 40px;
             height: 40px;
             >* {
@@ -128,4 +126,36 @@
         background-color:#eef7ff;
         cursor: pointer;
     }
+}
+
+.modal-screen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-form {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    margin-left: -220px;
+    width: 360px;
+    padding: 20px;
+    background: #fff;
+    z-index: 3;
+    border-radius: 5px;
+    border: 1px solid #000;
+    
+}
+
+.modal-form h1 {
+    font-size: x-large;
+}
+
+.hidden-modal {
+    display:none;
 }
