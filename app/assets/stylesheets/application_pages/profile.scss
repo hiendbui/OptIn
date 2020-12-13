@@ -4,7 +4,7 @@
     margin-top: 10px;
     left: 50px;
     width: 800px;
-    height: 400px;
+    height: 375px;
     border-radius: 10px;
     border-width: 3px;
     border-color: grey;
@@ -83,15 +83,23 @@
     box-shadow: .3px .3px rgba(0, 0, 0, 0.2);
     display: inline-block;
     position: absolute;
-    margin-top: 430px;
+    margin-top: 405px;
     left: 50px;
     width: 775px;
-    min-height: 200px;
+    min-height: 50px;
     border-radius: 10px;
     background-color: white;
     padding-left: 25px;
+    font-family: helvetica, arial;
     label {
         font-size: 22px;
+    }
+    p {
+        font-weight: light;
+        margin-top: 30px;
+        margin-bottom:20px;
+        font-size: 14px;
+        margin-right: 20px;
     }
     :last-child  {
 
