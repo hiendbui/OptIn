@@ -32,12 +32,12 @@ export default class NavBar extends React.Component {
             <div>
             <div className="nav-bar">
                 <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>
-                <IconContext.Provider value={{ style: { fontSize: '23px'} }}>
+                <IconContext.Provider value={{ style: { fontSize: '20px'} }}>
                     <button></button>
                     <button></button>
                     <button onClick={this.handleClick}>
                         <div className='dropdown'>
-                        <img id='navbar-pic' src={url} width="23" height="23"/>
+                        <img id='navbar-pic' src={url} width="22.5" height="22.5"/>
                         <br />
                         <span>Me ▾</span> 
                         <div className={this.state.dropdown}>

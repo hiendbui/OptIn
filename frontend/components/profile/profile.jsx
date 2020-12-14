@@ -79,7 +79,7 @@ export default class Profile extends React.Component {
                     </IconContext.Provider>
                     </div>
                 </div>
-                <div>
+                <div className='prof-details'>
                 <div className='about'>
                     <br/>
                     <label>About</label>
@@ -93,6 +93,7 @@ export default class Profile extends React.Component {
                 </div>
                 <br/>
                 <div className='experiences'>
+                    <label>Experience</label>
                     {this.props.experiences.map((experience) => (
                         <div>
                             <p>{experience.title}</p>
