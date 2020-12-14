@@ -6,13 +6,14 @@ export const createProfile = (profile) => (
     })
 )
 
-export const updateProfile = (profile) => (
-    $.ajax({
+export const updateProfile = (profile) => {
+    profile.full_name = profile.fullName
+    return $.ajax({
         method: 'PATCH',
         url: `/api/profiles/${profile.id}`,
         data: { profile }
     })
-)
+}
 
 export const fetchProfile = (profile) => (
     $.ajax({

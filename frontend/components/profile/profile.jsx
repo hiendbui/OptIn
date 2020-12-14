@@ -8,7 +8,7 @@ export default class Profile extends React.Component {
         super(props);
         this.state = {profile: this.props.profile, modalMain: 'hidden-modal', modalAbout: 'hidden-modal' }
         // this.showForm = this.showForm.bind(this)
-        this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)    
     }
     
     componentDidMount() {
@@ -25,14 +25,13 @@ export default class Profile extends React.Component {
         return (e) => this.setState({ [field]: 'hidden-modal' })
     }
 
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //     console.log(this.props.updateProfile)
-    //     this.props.updateProfile(this.state.profile)
-    // }
+    handleSubmit(e) {
+        e.preventDefault;
+        this.props.updateProfile(this.state.profile);
+    }
 
     handleChange(field) {
-        return (e) => this.setState({ profile: { ...this.state[profile], [field]: e.target.value }})
+        return (e) => this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
     }
     render() {
         if (!this.state.profile) {
@@ -104,25 +103,25 @@ export default class Profile extends React.Component {
                                 <label>Full Name *
                                 </label>
                                 <br/>
-                                <input defaultValue={this.state.profile.fullName} type="text" onChange={this.handleChange}/>    
+                                <input defaultValue={this.state.profile.fullName} type="text" onChange={this.handleChange('fullName')}/>    
                             </div>
                              <br />
                             <div >
                                 <label>Headline *
                                 </label>
                                  <br />
-                                <input defaultValue={this.state.profile.headline} type="text" onChange={this.handleChange}/>
+                                <input defaultValue={this.state.profile.headline} type="text" onChange={this.handleChange('headline')}/>
                             </div>
                              <br />
                              <div >
                                  <label>Location *
                                 </label>
                                  <br />
-                                <input defaultValue={this.state.profile.location} type="text" onChange={this.handleChange} />
+                                <input defaultValue={this.state.profile.location} type="text" onChange={this.handleChange('location')} />
                              </div>
                              <br />
                             <div className="submit">
-                                <button type="submit">Save</button>
+                                <button onClick={this.closeForm('modalMain')} type="submit">Save</button>
                              </div>
                              <br/>
                         </form>
