@@ -6,7 +6,7 @@ import { GrClose } from 'react-icons/gr';
 export default class Profile extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {profile: this.props.profile, profileId:this.props.profileId, modalMain: 'hidden-modal', modalAbout: 'hidden-modal' }
+        this.state = {profile: this.props.profile,  modalMain: 'hidden-modal', modalAbout: 'hidden-modal' }
         // this.showForm = this.showForm.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)   
     }
@@ -16,8 +16,9 @@ export default class Profile extends React.Component {
     }
     
     componentDidMount() {
+        console.log(this.props.profileId)
         this.props.fetchAllProfiles()
-            .then(() => this.props.fetchProfile(Object.assign({}, this.state.profileId )))
+            .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
             .then(() => this.setState({profile: this.props.profile}))
     }
     
