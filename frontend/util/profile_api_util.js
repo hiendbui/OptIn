@@ -2,17 +2,17 @@ export const createProfile = (profile) => (
     $.ajax({
         method: 'POST',
         url: '/api/profiles',
-        data: { profile }
+        data: { profile }  
     })
 )
 
 export const updateProfile = (profile) => {
-    profile.full_name = profile.fullName
+    profile.full_name = profile.fullName;
     return $.ajax({
         method: 'PATCH',
         url: `/api/profiles/${profile.id}`,
         data: { profile }
-    })
+    });
 }
 
 export const fetchProfile = (profile) => (

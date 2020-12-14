@@ -6,9 +6,9 @@ import { GrClose } from 'react-icons/gr';
 export default class Profile extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {profile: this.props.profile,  modalMain: 'hidden-modal', modalAbout: 'hidden-modal' }
-        // this.showForm = this.showForm.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)   
+        this.state = {profile: this.props.profile, modalMain: 'hidden-modal', modalAbout: 'hidden-modal' };
+        this.handleSubmit = this.handleSubmit.bind(this);  
+        this.handleFile = this.handleFile.bind(this);
     }
 
     myProfile() {
@@ -32,12 +32,23 @@ export default class Profile extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault;
+        // const formData = new FormData();
+        // formData.append('profile[fullName]', this.state.profile.fullName);
+        // formData.append('profile[headline]', this.state.profile.headline)
+        // formData.append('profile[location]', this.state.profile.location)
+        // formData.append('profile[description]', this.state.profile.description)
+        // if (this.state.profile.photoUrl) formData.append('profile[profile_pic]', this.state.profile.photoUrl);
         this.props.updateProfile(this.state.profile);
     }
 
     handleChange(field) {
         return (e) => this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
     }
+
+    handleFile(e) {
+        // this.setState({ profile: { ...this.state.profile, [photoUrl]: e.currentTarget.files[0] } })
+    }
+
     render() {
         if (!this.state.profile) {
             this.state.profile = {
@@ -101,7 +112,7 @@ export default class Profile extends React.Component {
                         <form onSubmit={this.handleSubmit}>
                             <label>Update Profile Pic</label>
                              <br />
-                            <input className='img-input' type="file" />
+                            <input className='img-input' type="file" /*onChange={this.handleFile}*/ />
                             <br />
                             <br/>
                             <div >
