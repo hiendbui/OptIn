@@ -38,9 +38,9 @@ export default class Profile extends React.Component {
         e.preventDefault;
         const formData = new FormData();
         formData.append('profile[full_name]', this.state.profile.fullName);
-        formData.append('profile[headline]', this.state.profile.headline)
-        formData.append('profile[location]', this.state.profile.location)
-        formData.append('profile[description]', this.state.profile.description)
+        formData.append('profile[headline]', this.state.profile.headline);
+        formData.append('profile[location]', this.state.profile.location);
+        formData.append('profile[description]', this.state.profile.description);
         if (this.state.profile.photoFile) formData.append('profile[profile_pic]', this.state.profile.photoFile);
         this.props.updateProfile(formData, this.state.profile.id);
     }
@@ -105,12 +105,12 @@ export default class Profile extends React.Component {
                         <div>
                         <img src={experience.photoUrl} width='60px' height='60px'/>
                         <div className="experience">
-                            <p>{experience.title}</p>
-                            <p>{experience.company}</p>
-                            <p>{experience.start_date}</p>
-                            <p>{experience.end_date}</p>
-                            <p>{experience.location}</p>
-                            <p>{experience.description}</p>
+                            <p className='title'>{experience.title}</p>
+                            <p className='company' >{experience.company}</p>
+                            <p className='dates'>{experience.startDate} - {experience.endDate}</p>
+                            <p className='location'>{experience.location}</p>
+                            <p className='description'>{experience.description}</p>
+                            <br/>
                         </div>
                         </div>
                     ))}
