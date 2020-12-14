@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    updateProfile: (profile) => dispatch(updateProfile(profile)),
+    updateProfile: (profile, profileId) => dispatch(updateProfile(profile, profileId)),
     fetchAllProfiles: () => dispatch(fetchAllProfiles()),
     fetchProfile: (profile) => dispatch(fetchProfile(profile))
 })

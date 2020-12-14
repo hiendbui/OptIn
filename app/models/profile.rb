@@ -14,16 +14,16 @@
 class Profile < ApplicationRecord
     validates :user_id, :full_name, :headline, :location, presence: true
     validates :user_id, uniqueness: true
-    # validate :ensure_photo
+    validate :ensure_photo
     
     belongs_to :user
     has_one_attached :profile_pic
 
-    # def ensure_photo
-    #     unless self.profile_pic.attached?
-    #         errors[:profile_pic] << "must be attached"
-    #     end
-    # end
+    def ensure_photo
+        unless self.profile_pic.attached?
+            errors[:profile_pic] << "must be attached"
+        end
+    end
 
     has_many :experiences,
         primary_key: :id,

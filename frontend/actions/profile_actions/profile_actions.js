@@ -32,8 +32,9 @@ export const createProfile = profile => dispatch => {
         );
 };
 
-export const updateProfile = profile => dispatch => { 
-    return APIUtil.updateProfile(profile)
+export const updateProfile = (profile, profileId) => dispatch => { 
+    // debugger;
+    return APIUtil.updateProfile(profile, profileId)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),
             (errors) => dispatch(receiveProfileErrors(errors.responseJSON))

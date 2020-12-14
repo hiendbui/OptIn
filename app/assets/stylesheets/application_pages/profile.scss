@@ -146,9 +146,21 @@
     border-radius: 10px;
     background-color: white;
     padding-left: 25px;
+    padding-top:15px;
     font-family: helvetica, arial;
+    label {
+        font-size: 18px;
+    }
+    img {
+        margin-top: 15px;
+        display: inline-block;
+    }
 }
 
+.experience {
+    display: inline-block;
+    margin-top: -15px;
+}
 .modal-screen {
     position: fixed;
     top: 0;

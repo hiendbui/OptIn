@@ -6,13 +6,14 @@ export const createProfile = (profile) => (
     })
 )
 
-export const updateProfile = (profile) => {
-    profile.full_name = profile.fullName;
+export const updateProfile = (profile, profileId) => {
     return $.ajax({
         method: 'PATCH',
-        url: `/api/profiles/${profile.id}`,
-        data: { profile }
-    });
+        url: `/api/profiles/${profileId}`,
+        data: profile,
+        contentType: false,
+        processData: false
+    })
 }
 
 export const fetchProfile = (profile) => (

@@ -6,11 +6,11 @@ import { GrClose } from 'react-icons/gr';
 //I know this file is super long but I needed 
 //to make the edit forms modal and I could 
 //not fade the entire screen out without putting 
-//everything related to the profile in one signle component. Forgive me.
+//everything related to the profile in one single component. Forgive me.
 export default class Profile extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {profile: this.props.profile, modalMain: 'hidden-modal', modalAbout: 'hidden-modal' };
+        this.state = {profile: {...this.props.profile, photoFile: null}, modalMain: 'hidden-modal', modalAbout: 'hidden-modal' };
         this.handleSubmit = this.handleSubmit.bind(this);  
         this.handleFile = this.handleFile.bind(this);
     }
@@ -36,13 +36,13 @@ export default class Profile extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault;
-        // const formData = new FormData();
-        // formData.append('profile[fullName]', this.state.profile.fullName);
-        // formData.append('profile[headline]', this.state.profile.headline)
-        // formData.append('profile[location]', this.state.profile.location)
-        // formData.append('profile[description]', this.state.profile.description)
-        // if (this.state.profile.photoUrl) formData.append('profile[profile_pic]', this.state.profile.photoUrl);
-        this.props.updateProfile(this.state.profile);
+        const formData = new FormData();
+        formData.append('profile[full_name]', this.state.profile.fullName);
+        formData.append('profile[headline]', this.state.profile.headline)
+        formData.append('profile[location]', this.state.profile.location)
+        formData.append('profile[description]', this.state.profile.description)
+        if (this.state.profile.photoFile) formData.append('profile[profile_pic]', this.state.profile.photoFile);
+        this.props.updateProfile(formData, this.state.profile.id);
     }
 
     handleChange(field) {
@@ -50,7 +50,14 @@ export default class Profile extends React.Component {
     }
 
     handleFile(e) {
-        // this.setState({ profile: { ...this.state.profile, [photoUrl]: e.currentTarget.files[0] } })
+        const img = e.currentTarget.files[0]
+        const reader = new FileReader();
+        reader.onloadend = (event) => {
+            this.setState({ profile: { ...this.state.profile, ['photoUrl']: reader.result, ['photoFile']: img } })
+            console.log(this.state.profile)
+        };
+        reader.readAsDataURL(img);
+        // console.log(this.state.profile)
     }
 
     render() {
@@ -96,12 +103,15 @@ export default class Profile extends React.Component {
                     <label>Experience</label>
                     {this.props.experiences.map((experience) => (
                         <div>
+                        <img src={experience.photoUrl} width='60px' height='60px'/>
+                        <div className="experience">
                             <p>{experience.title}</p>
                             <p>{experience.company}</p>
                             <p>{experience.start_date}</p>
                             <p>{experience.end_date}</p>
                             <p>{experience.location}</p>
                             <p>{experience.description}</p>
+                        </div>
                         </div>
                     ))}
                 </div>
@@ -131,7 +141,7 @@ export default class Profile extends React.Component {
                         <form onSubmit={this.handleSubmit}>
                             <label>Update Profile Pic</label>
                              <br />
-                            <input className='img-input' type="file" /*onChange={this.handleFile}*/ />
+                            <input className='img-input' type="file" onChange={this.handleFile} />
                             <br />
                             <br/>
                             <div >
