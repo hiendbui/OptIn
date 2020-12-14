@@ -3,6 +3,10 @@ import { ImPencil} from 'react-icons/im';
 import { IconContext } from "react-icons"
 import { GrClose } from 'react-icons/gr';
 
+//I know this file is super long but I needed 
+//to make the edit forms modal and I could 
+//not fade the entire screen out without putting 
+//everything related to the profile in one signle component. Forgive me.
 export default class Profile extends React.Component {
     constructor (props) {
         super(props);
@@ -75,6 +79,7 @@ export default class Profile extends React.Component {
                     </IconContext.Provider>
                     </div>
                 </div>
+                <div>
                 <div className='about'>
                     <br/>
                     <label>About</label>
@@ -87,6 +92,19 @@ export default class Profile extends React.Component {
                     </div>
                 </div>
                 <br/>
+                <div className='experiences'>
+                    {this.props.experiences.map((experience) => (
+                        <div>
+                            <p>{experience.title}</p>
+                            <p>{experience.company}</p>
+                            <p>{experience.start_date}</p>
+                            <p>{experience.end_date}</p>
+                            <p>{experience.location}</p>
+                            <p>{experience.description}</p>
+                        </div>
+                    ))}
+                </div>
+                </div>
                 <div className={`${this.state.modalMain}`}>
                     <div className='modal-screen'>
 

@@ -128,6 +128,20 @@
     }
 }
 
+.experiences {
+    box-shadow: .3px .3px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    position: relative;
+    // left: 50px;
+    // top: 525px;
+    // width: 775px;
+    min-height: 50px;
+    border-radius: 10px;
+    background-color: white;
+    padding-left: 25px;
+    font-family: helvetica, arial;
+}
+
 .modal-screen {
     position: fixed;
     top: 0;
