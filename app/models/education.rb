@@ -17,4 +17,5 @@ class Education < ApplicationRecord
         validates :profile_id, :school, presence: true
 
         belongs_to :profile
+        has_one_attached :photo
 end
