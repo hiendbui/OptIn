@@ -70,7 +70,7 @@ export default class Profile extends React.Component {
             }
         }
         return (
-            <div>
+            <div className='profile'>
                 <div className='main-profile'>
                     <img src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt=""/>
                     <div className='profile-info'>
@@ -99,37 +99,42 @@ export default class Profile extends React.Component {
                         </div>
                     </div>
                     <br/>
-                    <div className='experiences'>
-                        <label>Experience</label>
-                        {this.props.experiences.map((experience) => (
-                            <div>
-                            <img src={experience.photoUrl} width='60px' height='60px'/>
-                            <div className="experience">
-                                <p className='title'>{experience.title}</p>
-                                <p className='company' >{experience.company}</p>
-                                <p className='dates'>{experience.startDate} - {experience.endDate}</p>
-                                <p className='location'>{experience.location}</p>
-                                <p className='description'>{experience.description}</p>
-                                <br/>
-                            </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className='educations'>
-                        <label>Education</label>
-                        {this.props.educations.map((education) => (
-                            <div>
-                                <img src={education.photoUrl} width='60px' height='60px' />
-                                <div className="education">
-                                    <p className='school'>{education.school}</p>
-                                    <p className='degree' >{education.degree}</p>
-                                    <p className='subject'>{education.subject}</p>
-                                    <p className='years'>{education.startYear} - {education.endYear}</p>
-                                    <p className='description'>{education.description}</p>
-                                    <br />
+                    <div className='exp-edu'>
+                        <div className='experiences'>
+                            <label>Experience</label>
+                            
+                            {this.props.experiences.map((experience) => (
+                                <div>
+                            
+                                <img src={experience.photoUrl} width='60px' height='60px'/>
+                                <div className="experience">
+                                    <p className='title'>{experience.title}</p>
+                                    <p className='company' >{experience.company}</p>
+                                    <p className='dates'>{experience.startDate} - {experience.endDate}</p>
+                                    <p className='location'>{experience.location}</p>
+                                    <p className='description'>{experience.description}</p>
+                                    <br/>
                                 </div>
-                            </div>
-                        ))}
+                                </div>
+                            ))}
+                        </div>
+                        <div className='border'></div>
+                        <div className='educations'>
+                            <label>Education</label>
+                            {this.props.educations.map((education) => (
+                                <div>
+                               
+                                    <img src={education.photoUrl} width='60px' height='60px' />
+                                    <div className="education">
+                                        <p className='school'>{education.school}</p>
+                                        <p className='degree-subject' >{education.degree ? `${education.degree},` : ""} {education.subject}</p>
+                                        <p className='years'>{education.startYear} - {education.endYear}</p>
+                                        <p className='description'>{education.description}</p>
+                                        <br />
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
                     </div>
                 </div>
                 <div className={`${this.state.modalMain}`}>
@@ -210,6 +215,7 @@ export default class Profile extends React.Component {
                         </form>
                     </div>
                 </div>
+                <br/>
             </div>
         )
     }
