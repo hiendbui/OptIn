@@ -44,6 +44,16 @@
 
 }
 
+#navbar-pic {
+    border-radius: 23px;
+    box-sizing: border-box;
+}
+
+#dropdown-pic {
+    border-radius: 45px;
+    box-sizing: border-box;
+}
+
 #gap {
     display: block;
     width: 100%;
@@ -78,7 +88,7 @@
 
     img {
         float: left;
-        padding-right: 5px;
+        margin-right: 5px;
     }
     :nth-child(2) {
         font-size: 15px;

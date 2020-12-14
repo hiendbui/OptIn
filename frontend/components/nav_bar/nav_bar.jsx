@@ -37,11 +37,11 @@ export default class NavBar extends React.Component {
                     <button></button>
                     <button onClick={this.handleClick}>
                         <div className='dropdown'>
-                        <img src={url} width="23" height="23"/>
+                        <img id='navbar-pic' src={url} width="23" height="23"/>
                         <br />
                         <span>Me ▾</span> 
                         <div className={this.state.dropdown}>
-                            <img src={url} width="45" height="45"/>
+                            <img id='dropdown-pic' src={url} width="45" height="45"/>
                             <p>{fullName}</p>
                             <p>{headline}</p>
                                 <div><Link to={{pathname: this.state.profile ? `/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].profile.id}` : null, state: {users: this.props.users}}} ><div> <span>View Profile</span></div></Link></div>
