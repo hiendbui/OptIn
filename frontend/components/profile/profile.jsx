@@ -6,14 +6,18 @@ import { GrClose } from 'react-icons/gr';
 export default class Profile extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {profile: this.props.profile, modalMain: 'hidden-modal', modalAbout: 'hidden-modal' }
+        this.state = {profile: this.props.profile, profileId:this.props.profileId, modalMain: 'hidden-modal', modalAbout: 'hidden-modal' }
         // this.showForm = this.showForm.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)    
+        this.handleSubmit = this.handleSubmit.bind(this)   
+    }
+
+    myProfile() {
+        if (this.props.currentUser.id !== this.props.profile.userId) return 'hide'
     }
     
     componentDidMount() {
-        this.props.fetchAllProfiles(this.props.currentUser)
-            .then(() => this.props.fetchProfile(this.props.profile))
+        this.props.fetchAllProfiles()
+            .then(() => this.props.fetchProfile(Object.assign({}, this.state.profileId )))
             .then(() => this.setState({profile: this.props.profile}))
     }
     
@@ -53,7 +57,7 @@ export default class Profile extends React.Component {
                         <p>{this.state.profile.location}</p>
                         <p>{this.state.profile.headline}</p>
                     </div>
-                    <div>
+                    <div className={`edit-${this.myProfile}`}>
                     <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                             <div onClick={this.showForm('modalMain')}><ImPencil /></div>
                     </IconContext.Provider>
@@ -64,9 +68,9 @@ export default class Profile extends React.Component {
                     <label>About</label>
                     <br/>
                     <p>{this.state.profile.description}</p>
-                    <div>
+                    <div className={`edit-${this.myProfile}`}>
                         <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
-                            <div onClick={this.showForm}><ImPencil /></div>
+                            <div onClick={this.showForm('modalAbout')}><ImPencil /></div>
                         </IconContext.Provider>
                     </div>
                 </div>
@@ -124,6 +128,28 @@ export default class Profile extends React.Component {
                                 <button onClick={this.closeForm('modalMain')} type="submit">Save</button>
                              </div>
                              <br/>
+                        </form>
+                    </div>
+                </div>
+                
+                <div className={`${this.state.modalAbout}`}>
+                    <div className='modal-screen'>
+
+                    </div>
+
+                    <div className='modal-about-form'>
+                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
+                            <div className='close' onClick={this.closeForm('modalAbout')}><GrClose /></div>
+                        </IconContext.Provider>
+                        
+                        <h1>Edit about</h1>
+                        <form onSubmit={this.handleSubmit}>
+                            <label>Summary</label>
+                            <br/>
+                            <textarea defaultValue={this.state.profile.description} cols="30" rows="10" onChange={this.handleChange('description')}></textarea>
+                            <div className="submit">
+                                <button onClick={this.closeForm('modalAbout')} type="submit">Save</button>
+                            </div>
                         </form>
                     </div>
                 </div>

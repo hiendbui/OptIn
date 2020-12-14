@@ -3,7 +3,8 @@ import Profile from './profile';
 import { updateProfile, fetchProfile, fetchAllProfiles } from '../../actions/profile_actions/profile_actions'
 
 const mapStateToProps = (state, ownProps) => ({
-    profile: state.entities.profiles[state.entities.users[ownProps.match.params.fullNameuserId.split('-').slice(-1)[0]].profile.id],
+    profile: state.entities.profiles[ownProps.match.params.fullNameprofileId.split('-').slice(-1)[0]],
+    profileId: ownProps.match.params.fullNameprofileId.split('-').slice(-1)[0],
     currentUser: state.entities.users[state.session.id] 
 })
 

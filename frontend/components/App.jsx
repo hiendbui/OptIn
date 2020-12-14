@@ -16,7 +16,7 @@ const App = () => (
         <LoggedInAuthRoute component={NavBarContainer} />
         <Switch>
             <LoggedInAuthRoute path="/feed" component={NewsFeedContainer} />
-            <LoggedInAuthRoute path="/in/:fullNameuserId" component={ProfileContainer} />
+            <LoggedInAuthRoute path="/in/:fullNameprofileId" component={ProfileContainer} />
             <LoggedOutAuthRoute path="/login" component={LoginFormContainer} />
             <LoggedOutAuthRoute path="/signup" component={SignUpFormContainer} />
             <LoggedOutAuthRoute path='/' component={Greeting} /> 

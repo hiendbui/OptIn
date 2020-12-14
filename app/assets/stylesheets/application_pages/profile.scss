@@ -207,6 +207,10 @@
     
 }
 
+.edit-hide {
+    display:none;
+}
+
 .modal-form h1 {
     font-size: x-large;
     padding: 10px;
@@ -215,4 +219,61 @@
 
 .hidden-modal {
     display:none;
+}
+
+.modal-about-form {
+    font-family: helvetica;
+    font-size: 15px;
+    color: rgb(95, 95, 95);
+    position: absolute;
+    top: 100px;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 600px;
+    background: #fff;
+    z-index: 3;
+    border-radius: 10px;
+    border: 1px solid #000;
+    h1 {
+        font-size: x-large;
+        padding: 10px;
+        color: black;
+    }
+    textarea {
+        margin-top: 10px;
+        border: 1px solid black;
+        width: 90%;
+        align-self: center;
+        color:black;
+    }
+    form {
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    button {
+        color:white;
+        background:  #2072ca;
+        width: 40px;
+        text-align: center;
+        padding: 10px;
+        border-width: 0px;
+        border-radius: 40px;
+        font-weight: bold;
+        margin-right: 15px;
+    }
+    button:hover {
+        background-color: #12447a;
+        cursor: pointer;
+    }
+    .close:hover {
+        cursor: pointer;
+    }
+    .submit {
+        margin-top:10px;
+        display:flex;
+        justify-content: flex-end;
+    }
 }

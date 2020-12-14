@@ -11,6 +11,7 @@ export default class NavBar extends React.Component {
         super(props);
         this.state = { profile: this.props.users[this.props.session.id].profile, dropdown: 'hidden'}
         this.handleClick = this.handleClick.bind(this)
+        this.props.fetchAllProfiles()
     }
     
     handleClick(e) {
@@ -43,7 +44,7 @@ export default class NavBar extends React.Component {
                             <img src={url} width="45" height="45"/>
                             <p>{fullName}</p>
                             <p>{headline}</p>
-                                <div><Link to={{pathname:`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`, state: {users: this.props.users}}} ><div> <span>View Profile</span></div></Link></div>
+                                <div><Link to={{pathname: this.state.profile ? `/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].profile.id}` : null, state: {users: this.props.users}}} ><div> <span>View Profile</span></div></Link></div>
                             <p>{'\xa0'}</p>
                             <div onClick={() => this.props.logout()}><span>Log out</span></div>
                         </div>
