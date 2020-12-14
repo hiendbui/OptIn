@@ -18,7 +18,7 @@ Profile.create([{user_id: User.last.id, full_name: 'Stephen Curry', location: 'S
 Profile.last.profile_pic.attach(io: open("https://optin-dev.s3-us-west-1.amazonaws.com/1568784015684.jpg"), filename: "steph_profile_pic.jpg")
 Experience.create([{profile_id: Profile.last.id, title: 'Chief Executive Officer', company: 'SC30 Inc.', start_date:'Jan 2018', end_date:'Present', location: 'San Francisco Bay Area'}])
 Experience.last.photo.attach(io: open("https://optin-dev.s3-us-west-1.amazonaws.com/1539703187847.png"), filename: "sc30.png")
-Experience.create([{profile_id: Profile.last.id, title: 'Guard', company: 'Golden State Warriors', start_date:'July 2009', end_date:'Present', location: 'San Francisco Bay Area', description: 'Selected by Golden State as the 7th pick in the 2009 NBA Draft'}])
+Experience.create([{profile_id: Profile.last.id, title: 'Guard', company: 'Golden State Warriors', start_date:'July 2009', end_date:'Present', location: 'San Francisco Bay Area', description: '- Selected by Golden State as the 7th pick in the 2009 NBA Draft'}])
 Experience.last.photo.attach(io: open("https://optin-dev.s3-us-west-1.amazonaws.com/1589935240758.png"), filename: "gswlogo.png")
 Achievement.create([{profile_id: Profile.last.id, title: 'Unanimous MVP', issuer: 'NBA', year: 2016, description: 'Also awarded MVP in 2015'}, {profile_id: Profile.last.id, title: '3x NBA Champion', issuer: 'NBA', description: '2015, 2017, 2018'}])
 Education.create([{profile_id: Profile.last.id, school: 'Davidson College', degree: 'BA (not completed)', subject: 'Sociology', start_year:'2006', end_year:'2009', description: 'NCAA season scoring leader in 2009'}])
