@@ -104,17 +104,17 @@ export default class Profile extends React.Component {
                             <label>Experience</label>
                             
                             {this.props.experiences.map((experience) => (
-                                <div>
-                            
-                                <img src={experience.photoUrl} width='60px' height='60px'/>
-                                <div className="experience">
-                                    <p className='title'>{experience.title}</p>
-                                    <p className='company' >{experience.company}</p>
-                                    <p className='dates'>{experience.startDate} - {experience.endDate}</p>
-                                    <p className='location'>{experience.location}</p>
-                                    <p className='description'>{experience.description}</p>
-                                    <br/>
-                                </div>
+                                <div key={experience.id}>
+                                    <div></div>
+                                    <img src={experience.photoUrl} width='60px' height='60px'/>
+                                    <div className="experience">
+                                        <p className='title'>{experience.title}</p>
+                                        <p className='company' >{experience.company}</p>
+                                        <p className='dates'>{experience.startDate} - {experience.endDate}</p>
+                                        <p className='location'>{experience.location}</p>
+                                        <p className='description'>{experience.description}</p>
+                                        <br/>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -122,18 +122,33 @@ export default class Profile extends React.Component {
                         <div className='educations'>
                             <label>Education</label>
                             {this.props.educations.map((education) => (
-                                <div>
-                               
+                                <div key={education.id}>
+                                    <div></div>
                                     <img src={education.photoUrl} width='60px' height='60px' />
                                     <div className="education">
                                         <p className='school'>{education.school}</p>
-                                        <p className='degree-subject' >{education.degree ? `${education.degree},` : ""} {education.subject}</p>
+                                        <p className='issuer-subject' >{education.degree ? education.degree : ""}{education.degree && education.subject ? ", " : ""}{education.subject}</p>
                                         <p className='years'>{education.startYear} - {education.endYear}</p>
                                         <p className='description'>{education.description}</p>
                                         <br />
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                    <div className='ach-container'>
+                    <div className='achievements'>
+                        <label>Achievements</label>
+                        {this.props.achievements.map((achievement) => (
+                            <div key={achievement.id}>
+                                <div className="achievement">
+                                    <p className='title'>{achievement.title}</p>
+                                    <p className='issuer-year' >{achievement.issuer ? achievement.issuer : ""}{achievement.issuer && achievement.year ? " · " : ""}{achievement.year}</p>
+                                    <p className='description'>{achievement.description}</p>
+                                    <br />
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     </div>
                 </div>
