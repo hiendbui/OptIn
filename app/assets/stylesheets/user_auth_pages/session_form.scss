@@ -7,9 +7,6 @@
 }
 
 .session-form {
-    >:last-child {
-        height: 200px;
-    }
     background-color: white;
     padding: 100px;
     font-family: sans-serif;
@@ -56,7 +53,6 @@
     #submit-form:hover, button:hover {
             background-color: #12447a;
             cursor: pointer;
-            
     }
 
     #submit-form:focus {outline:0;}
@@ -66,7 +62,6 @@
         font-weight: bold;
         text-decoration: none;
     }
-    
 }
 
 .sign-in {
@@ -103,7 +98,7 @@
         display: flex;
         justify-content: center;
         margin-right: 82px;
-        margin-bottom: 5px;
+        margin-bottom: 20px;
         input {
         width: 250px;
         padding: 7px;
@@ -122,5 +117,6 @@
     }
     :nth-child(7) {
         padding-left: 8.8px;
+        margin-bottom: 5px;
     }
 }
