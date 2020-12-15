@@ -6,7 +6,7 @@ const educationsReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_PROFILE:
-            if (action.profile.educations) newState = action.profile.educations;
+            (action.profile.educations) ? newState = action.profile.educations : newState={};
             return newState;
         default:
             return state;

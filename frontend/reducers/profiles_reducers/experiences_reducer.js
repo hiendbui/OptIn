@@ -8,7 +8,7 @@ const experiencesReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_PROFILE:
-            if (action.profile.experiences) newState = action.profile.experiences;
+            (action.profile.experiences) ? newState = action.profile.experiences : newState = {};
             return newState;
         default:
             return state;

@@ -6,7 +6,7 @@ const achievementsReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_PROFILE:
-            if (action.profile.achievements) newState = action.profile.achievements;
+            (action.profile.achievements) ? newState = action.profile.achievements : newState = {};
             return newState;
         default:
             return state;

@@ -3,10 +3,7 @@ import { ImPencil} from 'react-icons/im';
 import { IconContext } from "react-icons"
 import { GrClose } from 'react-icons/gr';
 
-//I know this file is super long but I needed 
-//to make the edit forms modal and I could 
-//not fade the entire screen out without putting 
-//everything related to the profile in one single component. Forgive me.
+//Please forgive me for this file being way too long.
 export default class Profile extends React.Component {
     constructor (props) {
         super(props);
@@ -16,7 +13,7 @@ export default class Profile extends React.Component {
     }
 
     myProfile() {
-        if (this.props.currentUser.id !== this.props.profile.userId) return 'hide'
+        if (this.props.profile) return this.props.currentUser.id === this.props.profile.userId;
     }
     
     componentDidMount() {
@@ -80,7 +77,7 @@ export default class Profile extends React.Component {
                         <p>{this.state.profile.location}</p>
                         <p>{this.state.profile.headline}</p>
                     </div>
-                    <div className={`edit-${this.myProfile}`}>
+                    <div className={this.myProfile() ? 'reveal' : 'hide'}>
                     <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                             <div onClick={this.showForm('modalMain')}><ImPencil /></div>
                     </IconContext.Provider>
@@ -92,7 +89,7 @@ export default class Profile extends React.Component {
                         <label>About</label>
                         <br/>
                         <p>{this.state.profile.description}</p>
-                        <div className={`edit-${this.myProfile}`}>
+                        <div className={this.myProfile() ? 'reveal' : 'hide'}>
                             <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                                 <div onClick={this.showForm('modalAbout')}><ImPencil /></div>
                             </IconContext.Provider>
