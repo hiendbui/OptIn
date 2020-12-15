@@ -14,9 +14,9 @@ export const updateEducation = (education) => (
     })
 )
 
-export const destroyEducation = (education) => (
+export const destroyEducation = (educationId) => (
     $.ajax({
         method: 'DELETE',
-        url: `/api/educations/${education.id}`,
+        url: `/api/educations/${educationId}`,
     })
 )

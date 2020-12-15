@@ -14,9 +14,9 @@ export const updateExperience = (experience) => (
     })
 )
 
-export const destroyExperience = (experience) => (
+export const destroyExperience = (experienceId) => (
     $.ajax({
         method: 'DELETE',
-        url: `/api/experiences/${experience.id}`,
+        url: `/api/experiences/${experienceId}`,
     })
 )

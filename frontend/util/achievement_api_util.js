@@ -14,9 +14,9 @@ export const updateAchievement = (achievement) => (
     })
 )
 
-export const destroyAchievement = (achievement) => (
+export const destroyAchievement = (achievementId) => (
     $.ajax({
         method: 'DELETE',
-        url: `/api/achievements/${achievement.id}`,
+        url: `/api/achievements/${achievementId}`,
     })
 )
