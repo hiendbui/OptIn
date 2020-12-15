@@ -6,7 +6,7 @@ const profilesReducer = (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_PROFILE:
-            newState[action.profile.id] = (({ userId, fullName, headline, location, description, photoUrl }) => ({ userId, fullName, headline, location, description, photoUrl }))(action.profile);
+            newState[action.profile.id] = (({ id, userId, fullName, headline, location, description, photoUrl }) => ({ id, userId, fullName, headline, location, description, photoUrl }))(action.profile);
             return newState;
         case RECEIVE_ALL_PROFILES:
             newState = action.profiles;

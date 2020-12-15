@@ -127,7 +127,7 @@ export default class Profile extends React.Component {
                                     <img src={education.photoUrl} width='60px' height='60px' />
                                     <div className="education">
                                         <p className='school'>{education.school}</p>
-                                        <p className='issuer-subject' >{education.degree ? education.degree : ""}{education.degree && education.subject ? ", " : ""}{education.subject}</p>
+                                        <p className='degree-subject' >{education.degree ? education.degree : ""}{education.degree && education.subject ? ", " : ""}{education.subject}</p>
                                         <p className='years'>{education.startYear} - {education.endYear}</p>
                                         <p className='description'>{education.description}</p>
                                         <br />
