@@ -1,6 +1,18 @@
 import { connect } from 'react-redux';
 import Profile from './profile';
 import { updateProfile, fetchProfile, fetchAllProfiles } from '../../actions/profile_actions/profile_actions'
+import { 
+    createExperience,
+    createEducation,
+    createAchievement,
+    updateExperience,
+    updateEducation,
+    updateAchievement,
+    destroyExperience,
+    destroyEducation,
+    destroyAchievement
+}   from '../../actions/profile_actions/profile_item_actions'
+
 
 const mapStateToProps = (state, ownProps) => ({
     profile: state.entities.profiles[ownProps.match.params.fullNameprofileId.split('-').slice(-1)[0]],
@@ -15,7 +27,16 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
     updateProfile: (profile, profileId) => dispatch(updateProfile(profile, profileId)),
     fetchAllProfiles: () => dispatch(fetchAllProfiles()),
-    fetchProfile: (profile) => dispatch(fetchProfile(profile))
+    fetchProfile: (profile) => dispatch(fetchProfile(profile)),
+    createExperience: (experience) => dispatch(createExperience(experience)),
+    createEducation: (education) => dispatch(createEducation(education)),
+    createAchievement: (achievement) => dispatch(createAchievement(achievement)),
+    updateExperience: (experience) => dispatch(updateExperience(experience)),
+    updateEducation: (education) => dispatch(updateEducation(education)),
+    updateAchievement: (achievement) => dispatch(updateAchievement(achievement)),
+    destroyExperience: (experienceId) => dispatch(destroyExperience(experienceId)),
+    destroyEducation: (educationId) => dispatch(destroyEducation(educationId)),
+    destroyAchievement: (achievementId) => dispatch(destroyAchievement(achievementId)),
 })
 
 const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
