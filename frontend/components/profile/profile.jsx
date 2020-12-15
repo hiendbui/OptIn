@@ -21,22 +21,24 @@ export default class Profile extends React.Component {
             experiences: this.props.experiences,
             education: { profileId: this.props.profiles[this.props.currentUser.profile.id]},
             achievement: { profileId: this.props.profiles[this.props.currentUser.profile.id]},
-            logos: []
+            logos: {}
         };
         this.handleSubmit = this.handleSubmit.bind(this);  
         this.handleFile = this.handleFile.bind(this);
-        this.handleItemSubmit = this.handleItemSubmit.bind(this);
+        this.handleCreateExp = this.handleCreateExp.bind(this);
+        this.handleEditExp = this.handleEditExp.bind(this);
+        this.closeItemForm = this.closeItemForm.bind(this);
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
     }
 
     
-    fetchLogo(institution) {
+    fetchLogo(institution, id) {
         return $.ajax({
             method: 'GET',
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
-                this.setState({logos: [...this.state.logos, data[0] ? data[0]['logo'] : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png']})
+                this.setState({logos: {...this.state.logos, [id]: data[0] ? data[0]['logo'] : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png'}})
             })
     };
 
@@ -47,7 +49,7 @@ export default class Profile extends React.Component {
     componentDidMount() {
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
-            .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company) }))
+            .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
             .then(() => this.setState({profile: this.props.profile}))
     }
     
@@ -57,6 +59,7 @@ export default class Profile extends React.Component {
 
     showItemForm(field, value, id) {
         return (e) => {this.setState({[field]: {class: value, id: id}});
+        
         if (value === 'edit-exp') this.setState({experience: this.props.experiences[id]});
         if (value === 'edit-edu') this.setState({education: this.props.educations[id]});
         if (value === 'edit-ach') this.setState({achievement: this.props.achievements[id]});
@@ -68,10 +71,7 @@ export default class Profile extends React.Component {
     }
 
     closeItemForm(field) {
-        this.state.experience = null;
-        this.state.education = null;
-        this.state.achievement = null;
-        return (e) => this.setState({ [field]: {...this.state['field'], class: 'hidden-modal' }})
+        return (e) =>this.setState({ [field]: {...this.state['field'], class: 'hidden-modal' }})
     }
 
     handleSubmit(e) {
@@ -85,13 +85,17 @@ export default class Profile extends React.Component {
         this.props.updateProfile(formData, this.state.profile.id);
     }
 
-    handleCreateExpSubmit(e) {
+    handleCreateExp(e) {
         e.preventDefault();
+        console.log(this.state.experience)
+        this.props.createExperience(this.state.experience)
+        .then(()=>this.setState({ experience: {profileId: this.props.profiles[this.props.currentUser.profile.id]}}))
     }
 
-    // handleEditExpSubmit(e){
-    //     e.prvent
-    // }
+    handleEditExp(e){
+        e.preventDefault();
+        this.props.updateExperience(this.state.experience)
+    }
 
     handleDeleteItem(func, id) {
         return (e) => {
@@ -101,7 +105,7 @@ export default class Profile extends React.Component {
     }
 
     handleItemChange(field, item) {
-        return (e) => this.setState({ [item]: { ...this.state[item], [field]: e.target.value }})
+        return (e) => this.setState({ experience: { ...this.state.experience, [field]: e.target.value }})
     }
     handleChange(field) {
         return (e) => this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
@@ -112,7 +116,6 @@ export default class Profile extends React.Component {
         const reader = new FileReader();
         reader.onloadend = (event) => {
             this.setState({ profile: { ...this.state.profile, ['photoUrl']: reader.result, ['photoFile']: img } })
-            console.log(this.state.profile)
         };
         reader.readAsDataURL(img);
         // console.log(this.state.profile)
@@ -127,7 +130,7 @@ export default class Profile extends React.Component {
                 description: ''
             }
         }
-
+       
         return (
             <div className='profile'>
                 <div className='main-profile'>
@@ -164,14 +167,12 @@ export default class Profile extends React.Component {
                             <div className='add' onClick={this.showItemForm('modalExp','add-exp')}><AiOutlinePlus /></div>
                             </label>
                             {this.props.experiences.map((experience) => {
-                                let i = 0
                                 return (<div key={experience.id}>
                                     <p fontSize="5px">{'\xa0'}</p>
-                                  
                                     <img src={
                                         NBATEAMS.includes(experience.company) ? 
                                             `http://loodibee.com/wp-content/uploads/nba-${experience.company.toLowerCase().split(' ').join('-')}-logo.png` 
-                                            : experience.photoUrl ? experience.photoUrl : this.state.logos[i]}  width='60px' height='60px'></img>
+                                            : experience.photoUrl ? experience.photoUrl : this.state.logos[experience.id]}  width='60px' height='60px'></img>
                                     <div className="experience">
                                         <div className='title'>
                                             <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
@@ -187,7 +188,7 @@ export default class Profile extends React.Component {
                                     </div>
                                 </div>
                                 )
-                             i++
+                             
                             })}
                         </div>
                         <div className='border'></div>
@@ -326,9 +327,9 @@ export default class Profile extends React.Component {
                         <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
                             <div className='close' onClick={this.closeItemForm('modalExp')}><GrClose /></div>
                         </IconContext.Provider>
-
+                        
                         <h1>{`${this.state.modalExp.class.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.class.split('-')[0].slice(1)}`} Experience</h1>
-                        <form onSubmit={this.handleItemSubmit(this.state.modalExp.class === 'add-exp' ? 'createExperience' : 'updateExperience'), this.state.experience}>                                
+                        <form onSubmit={this.state.modalExp.class === 'add-exp' ? this.handleCreateExp : this.handleEditExp}>                                
                                 <div >
                                     <label>Title *
                                 </label>
@@ -340,34 +341,34 @@ export default class Profile extends React.Component {
                                     <label>Company *
                                 </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.company : ""} required="required" type="text" onChange={this.handleChange('company','experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.company : ""} required="required" type="text" onChange={this.handleItemChange('company','experience')} />
                                 </div>
                                 <br />
                                 <div >
                                     <label>Start Date (e.g. Feb 2018) *
                                 </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleChange('startDate','experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleItemChange('start_date','experience')} />
                                 </div>
                                 <br />
                                 <div >
                                     <label>End Date (if current position, state 'Present') *
                                     </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.endDate : ""} required="required" type="text" onChange={this.handleChange('endDate', 'experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.endDate : ""} required="required" type="text" onChange={this.handleItemChange('end_date', 'experience')} />
                                 </div>
                                 <br/>
                                 <div >
                                     <label>Location
                                         </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleChange('location', 'experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleItemChange('location', 'experience')} />
                                 </div>
                                 <div className='delete'>
                                     <button onClick={this.handleDeleteItem('destroyExperience', this.state.modalExp.id)} type="submit">Delete</button>
                                 </div>
                                 <div className="submit">
-                                    <button onClick={this.closeItemForm('modalExp')} type="submit">Save</button>
+                                    <button onClick={()=>this.closeItemForm('modalExp')} type="submit">Save</button>
                                 </div>
                                 <br />
                         </form>
