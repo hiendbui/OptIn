@@ -144,7 +144,7 @@
     display: inline-block;
     position: relative;
     width: 100%;
-    min-height: 50px;
+    // min-height: 50px;
     border-radius: 10px;
     background-color: white;
     padding-left: 25px;
@@ -192,6 +192,7 @@
 .experiences {
     font-family: helvetica, arial;
     margin-top:5px;
+    min-height: 50px;
     label {
         font-size: 18px;
     }
@@ -250,6 +251,7 @@
 .educations {
     margin-top:5px;
     font-family: helvetica, arial;
+    min-height: 50px;
     label {
         font-size: 18px;
     }
