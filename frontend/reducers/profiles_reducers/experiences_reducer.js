@@ -1,6 +1,5 @@
 import { RECEIVE_PROFILE } from '../../actions/profile_actions/profile_actions';
-// import { LOGOUT_CURRENT_USER } from '../../actions/user_auth_actions/session_actions';
-
+import { RECEIVE_EXPERIENCE, REMOVE_EXPERIENCE } from '../../actions/profile_actions/profile_item_actions'
 //reset state when user logs out here?
 const experiencesReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -10,6 +9,12 @@ const experiencesReducer = (state = {}, action) => {
         case RECEIVE_PROFILE:
             (action.profile.experiences) ? newState = action.profile.experiences : newState = {};
             return newState;
+        case RECEIVE_EXPERIENCE:
+            newState[action.experience.id] = action.experience;
+            return newState;
+        case REMOVE_EXPERIENCE:
+            delete newState[action.experienceId];
+            return newState
         default:
             return state;
     }

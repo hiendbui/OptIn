@@ -1,4 +1,5 @@
 import { RECEIVE_PROFILE } from '../../actions/profile_actions/profile_actions';
+import { RECEIVE_EDUCATION, REMOVE_EDUCATION } from '../../actions/profile_actions/profile_item_actions'
 
 const educationsReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -8,6 +9,12 @@ const educationsReducer = (state = {}, action) => {
         case RECEIVE_PROFILE:
             (action.profile.educations) ? newState = action.profile.educations : newState={};
             return newState;
+        case RECEIVE_EDUCATION:
+            newState[action.education.id] = action.education;
+            return newState;
+        case REMOVE_EDUCATION:
+            delete newState[action.educationId];
+            return newState
         default:
             return state;
     }
