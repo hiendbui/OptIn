@@ -49,8 +49,8 @@ export default class Profile extends React.Component {
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
         .then(() => this.setState({profile: this.props.profile}))
+        // this.setState({ 'experience': {} })
         .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
-        .then(() => this.setState({ experience: {} }))
     }
     
     showForm(field) {
@@ -66,6 +66,7 @@ export default class Profile extends React.Component {
     }
     
     closeForm(field) {
+        if (this['expRef']) this['expRef']reset();
         return (e) => {
             this.setState({ [field]: 'hidden-modal' });
         }
@@ -86,8 +87,8 @@ export default class Profile extends React.Component {
     
     handleCreateExp(e) {
         e.preventDefault();
+        this['expRef'].reset();
         this.props.createExperience(this.state.experience)
-        .then(() => this.setState({ experience: {} }))
         .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
     }
 
@@ -166,7 +167,9 @@ export default class Profile extends React.Component {
                     <div className='exp-edu'>
                         <div className='experiences'>
                             <label>Experience
+                            <div className={this.myProfile() ? 'reveal' : 'hide'}>  
                             <div className='add' onClick={this.showItemForm('modalExp','add-exp')}><AiOutlinePlus /></div>
+                            </div>  
                             </label>
                             {this.props.experiences.map((experience) => {
                                 return (<div key={experience.id}>
@@ -198,7 +201,9 @@ export default class Profile extends React.Component {
                         <div className='border'></div>
                         <div className='educations'>
                             <label>Education
-                            <div className='add' onClick={this.showItemForm('modalEdu', 'add-edu')}><AiOutlinePlus /></div>
+                            <div className={this.myProfile() ? 'reveal' : 'hide'}>  
+                                <div className='add' onClick={this.showItemForm('modalEdu', 'add-edu')}><AiOutlinePlus /></div>
+                            </div>
                             </label>
                  
                             {this.props.educations.map((education) => (
@@ -223,7 +228,9 @@ export default class Profile extends React.Component {
                     <div className='ach-container'>
                     <div className='achievements'>
                         <label>Achievements
-                            <div className='add' onClick={this.showItemForm('modalAch', 'add-ach')}><AiOutlinePlus /></div>
+                            <div className={this.myProfile() ? 'reveal' : 'hide'}> 
+                                <div className='add' onClick={this.showItemForm('modalAch', 'add-ach')}><AiOutlinePlus /></div>
+                            </div>
                         </label>
                         {this.props.achievements.map((achievement) => (
                             <div key={achievement.id}>
@@ -333,7 +340,8 @@ export default class Profile extends React.Component {
                         </IconContext.Provider>
                         
                         <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} Experience</h1>
-                        <form onSubmit={!this.state.experience ? this.handleCreateExp : this.state.experience.id ? this.handleEditExp : this.handleCreateExp}>                                
+                        <form ref={(el) => this['expRef'] = el} 
+                            onSubmit={!this.state.experience ? this.handleCreateExp : this.state.experience.id ? this.handleEditExp : this.handleCreateExp}>                                
                                 <div >
                                     <label>Title *
                                 </label>

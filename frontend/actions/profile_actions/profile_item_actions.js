@@ -1,4 +1,3 @@
-import * as LogoUtil from '../../util/institution_logo';
 import * as ExpUtil from '../../util/experience_api_util';
 import * as EduUtil from '../../util/education_api_util';
 import * as AchUtil from '../../util/achievement_api_util';
@@ -11,23 +10,6 @@ export const RECEIVE_ACHIEVEMENT = 'RECEIVE_ACHIEVEMENT';
 export const REMOVE_EXPERIENCE = 'REMOVE_EXPERIENCE';
 export const REMOVE_EDUCATION = 'REMOVE_EDUCATION';
 export const REMOVE_ACHIEVEMENT = 'REMOVE_ACHIEVEMENT';
-
-// const receiveExpLogo = (data,expId) => ({
-//     type: RECEIVE_EXP_LOGO,
-//     logo: data[0] ? data[0].logo : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png',
-//     expId: expId
-// })
-
-// const receiveEduLogo = (data, eduId) => ({
-//     type: RECEIVE_EDU_LOGO,
-//     logo: data[0] ? data[0].logo : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png',
-//     eduId: eduId
-// })
-
-// export const fetchExpLogo = (institution, expId) => dispatch => {
-//     return LogoUtil.fetchLogo(institution)
-//         .then(data => dispatch(receiveExpLogo(data),expId))
-// };
 
 const receiveExperience = experience => ({
     type: RECEIVE_EXPERIENCE,
