@@ -49,11 +49,11 @@ class Profile < ApplicationRecord
         foreign_key: :followee_id,
         class_name: :Connection
     
-    has_many :followers,
+    has_many :followers, #aka profiles that are following this profile
         through: :passive_connections,
         source: :follower
     
-    has_many :followed,
+    has_many :followed, #aka profiles that his profile is following
         through: :active_connections,
         source: :followee
 end

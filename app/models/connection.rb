@@ -11,12 +11,12 @@
 class Connection < ApplicationRecord
     validates :follower_id, :followed_id, presence: true
 
-    belongs_to :follower,
+    belongs_to :follower, #aka profile that is following
         primary_key: :id,
         foreign_key: :follower_id,
         class_name: :Profile
 
-    belongs_to :followee,
+    belongs_to :followee, #aka profile that is being followed
         primary_key: :id,
         foreign_key: :followee_id,
         class_name: :Profile
