@@ -1,8 +1,6 @@
 class Api::ConnectionsController < ApplicationController
     def create
-        @followee = Profile.find(params[:connection][:followee_id])
-        @connection = current_user.active_connections.new(followee_id: @followee.id)
-
+        @connection = current_user.active_connections.new(connection_params)
         if @connection.save
             render 'api/connections/show'
         else
@@ -13,5 +11,12 @@ class Api::ConnectionsController < ApplicationController
     def destroy
         @connection = Connection.find(params[:id])
         @connection.delete if @connection
+    end
+
+
+    private
+
+    def connection_params
+        params.require(:connection).permit(:followee_id)
     end
 end

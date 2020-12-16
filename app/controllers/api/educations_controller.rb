@@ -25,6 +25,8 @@ class Api::EducationsController < ApplicationController
         @education.delete if @education
     end
 
+    private 
+    
     def education_params
         params.require(:education).permit(:school, :degree, :subject, :start_year, :end_year, :description) #photo?
     end

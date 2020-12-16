@@ -25,6 +25,8 @@ class Api::AchievementsController < ApplicationController
         @achievement.delete if @achievement
     end
 
+    private 
+    
     def achievement_params
         params.require(:achievement).permit(:title, :issuer, :year, :description)
     end
