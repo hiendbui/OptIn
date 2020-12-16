@@ -252,7 +252,7 @@ export default class Profile extends React.Component {
                                     <p fontSize="5px">{'\xa0'}</p>
                                     <img src={
                                         NBATEAMS.includes(experience.company) ? 
-                                            `http://loodibee.com/wp-content/uploads/nba-${experience.company.toLowerCase().split(' ').join('-')}-logo.png` 
+                                            `https://www.nba.com/assets/logos/teams/primary/web/GSW.svg` 
                                             : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id]}  width='60px' height='60px'></img>
                                     <div className="experience">
                                         <div className='title'>
