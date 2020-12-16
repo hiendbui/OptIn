@@ -17,11 +17,11 @@ export default class Profile extends React.Component {
             modalExp: { class: 'hidden-modal', id: null },
             modalEdu: { class: 'hidden-modal', id: null },
             modalAch: { class: 'hidden-modal', id: null },
-            experience: { profileId: this.props.profiles[this.props.currentUser.profile.id]},
             experiences: this.props.experiences,
-            education: { profileId: this.props.profiles[this.props.currentUser.profile.id]},
-            achievement: { profileId: this.props.profiles[this.props.currentUser.profile.id]},
-            logos: {}
+            logos: {},
+            education: { },
+            achievement: { },
+            experience: { },
         };
         this.handleSubmit = this.handleSubmit.bind(this);  
         this.handleFile = this.handleFile.bind(this);
@@ -29,6 +29,7 @@ export default class Profile extends React.Component {
         this.handleEditExp = this.handleEditExp.bind(this);
         this.closeItemForm = this.closeItemForm.bind(this);
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
+        this.showItemForm = this.showItemForm.bind(this)
     }
 
     
@@ -49,31 +50,30 @@ export default class Profile extends React.Component {
     componentDidMount() {
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
-            .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
-            .then(() => this.setState({profile: this.props.profile}))
+        .then(() => this.setState({profile: this.props.profile}))
+        .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
     }
     
     showForm(field) {
         return (e) => this.setState({[field]: 'modal'})
     }
-
-    showItemForm(field, value, id) {
-        return (e) => {this.setState({[field]: {class: value, id: id}});
-        
-        if (value === 'edit-exp') this.setState({experience: this.props.experiences[id]});
-        if (value === 'edit-edu') this.setState({education: this.props.educations[id]});
-        if (value === 'edit-ach') this.setState({achievement: this.props.achievements[id]});
+    
+    showItemForm(field, value, item) {
+        // console.log(item)
+        // this.state.experience = item; 
+        return (e) => {
+            this.setState({[field]: {class: value}})
         }
     }
-
+    
     closeForm(field) {
         return (e) => this.setState({ [field]: 'hidden-modal' })
     }
-
+    
     closeItemForm(field) {
         return (e) =>this.setState({ [field]: {...this.state['field'], class: 'hidden-modal' }})
     }
-
+    
     handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData();
@@ -84,12 +84,13 @@ export default class Profile extends React.Component {
         if (this.state.profile.photoFile) formData.append('profile[profile_pic]', this.state.profile.photoFile);
         this.props.updateProfile(formData, this.state.profile.id);
     }
-
+    
     handleCreateExp(e) {
         e.preventDefault();
+        
         console.log(this.state.experience)
         this.props.createExperience(this.state.experience)
-        .then(()=>this.setState({ experience: {profileId: this.props.profiles[this.props.currentUser.profile.id]}}))
+        .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
     }
 
     handleEditExp(e){
@@ -105,7 +106,10 @@ export default class Profile extends React.Component {
     }
 
     handleItemChange(field, item) {
-        return (e) => this.setState({ experience: { ...this.state.experience, [field]: e.target.value }})
+        
+        return (e) => {
+            
+            this.setState({ experience: { ...this.state.experience, [field]: e.target.value }})}
     }
     handleChange(field) {
         return (e) => this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
@@ -176,7 +180,9 @@ export default class Profile extends React.Component {
                                     <div className="experience">
                                         <div className='title'>
                                             <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
-                                                <div  onClick={this.showItemForm('modalExp', 'edit-exp', experience.id)}><ImPencil /></div>
+                                                <div  onClick={this.showItemForm('modalExp', 'edit-exp', experience)}>
+                                                        <ImPencil />
+                                                </div>
                                             </div>
                                             {experience.title}
                                         </div>
