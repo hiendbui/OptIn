@@ -53,7 +53,7 @@ class Profile < ApplicationRecord
         through: :passive_connections,
         source: :follower
     
-    has_many :followed, #aka profiles that his profile is following
+    has_many :followed, #aka profiles that this profile is following
         through: :active_connections,
         source: :followee
 end
