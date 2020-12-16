@@ -38,4 +38,22 @@ class Profile < ApplicationRecord
         foreign_key: :profile_id,
         class_name: :Achievement,
         dependent: :destroy
+
+    has_many :active_connections, 
+        primary_key: :id,
+        foreign_key: :follower_id,
+        class_name: :Connection
+    
+    has_many :passive_connections,
+        primary_key: :id,
+        foreign_key: :followee_id,
+        class_name: :Connection
+    
+    has_many :followers,
+        through: :passive_connections,
+        source: :follower
+    
+    has_many :followed,
+        through: :active_connections,
+        source: :followee
 end

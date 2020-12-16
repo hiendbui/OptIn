@@ -13,12 +13,12 @@ import ProfileContainer from './profile/profile_container';
 const App = () => (
     <div>  
         <LoggedInAuthRoute component={NavBarContainer} />
+        <LoggedInAuthRoute exact path="/feed" component={NewsFeedContainer} />
+        <LoggedInAuthRoute exact path="/in/:fullNameprofileId" component={ProfileContainer} />
         <Switch>
-            <LoggedInAuthRoute path="/feed" component={NewsFeedContainer} />
-            <LoggedInAuthRoute path="/in/:fullNameprofileId" component={ProfileContainer} />
-            <LoggedOutAuthRoute path="/login" component={LoginFormContainer} />
-            <LoggedOutAuthRoute path="/signup" component={SignUpFormContainer} />
-            <LoggedOutAuthRoute path='/' component={Greeting} /> 
+            <LoggedOutAuthRoute exact path="/login" component={LoginFormContainer} />
+            <LoggedOutAuthRoute exact path="/signup" component={SignUpFormContainer} />
+            <LoggedOutAuthRoute exact path='/' component={Greeting} /> 
         </Switch>   
     </div>
 );
