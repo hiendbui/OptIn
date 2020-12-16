@@ -10,14 +10,6 @@ class Api::EducationsController < ApplicationController
         end
     end
 
-    def show
-        @education = Education.find(params[:id])
-        if @education
-            render "api/educations/show"
-        else
-            render json: @education.errors.full_messages, status: 422
-        end
-    end
     
     def update
         @education = Education.find(params[:id])
@@ -26,6 +18,11 @@ class Api::EducationsController < ApplicationController
         else
             render json: @education.errors.full_messages, status: 422
         end
+    end
+    
+    def destroy
+        @education = current_user.educations.find_by(id: params[:id])
+        @education.delete
     end
 
     def education_params

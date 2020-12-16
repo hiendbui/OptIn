@@ -10,14 +10,6 @@ class Api::AchievementsController < ApplicationController
         end
     end
 
-    def show
-        @achievement = Achievement.find(params[:id])
-        if @achievement
-            render "api/achievements/show"
-        else
-            render json: @achievement.errors.full_messages, status: 422
-        end
-    end
     
     def update
         @achievement = Achievement.find(params[:id])
@@ -26,6 +18,11 @@ class Api::AchievementsController < ApplicationController
         else
             render json: @achievement.errors.full_messages, status: 422
         end
+    end
+    
+    def destroy
+        @achievement = current_user.achievements.find_by(id: params[:id])
+        @achievement.delete
     end
 
     def achievement_params

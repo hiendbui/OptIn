@@ -10,14 +10,6 @@ class Api::ExperiencesController < ApplicationController
         end
     end
 
-    def show
-        @experience = Experience.find(params[:id])
-        if @experience
-            render "api/experiences/show"
-        else
-            render json: @experience.errors.full_messages, status: 422
-        end
-    end
     
     def update
         @experience = Experience.find(params[:id])
@@ -26,6 +18,11 @@ class Api::ExperiencesController < ApplicationController
         else
             render json: @experience.errors.full_messages, status: 422
         end
+    end
+    
+    def destroy
+        @experience = current_user.experiences.find_by(id: params[:id])
+        @experience.delete
     end
 
     def experience_params
