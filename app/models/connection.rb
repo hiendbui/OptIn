@@ -9,7 +9,7 @@
 #  updated_at  :datetime         not null
 #
 class Connection < ApplicationRecord
-    validates :follower_id, :followed_id, presence: true
+    validates :follower_id, :followee_id, presence: true
 
     belongs_to :follower, #aka profile that is following
         primary_key: :id,

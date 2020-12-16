@@ -1,6 +1,7 @@
 class Api::ConnectionsController < ApplicationController
     def create
-        @connection = current_user.active_connections.new(connection_params)
+        @profile = Profile.find_by(user_id: current_user.id)
+        @connection = @profile.active_connections.new(connection_params)
         if @connection.save
             render 'api/connections/show'
         else
@@ -9,8 +10,13 @@ class Api::ConnectionsController < ApplicationController
     end
 
     def destroy
-        @connection = Connection.find(params[:id])
-        @connection.delete if @connection
+        @profile = Profile.find_by(user_id: current_user.id)
+        @connection = @profile.active_connections.find_by(followee_id: params[:id])
+        if @connection
+            @connection.delete
+        else
+            render json: params[:followee_id]
+        end
     end
 
 
