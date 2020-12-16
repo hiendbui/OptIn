@@ -340,11 +340,11 @@ export default class Profile extends React.Component {
                     </div>
 
                     <div className='modal-exp-form'>
-                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
+                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
                             <div className='close' onClick={this.closeForm('modalExp','expRef')}><GrClose /></div>
                         </IconContext.Provider>
                         
-                        <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} Experience</h1>
+                        <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} experience</h1>
                         <form ref={(el) => this['expRef'] = el} 
                             onSubmit={!this.state.experience ? this.handleCreateExp : this.state.experience.id ? this.handleEditExp : this.handleCreateExp}>                                
                                 <div >
@@ -362,7 +362,7 @@ export default class Profile extends React.Component {
                                 </div>
                                 <br />
                                 <div >
-                                    <label>Start Date (e.g. Feb 2018) *
+                                    <label>Start Date (e.g. Jun 2018) *
                                 </label>
                                     <br />
                                 <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleItemChange('start_date','experience')} />
@@ -381,6 +381,7 @@ export default class Profile extends React.Component {
                                     <br />
                                 <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleItemChange('location', 'experience')} />
                                 </div>
+                                <br/>
                                 <div > 
                                     <label>Description
                                         </label>
@@ -388,6 +389,7 @@ export default class Profile extends React.Component {
 
                                 <textarea cols="30" rows="5" defaultValue={this.state.experience ? this.state.experience.description : ""} type="textarea" onChange={this.handleItemChange('description', 'experience')}></textarea>
                                 </div>
+                                <br/>
                                 <div className='delete'>
                                     <button onClick={this.handleDeleteItem('destroyExperience')} type="submit">Delete</button>
                                 </div>
