@@ -6,7 +6,7 @@ export const createConnection = (followeeId) => (
     })
 )
 
-export const destroyEducation = (followeeId) => (
+export const destroyConnection = (followeeId) => (
     $.ajax({
         method: 'DELETE',
         url: `/api/connections/${followeeId}`,

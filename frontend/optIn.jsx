@@ -2,10 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from './store/store';
 import Root from './components/root';
-import { createProfile, updateProfile } from './actions/profile_actions/profile_actions'
-import { destroy } from './actions/user_auth_actions/session_actions'
-import { logout } from './actions/user_auth_actions/session_actions'
-import {fetchProfile} from './util/profile_api_util'
+import { createConnection, destroyConnection } from './actions/connection_actions/connection_actions'
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,11 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     window.state = store.getState()
     window.dispatch = store.dispatch;
-    window.createProfile = createProfile;
-    window.updateProfile = updateProfile;
-    window.logout = logout
-    window.destroy = destroy;
-    window.fetchProfile = fetchProfile
+    window.createConnection = createConnection;
+    window.destroyConnection = destroyConnection;
+    
     const rootEl = document.getElementById("root");
     ReactDOM.render(<Root store={store}/>, rootEl);
 });

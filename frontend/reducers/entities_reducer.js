@@ -4,6 +4,7 @@ import  profilesReducer  from './profiles_reducers/profiles_reducer';
 import experiencesReducer from './profiles_reducers/experiences_reducer';
 import educationsReducer from './profiles_reducers/educations_reducer';
 import achievementsReducer from './profiles_reducers/achievements_reducer';
+import connectionsReducer from './connections_reducer';
 
 
 
@@ -12,6 +13,7 @@ const entitiesReducer = combineReducers({
     profiles: profilesReducer,
     experiences: experiencesReducer,
     educations: educationsReducer,
-    achievements: achievementsReducer
+    achievements: achievementsReducer,
+    connections: connectionsReducer
 })
 export default entitiesReducer;
