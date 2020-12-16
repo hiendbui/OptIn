@@ -65,9 +65,9 @@ export default class Profile extends React.Component {
         }
     }
     
-    closeForm(field) {
-        if (this['expRef']) this['expRef']reset();
+    closeForm(field, ref) {
         return (e) => {
+            if (ref) this[ref].reset();
             this.setState({ [field]: 'hidden-modal' });
         }
     }
@@ -83,6 +83,7 @@ export default class Profile extends React.Component {
         formData.append('profile[description]', this.state.profile.description);
         if (this.state.profile.photoFile) formData.append('profile[profile_pic]', this.state.profile.photoFile);
         this.props.updateProfile(formData, this.state.profile.id);
+        if (this['mainRef']) this['mainRef'].reset();
     }
     
     handleCreateExp(e) {
@@ -94,6 +95,7 @@ export default class Profile extends React.Component {
 
     handleEditExp(e){
         e.preventDefault();
+        this['expRef'].reset();
         this.props.updateExperience(this.state.experience)
     }
 
@@ -111,7 +113,10 @@ export default class Profile extends React.Component {
             this.setState({ experience: { ...this.state.experience, [field]: e.target.value }})}
     }
     handleChange(field) {
-        return (e) => this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
+        return (e) => {
+            e.preventDefault();
+            this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
+        }
     }
 
     handleFile(e) {
@@ -125,7 +130,7 @@ export default class Profile extends React.Component {
     }
 
     render() {
-        if (!this.state.profile) {
+        if (!this.props.profile) {
             this.state.profile = {
                 fullName: '',
                 location:'',
@@ -256,7 +261,7 @@ export default class Profile extends React.Component {
                     </div>
                     <div className='modal-form'>
                         <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
-                            <div className='close' onClick={this.closeForm('modalMain')}><GrClose /></div>
+                            <div className='close' onClick={this.closeForm('modalMain','mainRef')}><GrClose /></div>
                         </IconContext.Provider>
                        <h1>Edit intro</h1>
                     <img src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" width='100%' />
@@ -271,7 +276,7 @@ export default class Profile extends React.Component {
                        <br/>
                        <br/>
                        <br/>
-                        <form onSubmit={this.handleSubmit}>
+                        <form ref={(el) => this['mainRef'] = el} onSubmit={this.handleSubmit}>
                             <label>Update Profile Pic</label>
                              <br />
                             <input className='img-input' type="file" onChange={this.handleFile} />
@@ -336,7 +341,7 @@ export default class Profile extends React.Component {
 
                     <div className='modal-exp-form'>
                         <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
-                            <div className='close' onClick={this.closeForm('modalExp')}><GrClose /></div>
+                            <div className='close' onClick={this.closeForm('modalExp','expRef')}><GrClose /></div>
                         </IconContext.Provider>
                         
                         <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} Experience</h1>
@@ -375,6 +380,13 @@ export default class Profile extends React.Component {
                                         </label>
                                     <br />
                                 <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleItemChange('location', 'experience')} />
+                                </div>
+                                <div > 
+                                    <label>Description
+                                        </label>
+                                    <br /> 
+
+                                <textarea cols="30" rows="5" defaultValue={this.state.experience ? this.state.experience.description : ""} type="textarea" onChange={this.handleItemChange('description', 'experience')}></textarea>
                                 </div>
                                 <div className='delete'>
                                     <button onClick={this.handleDeleteItem('destroyExperience')} type="submit">Delete</button>
