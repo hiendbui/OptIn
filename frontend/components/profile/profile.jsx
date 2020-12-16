@@ -14,10 +14,9 @@ export default class Profile extends React.Component {
             profile: {...this.props.profile, photoFile: null}, 
             modalMain: 'hidden-modal', 
             modalAbout: 'hidden-modal', 
-            modalExp: { class: 'hidden-modal', id: null },
-            modalEdu: { class: 'hidden-modal', id: null },
-            modalAch: { class: 'hidden-modal', id: null },
-            experiences: this.props.experiences,
+            modalExp: 'hidden-modal' ,
+            modalEdu: 'hidden-modal',
+            modalAch: 'hidden-modal',
             logos: {},
             education: { },
             achievement: { },
@@ -27,7 +26,6 @@ export default class Profile extends React.Component {
         this.handleFile = this.handleFile.bind(this);
         this.handleCreateExp = this.handleCreateExp.bind(this);
         this.handleEditExp = this.handleEditExp.bind(this);
-        this.closeItemForm = this.closeItemForm.bind(this);
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
         this.showItemForm = this.showItemForm.bind(this)
     }
@@ -52,6 +50,7 @@ export default class Profile extends React.Component {
         .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
         .then(() => this.setState({profile: this.props.profile}))
         .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
+        .then(() => this.setState({ experience: {} }))
     }
     
     showForm(field) {
@@ -59,20 +58,20 @@ export default class Profile extends React.Component {
     }
     
     showItemForm(field, value, item) {
-        // console.log(item)
-        // this.state.experience = item; 
+        // console.log(item) 
         return (e) => {
-            this.setState({[field]: {class: value}})
+            this.setState({'experience': item })
+            this.setState({[field]: value})
         }
     }
     
     closeForm(field) {
-        return (e) => this.setState({ [field]: 'hidden-modal' })
+        return (e) => {
+            this.setState({ [field]: 'hidden-modal' });
+        }
     }
     
-    closeItemForm(field) {
-        return (e) =>this.setState({ [field]: {...this.state['field'], class: 'hidden-modal' }})
-    }
+    
     
     handleSubmit(e) {
         e.preventDefault();
@@ -87,9 +86,8 @@ export default class Profile extends React.Component {
     
     handleCreateExp(e) {
         e.preventDefault();
-        
-        console.log(this.state.experience)
         this.props.createExperience(this.state.experience)
+        .then(() => this.setState({ experience: {} }))
         .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
     }
 
@@ -324,18 +322,18 @@ export default class Profile extends React.Component {
                 </div>
 
                 
-                <div className={`${this.state.modalExp.class}`}>
+                <div className={`${this.state.modalExp}`}>
                     <div className='modal-screen'>
 
                     </div>
 
                     <div className='modal-exp-form'>
                         <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
-                            <div className='close' onClick={this.closeItemForm('modalExp')}><GrClose /></div>
+                            <div className='close' onClick={this.closeForm('modalExp')}><GrClose /></div>
                         </IconContext.Provider>
                         
-                        <h1>{`${this.state.modalExp.class.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.class.split('-')[0].slice(1)}`} Experience</h1>
-                        <form onSubmit={this.state.modalExp.class === 'add-exp' ? this.handleCreateExp : this.handleEditExp}>                                
+                        <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} Experience</h1>
+                        <form onSubmit={!this.state.experience ? this.handleCreateExp : this.state.experience.id ? this.handleEditExp : this.handleCreateExp}>                                
                                 <div >
                                     <label>Title *
                                 </label>
@@ -371,10 +369,10 @@ export default class Profile extends React.Component {
                                 <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleItemChange('location', 'experience')} />
                                 </div>
                                 <div className='delete'>
-                                    <button onClick={this.handleDeleteItem('destroyExperience', this.state.modalExp.id)} type="submit">Delete</button>
+                                    <button onClick={this.handleDeleteItem('destroyExperience')} type="submit">Delete</button>
                                 </div>
                                 <div className="submit">
-                                    <button onClick={()=>this.closeItemForm('modalExp')} type="submit">Save</button>
+                                <button onClick={this.closeForm('modalExp')} type="submit">Save</button>
                                 </div>
                                 <br />
                         </form>
