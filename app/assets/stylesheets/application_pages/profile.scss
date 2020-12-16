@@ -1,7 +1,7 @@
 .main-profile {
     display: block;
     position: absolute;
-    margin-top: 10px;
+    margin-top: 0px;
     left: 50px;
     width: 800px;
     height: 375px;
@@ -80,7 +80,7 @@
 .prof-details {
     display: inline-block;
     position: absolute;
-    margin-top: 405px;
+    margin-top: 395px;
     left: 50px;
     width: 775px;
 }
@@ -782,6 +782,93 @@
      
 }
 
+.modal-ach-form {
+    font-family: helvetica;
+    font-size: 15px;
+    color: rgb(95, 95, 95);
+    position: fixed;
+    top: 25px;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    padding: 25px;
+    width: 600px;
+    height: 400px;
+    // padding: 20px;
+    background-color: white;
+    z-index: 3;
+    border-radius: 10px;
+    border: 1px solid #000;
+    h1 {
+        font-size:20px;
+        color:black;
+    }
+    
+    input {
+        color:black;
+        border: 1px solid rgb(95, 95, 95);
+        width: 350px;
+        height: 16px;
+        padding: 5px;
+    }
+    textarea {
+        border: 1px solid rgb(95, 95, 95);
+        color: black;
+    }
+    form {
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+    .submit {
+        display:flex;
+        justify-content: flex-end;
+        margin-top:11.7px;
+        button {
+        color:white;
+        background:  #2072ca;
+        width: 40px;
+        text-align: center;
+        padding: 10px;
+        border-width: 0px;
+        border-radius: 40px;
+        font-weight: bold;
+        margin-right: 15px;
+        }
+    }
+    .submit button:hover {
+        background-color: #12447a;
+        cursor: pointer;
+    }
+    .delete {
+        margin-bottom: -50px;
+        align-items: center;
+        button {
+        border: 1px solid grey;
+        color:grey;
+        background:  white;
+        width: 50px;
+        text-align: center;
+        padding: 10px;
+        margin-top: 5px;
+        border-width: 1px;
+        border-radius: 40px;
+        font-weight: bold;
+        margin-right: 15px;
+        }
+    }
+    .delete button:hover {
+        background-color: rgb(235, 235, 235);
+    }
+    .close:hover {
+        cursor: pointer;
+    }
+    label {
+        margin-bottom: 10px;
+    }
+     
+}
+
 .add-exp {
     .delete {
         display:none;
@@ -793,20 +880,14 @@
     }
 }
         
-        // .edit-edu {
+       
             
-            // }
-            
-            // .add-ach {
-                //     .delete {
-                    //         display:none;
-                    //     }
-// }
+.add-ach {
+    .delete {
+        display:none;
+    }
+}
 
-// .edit-ach {
-    
-    // }
-    
 .modal-screen {
     position: fixed;
     top: 0;

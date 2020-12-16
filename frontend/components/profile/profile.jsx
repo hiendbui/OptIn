@@ -32,6 +32,9 @@ export default class Profile extends React.Component {
         this.handleCreateEdu = this.handleCreateEdu.bind(this);
         this.handleEditEdu = this.handleEditEdu.bind(this);
         this.handleDeleteEdu = this.handleDeleteEdu.bind(this);
+        this.handleCreateAch = this.handleCreateAch.bind(this);
+        this.handleEditAch = this.handleEditAch.bind(this);
+        this.handleDeleteAch = this.handleDeleteAch.bind(this);
     }
 
     
@@ -108,6 +111,15 @@ export default class Profile extends React.Component {
         }
     }
     
+    handleFile(e) {
+        const img = e.currentTarget.files[0]
+        const reader = new FileReader();
+        reader.onloadend = (event) => {
+            this.setState({ profile: { ...this.state.profile, ['photoUrl']: reader.result, ['photoFile']: img } })
+        };
+        reader.readAsDataURL(img);
+    }
+
     handleCreateExp(e) {
         e.preventDefault();
         this['expRef'].reset();
@@ -162,15 +174,31 @@ export default class Profile extends React.Component {
         }
     }
 
-    handleFile(e) {
-        const img = e.currentTarget.files[0]
-        const reader = new FileReader();
-        reader.onloadend = (event) => {
-            this.setState({ profile: { ...this.state.profile, ['photoUrl']: reader.result, ['photoFile']: img } })
-        };
-        reader.readAsDataURL(img);
-        // console.log(this.state.profile)
+    handleCreateAch(e) {
+        e.preventDefault();
+        this['achRef'].reset();
+        this.props.createAchievement(this.state.achievement)
     }
+
+    handleEditAch(e) {
+        e.preventDefault();
+        this['achRef'].reset();
+        this.props.updateAchievement(this.state.achievement)
+    }
+
+    handleDeleteAch(achievement) {
+        return (e) => {
+            e.preventDefault();
+            this.props.destroyAchievement(achievement.id);
+        }
+    }
+
+    handleAchChange(field) {
+        return (e) => {
+            this.setState({ achievement: { ...this.state.achievement, [field]: e.target.value } })
+        }
+    }
+
 
     render() {
         if (!this.props.profile) {
@@ -347,7 +375,7 @@ export default class Profile extends React.Component {
                              </div>
                              <br />
                             <div className="submit">
-                                <button onClick={this.closeForm('modalMain')} type="submit">Save</button>
+                                <button onClick={this.closeForm('modalMain', 'mainRef')} type="submit">Save</button>
                              </div>
                              <br/>
                         </form>
@@ -365,12 +393,12 @@ export default class Profile extends React.Component {
                         </IconContext.Provider>
                         
                         <h1>Edit about</h1>
-                        <form onSubmit={this.handleSubmit}>
+                        <form ref={(el) => this['aboutRef'] = el} onSubmit={this.handleSubmit}>
                             <label>Summary</label>
                             <br/>
                             <textarea defaultValue={this.state.profile.description} cols="30" rows="10" onChange={this.handleChange('description')}></textarea>
                             <div className="submit">
-                                <button onClick={this.closeForm('modalAbout')} type="submit">Save</button>
+                                <button onClick={this.closeForm('modalAbout', 'aboutRef')} type="submit">Save</button>
                             </div>
                         </form>
                     </div>
@@ -454,7 +482,7 @@ export default class Profile extends React.Component {
                             <div className='close' onClick={this.closeForm('modalEdu', 'eduRef')}><GrClose /></div>
                         </IconContext.Provider>
 
-                        <h1>{`${this.state.modalEdu.split('-')[0].charAt(0).toUpperCase() + this.state.modalEdu.split('-')[0].slice(1)}`} experience</h1>
+                        <h1>{`${this.state.modalEdu.split('-')[0].charAt(0).toUpperCase() + this.state.modalEdu.split('-')[0].slice(1)}`} education</h1>
                         <form ref={(el) => this['eduRef'] = el}
                             onSubmit={!this.state.education ? this.handleCreateEdu : this.state.education.id ? this.handleEditEdu : this.handleCreateEdu}>
                             <div >
@@ -505,6 +533,59 @@ export default class Profile extends React.Component {
                             </div>
                             <div className="submit">
                                 <button onClick={this.closeForm('modalEdu')} type="submit">Save</button>
+                            </div>
+                            <br />
+                        </form>
+                    </div>
+                </div>
+
+                <div className={`${this.state.modalAch}`}>
+                    <div className='modal-screen'>
+
+                    </div>
+
+                    <div className='modal-ach-form'>
+                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
+                            <div className='close' onClick={this.closeForm('modalAch', 'achRef')}><GrClose /></div>
+                        </IconContext.Provider>
+
+                        <h1>{`${this.state.modalAch.split('-')[0].charAt(0).toUpperCase() + this.state.modalAch.split('-')[0].slice(1)}`} achievement</h1>
+                        <form ref={(el) => this['achRef'] = el}
+                            onSubmit={!this.state.achievement ? this.handleCreateAch : this.state.achievement.id ? this.handleEditAch : this.handleCreateAch}>
+                            <div >
+                                <label>Title *
+                                </label>
+                                <br />
+                                <input defaultValue={this.state.achievement ? this.state.achievement.title : ""} required="required" type="text" onChange={this.handleAchChange('title')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>Issuer
+                                </label>
+                                <br />
+                                <input defaultValue={this.state.achievement ? this.state.achievement.issuer : ""} type="text" onChange={this.handleAchChange('issuer')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>Year
+                                </label>
+                                <br />
+                                <input defaultValue={this.state.achievement ? this.state.achievement.year : ""} type="text" onChange={this.handleAchChange('year')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>Description
+                                        </label>
+                                <br />
+
+                                <textarea cols="30" rows="5" defaultValue={this.state.achievement ? this.state.achievement.description : ""} type="textarea" onChange={this.handleAchChange('description')}></textarea>
+                            </div>
+                            <br />
+                            <div className='delete'>
+                                <button onClick={this.handleDeleteAch(this.state.achievement)} type="submit">Delete</button>
+                            </div>
+                            <div className="submit">
+                                <button onClick={this.closeForm('modalAch')} type="submit">Save</button>
                             </div>
                             <br />
                         </form>
