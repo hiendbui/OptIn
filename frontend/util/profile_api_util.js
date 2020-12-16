@@ -2,17 +2,19 @@ export const createProfile = (profile) => (
     $.ajax({
         method: 'POST',
         url: '/api/profiles',
-        data: { profile }
+        data: { profile }  
     })
 )
 
-export const updateProfile = (profile) => (
-    $.ajax({
+export const updateProfile = (profile, profileId) => {
+    return $.ajax({
         method: 'PATCH',
-        url: `/api/profiles/${profile.id}`,
-        data: { profile }
+        url: `/api/profiles/${profileId}`,
+        data: profile,
+        contentType: false,
+        processData: false
     })
-)
+}
 
 export const fetchProfile = (profile) => (
     $.ajax({
@@ -20,7 +22,7 @@ export const fetchProfile = (profile) => (
     })
 )
 
-export const fetchProfiles = () => (
+export const fetchAllProfiles = () => (
     $.ajax({
         url: '/api/profiles',
     })

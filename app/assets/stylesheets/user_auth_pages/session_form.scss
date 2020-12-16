@@ -61,6 +61,7 @@
         color: #2977c9;
         font-weight: bold;
         text-decoration: none;
+        padding-bottom:200px;
     }
 }
 
@@ -98,7 +99,7 @@
         display: flex;
         justify-content: center;
         margin-right: 82px;
-        margin-bottom: 5px;
+        margin-bottom: 20px;
         input {
         width: 250px;
         padding: 7px;
@@ -117,5 +118,6 @@
     }
     :nth-child(7) {
         padding-left: 8.8px;
+        margin-bottom: 5px;
     }
 }

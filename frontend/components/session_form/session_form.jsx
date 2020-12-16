@@ -99,6 +99,7 @@ export default class SessionForm extends React.Component {
                                                         {this.props.message[2]}
                                                     </Link>
                 </p>
+                <div></div>
             </div>
         )
     }    

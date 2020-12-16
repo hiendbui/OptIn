@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: educations
+#
+#  id          :bigint           not null, primary key
+#  profile_id  :integer          not null
+#  school      :string           not null
+#  degree      :string
+#  subject     :string
+#  start_year  :integer
+#  end_year    :integer
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+one:
+  profile_id: 1
+  school: MyString
+  degree: MyString
+  subject: MyString
+  start_year: 1
+  end_year: 1
+  description: MyText
+
+two:
+  profile_id: 1
+  school: MyString
+  degree: MyString
+  subject: MyString
+  start_year: 1
+  end_year: 1
+  description: MyText

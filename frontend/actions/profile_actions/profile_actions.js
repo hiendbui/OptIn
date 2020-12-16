@@ -10,6 +10,11 @@ const receiveProfile = profile => ({
     profile
 });
 
+const receiveAllProfiles = profiles => ({
+    type: RECEIVE_ALL_PROFILES,
+    profiles
+})
+
 const receiveProfileErrors = errors => ({
     type: RECEIVE_PROFILE_ERRORS,
     errors
@@ -27,8 +32,9 @@ export const createProfile = profile => dispatch => {
         );
 };
 
-export const updateProfile = profile => dispatch => { 
-    return APIUtil.updateProfile(profile)
+export const updateProfile = (profile, profileId) => dispatch => { 
+    // debugger;
+    return APIUtil.updateProfile(profile, profileId)
         .then(
             (savedProfile) => dispatch(receiveProfile(savedProfile)),
             (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
@@ -42,3 +48,12 @@ export const fetchProfile = profile => dispatch => {
             (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
         );
 }
+
+export const fetchAllProfiles = () => dispatch => {
+    return APIUtil.fetchAllProfiles()
+        .then(
+            (profiles) => dispatch(receiveAllProfiles(profiles)),
+            (errors) => dispatch(receiveProfileErrors(errors.responseJSON))
+        )
+}
+

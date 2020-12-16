@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: achievements
+#
+#  id          :bigint           not null, primary key
+#  profile_id  :integer          not null
+#  title       :string           not null
+#  issuer      :string
+#  year        :integer
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+one:
+  profile_id: 1
+  title: MyString
+  issuer: MyString
+  year: 1
+  description: MyText
+
+two:
+  profile_id: 1
+  title: MyString
+  issuer: MyString
+  year: 1
+  description: MyText

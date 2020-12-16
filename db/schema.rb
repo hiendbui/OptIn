@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_192240) do
+ActiveRecord::Schema.define(version: 2020_12_13_002853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.integer "profile_id", null: false
+    t.string "title", null: false
+    t.string "issuer"
+    t.integer "year"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_achievements_on_profile_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,6 +45,32 @@ ActiveRecord::Schema.define(version: 2020_12_09_192240) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.integer "profile_id", null: false
+    t.string "school", null: false
+    t.string "degree"
+    t.string "subject"
+    t.integer "start_year"
+    t.integer "end_year"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_educations_on_profile_id"
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.integer "profile_id", null: false
+    t.string "title", null: false
+    t.string "company", null: false
+    t.string "start_date", null: false
+    t.string "end_date", null: false
+    t.string "location"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_experiences_on_profile_id"
   end
 
   create_table "profiles", force: :cascade do |t|

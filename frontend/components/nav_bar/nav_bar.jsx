@@ -11,6 +11,7 @@ export default class NavBar extends React.Component {
         super(props);
         this.state = { profile: this.props.users[this.props.session.id].profile, dropdown: 'hidden'}
         this.handleClick = this.handleClick.bind(this)
+        this.props.fetchAllProfiles()
     }
     
     handleClick(e) {
@@ -26,23 +27,24 @@ export default class NavBar extends React.Component {
             fullName = this.state.profile.fullName;
             headline = this.state.profile.headline
         }
-        const url = this.props.session && this.state.profile && this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/favpng_user-profile-2018-in-sight-user-conference-expo-business-default.png'
+        const url = this.props.session && this.state.profile && this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'
         return (
+            <div>
             <div className="nav-bar">
                 <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>
-                <IconContext.Provider value={{ style: { fontSize: '23px'} }}>
+                <IconContext.Provider value={{ style: { fontSize: '20px'} }}>
                     <button></button>
                     <button></button>
                     <button onClick={this.handleClick}>
                         <div className='dropdown'>
-                        <img src={url} width="23" height="23"/>
+                        <img id='navbar-pic' src={url} width="22.5" height="22.5"/>
                         <br />
                         <span>Me ▾</span> 
                         <div className={this.state.dropdown}>
-                            <img src={url} width="45" height="45"/>
+                            <img id='dropdown-pic' src={url} width="45" height="45"/>
                             <p>{fullName}</p>
                             <p>{headline}</p>
-                                <div><Link to={`/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].id}`}><div> <span>View Profile</span></div></Link></div>
+                                <div><Link to={{pathname: this.state.profile ? `/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].profile.id}` : null, state: {users: this.props.users}}} ><div> <span>View Profile</span></div></Link></div>
                             <p>{'\xa0'}</p>
                             <div onClick={() => this.props.logout()}><span>Log out</span></div>
                         </div>
@@ -69,7 +71,7 @@ export default class NavBar extends React.Component {
                         <br/>
                         <span>My Network</span>
                     </button>
-                    <Link to={'/in/feed'}> 
+                    <Link to={'/feed'}> 
                     <button>  
                         <ImHome3 />
                         <br/>
@@ -77,6 +79,8 @@ export default class NavBar extends React.Component {
                     </button>
                     </Link>
                 </IconContext.Provider>
+            </div>
+            <div id="gap"></div>
             </div>
         )
     }
