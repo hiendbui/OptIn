@@ -26,15 +26,15 @@ class User < ApplicationRecord
 
     has_many :experiences,
         through: :profile,
-        source: :experience
+        source: :experiences
 
     has_many :educations,
         through: :profile,
-        source: :education
+        source: :educations
 
     has_many :achievements,
         through: :profile,
-        source: :achievement
+        source: :achievements
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

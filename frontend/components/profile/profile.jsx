@@ -26,7 +26,7 @@ export default class Profile extends React.Component {
         this.handleFile = this.handleFile.bind(this);
         this.handleCreateExp = this.handleCreateExp.bind(this);
         this.handleEditExp = this.handleEditExp.bind(this);
-        this.handleDeleteItem = this.handleDeleteItem.bind(this);
+        this.handleDeleteExp = this.handleDeleteExp.bind(this)
         this.showItemForm = this.showItemForm.bind(this)
     }
 
@@ -391,7 +391,7 @@ export default class Profile extends React.Component {
                                 </div>
                                 <br/>
                                 <div className='delete'>
-                                    <button onClick={this.handleDeleteExp(experience.id)} type="submit">Delete</button>
+                                    <button onClick={this.handleDeleteExp(this.state.experience.id)} type="submit">Delete</button>
                                 </div>
                                 <div className="submit">
                                 <button onClick={this.closeForm('modalExp')} type="submit">Save</button>

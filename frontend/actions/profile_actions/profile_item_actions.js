@@ -2,8 +2,7 @@ import * as ExpUtil from '../../util/experience_api_util';
 import * as EduUtil from '../../util/education_api_util';
 import * as AchUtil from '../../util/achievement_api_util';
 
-export const RECEIVE_EXP_LOGO = 'RECEIVE_EXP_LOGO';
-export const RECEIVE_EDU_LOGO = 'RECEIVE_EDU_LOGO';
+
 export const RECEIVE_EXPERIENCE = 'RECEIVE_EXPERIENCE';
 export const RECEIVE_EDUCATION = 'RECEIVE_EDUCATION';
 export const RECEIVE_ACHIEVEMENT = 'RECEIVE_ACHIEVEMENT';
