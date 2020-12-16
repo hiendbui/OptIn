@@ -253,6 +253,7 @@ export default class Profile extends React.Component {
                                     <img src={
                                         experience.company in NBATEAMS ? 
                                             `https://sportsfly.cbsistatic.com/fly-62/bundles/sportsmediacss/images/team-logos/nba/${NBATEAMS[experience.company]}.svg` 
+                                            : experience.company === 'LinkedIn' || experience.company === 'OptIn' ? 'https://www.flaticon.com/svg/static/icons/svg/174/174857.svg' 
                                             : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id]}  width='60px' height='60px'></img>
                                     <div className="experience">
                                         <div className='title'>
