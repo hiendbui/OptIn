@@ -25,3 +25,15 @@ json.achievements do
         end
     end
 end
+
+json.followers do
+    json.array! @profile.followers.each do |follower_prof|
+        follower_prof.id      
+    end
+end
+
+json.followed do
+    json.array! @profile.followed.each do |followed_prof|
+        followed_prof.id
+    end
+end

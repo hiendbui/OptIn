@@ -1,0 +1,1 @@
+json.extract! @connection, :id, :follower_id, :followed_id
