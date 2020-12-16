@@ -99,10 +99,10 @@ export default class Profile extends React.Component {
         this.props.updateExperience(this.state.experience)
     }
 
-    handleDeleteItem(func, id) {
+    handleDeleteExp(id) {
         return (e) => {
             e.preventDefault();
-            this.props[func](id);
+            this.props.destroyExperience(id);
         }
     }
 
@@ -391,7 +391,7 @@ export default class Profile extends React.Component {
                                 </div>
                                 <br/>
                                 <div className='delete'>
-                                    <button onClick={this.handleDeleteItem('destroyExperience')} type="submit">Delete</button>
+                                    <button onClick={this.handleDeleteExp(experience.id)} type="submit">Delete</button>
                                 </div>
                                 <div className="submit">
                                 <button onClick={this.closeForm('modalExp')} type="submit">Save</button>
@@ -400,6 +400,72 @@ export default class Profile extends React.Component {
                         </form>
                     </div>
                 </div>
+                {/* <div className={`${this.state.modalExp}`}>
+                    <div className='modal-screen'>
+
+                    </div>
+
+                    <div className='modal-exp-form'>
+                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
+                            <div className='close' onClick={this.closeForm('modalExp', 'expRef')}><GrClose /></div>
+                        </IconContext.Provider>
+
+                        <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} experience</h1>
+                        <form ref={(el) => this['expRef'] = el}
+                            onSubmit={!this.state.experience ? this.handleCreateExp : this.state.experience.id ? this.handleEditExp : this.handleCreateExp}>
+                            <div >
+                                <label>Title *
+                                </label>
+                                <br />
+                                <input defaultValue={this.state.experience ? this.state.experience.title : ""} required="required" type="text" onChange={this.handleItemChange('title', 'experience')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>Company *
+                                </label>
+                                <br />
+                                <input defaultValue={this.state.experience ? this.state.experience.company : ""} required="required" type="text" onChange={this.handleItemChange('company', 'experience')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>Start Date (e.g. Jun 2018) *
+                                </label>
+                                <br />
+                                <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleItemChange('start_date', 'experience')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>End Date (if current position, state 'Present') *
+                                    </label>
+                                <br />
+                                <input defaultValue={this.state.experience ? this.state.experience.endDate : ""} required="required" type="text" onChange={this.handleItemChange('end_date', 'experience')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>Location
+                                        </label>
+                                <br />
+                                <input defaultValue={this.state.experience ? this.state.experience.location : ""} type="text" onChange={this.handleItemChange('location', 'experience')} />
+                            </div>
+                            <br />
+                            <div >
+                                <label>Description
+                                        </label>
+                                <br />
+
+                                <textarea cols="30" rows="5" defaultValue={this.state.experience ? this.state.experience.description : ""} type="textarea" onChange={this.handleItemChange('description', 'experience')}></textarea>
+                            </div>
+                            <br />
+                            <div className='delete'>
+                                <button onClick={this.handleDeleteItem('destroyExperience')} type="submit">Delete</button>
+                            </div>
+                            <div className="submit">
+                                <button onClick={this.closeForm('modalExp')} type="submit">Save</button>
+                            </div>
+                            <br />
+                        </form>
+                    </div>
+                </div> */}
                 <br/>
             </div>
         )
