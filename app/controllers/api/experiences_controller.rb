@@ -22,7 +22,7 @@ class Api::ExperiencesController < ApplicationController
     
     def destroy
         @experience = current_user.experiences.find_by(id: params[:id])
-        @experience.delete
+        @experience.delete if (@experience) 
     end
 
     def experience_params

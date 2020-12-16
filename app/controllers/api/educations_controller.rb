@@ -22,7 +22,7 @@ class Api::EducationsController < ApplicationController
     
     def destroy
         @education = current_user.educations.find_by(id: params[:id])
-        @education.delete
+        @education.delete if @education
     end
 
     def education_params

@@ -16,7 +16,7 @@ const receiveExperience = experience => ({
 })
 
 const receiveEducation = education => ({
-    type: RECEIVE_EDCUATION,
+    type: RECEIVE_EDUCATION,
     education: education
 })
 
@@ -31,7 +31,7 @@ const removeExperience = experienceId => ({
 })
 
 const removeEducation = educationId => ({
-    type: REMOVE_EDCUATION,
+    type: REMOVE_EDUCATION,
     educationId: educationId
 })
 

@@ -22,7 +22,7 @@ class Api::AchievementsController < ApplicationController
     
     def destroy
         @achievement = current_user.achievements.find_by(id: params[:id])
-        @achievement.delete
+        @achievement.delete if @achievement
     end
 
     def achievement_params

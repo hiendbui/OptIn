@@ -17,27 +17,41 @@ export default class Profile extends React.Component {
             modalExp: 'hidden-modal' ,
             modalEdu: 'hidden-modal',
             modalAch: 'hidden-modal',
-            logos: {},
-            education: { },
-            achievement: { },
-            experience: { },
+            expLogos: {},
+            eduLogos: {},
+            education: {},
+            achievement: {},
+            experience: {},
         };
         this.handleSubmit = this.handleSubmit.bind(this);  
         this.handleFile = this.handleFile.bind(this);
+        this.showItemForm = this.showItemForm.bind(this);
         this.handleCreateExp = this.handleCreateExp.bind(this);
         this.handleEditExp = this.handleEditExp.bind(this);
-        this.handleDeleteExp = this.handleDeleteExp.bind(this)
-        this.showItemForm = this.showItemForm.bind(this)
+        this.handleDeleteExp = this.handleDeleteExp.bind(this);
+        this.handleCreateEdu = this.handleCreateEdu.bind(this);
+        this.handleEditEdu = this.handleEditEdu.bind(this);
+        this.handleDeleteEdu = this.handleDeleteEdu.bind(this);
     }
 
     
-    fetchLogo(institution, id) {
+    fetchExpLogo(institution, id) {
         return $.ajax({
             method: 'GET',
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
-                this.setState({logos: {...this.state.logos, [id]: data[0] ? data[0]['logo'] : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png'}})
+                this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? data[0]['logo'] : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png'}})
+            })
+    };
+
+    fetchEduLogo(institution, id) {
+        return $.ajax({
+            method: 'GET',
+            url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
+        })
+            .then((data) => {
+                this.setState({ eduLogos: { ...this.state.eduLogos, [id]: data[0] ? data[0]['logo'] : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png' } })
             })
     };
 
@@ -50,7 +64,8 @@ export default class Profile extends React.Component {
         .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
         .then(() => this.setState({profile: this.props.profile}))
         // this.setState({ 'experience': {} })
-        .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
+        .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
+        .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
     }
     
     showForm(field) {
@@ -60,7 +75,7 @@ export default class Profile extends React.Component {
     showItemForm(field, value, item) {
         // console.log(item) 
         return (e) => {
-            this.setState({'experience': item })
+            field === 'modalExp' ? this.setState({ 'experience': item }) : field === 'modalEdu' ? this.setState({ 'education': item }) : this.setState({'achievement' : item})
             this.setState({[field]: value})
         }
     }
@@ -86,36 +101,64 @@ export default class Profile extends React.Component {
         if (this['mainRef']) this['mainRef'].reset();
     }
     
+    handleChange(field) {
+        return (e) => {
+            e.preventDefault();
+            this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
+        }
+    }
+    
     handleCreateExp(e) {
         e.preventDefault();
         this['expRef'].reset();
         this.props.createExperience(this.state.experience)
-        .then(() => this.props.experiences.forEach((experience) => { this.fetchLogo(experience.company, experience.id) }))
+        .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
     }
 
     handleEditExp(e){
         e.preventDefault();
         this['expRef'].reset();
         this.props.updateExperience(this.state.experience)
+        .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
     }
 
-    handleDeleteExp(id) {
+    handleDeleteExp(experience) {
         return (e) => {
             e.preventDefault();
-            this.props.destroyExperience(id);
+            this.props.destroyExperience(experience.id);
         }
     }
 
-    handleItemChange(field, item) {
-        
+    handleExpChange(field) {
         return (e) => {
-            
-            this.setState({ experience: { ...this.state.experience, [field]: e.target.value }})}
+            this.setState({ experience: { ...this.state.experience, [field]: e.target.value }})
+        }
     }
-    handleChange(field) {
+
+    handleCreateEdu(e) {
+        e.preventDefault();
+        this['eduRef'].reset();
+        this.props.createEducation(this.state.education)
+            .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
+    }
+
+    handleEditEdu(e) {
+        e.preventDefault();
+        this['eduRef'].reset();
+        this.props.updateEducation(this.state.education)
+            .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
+    }
+
+    handleDeleteEdu(education) {
         return (e) => {
             e.preventDefault();
-            this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
+            this.props.destroyEducation(education.id);
+        }
+    }
+
+    handleEduChange(field) {
+        return (e) => {
+            this.setState({ education: { ...this.state.education, [field]: e.target.value } })
         }
     }
 
@@ -182,7 +225,7 @@ export default class Profile extends React.Component {
                                     <img src={
                                         NBATEAMS.includes(experience.company) ? 
                                             `http://loodibee.com/wp-content/uploads/nba-${experience.company.toLowerCase().split(' ').join('-')}-logo.png` 
-                                            : experience.photoUrl ? experience.photoUrl : this.state.logos[experience.id]}  width='60px' height='60px'></img>
+                                            : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id]}  width='60px' height='60px'></img>
                                     <div className="experience">
                                         <div className='title'>
                                             <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
@@ -214,11 +257,11 @@ export default class Profile extends React.Component {
                             {this.props.educations.map((education) => (
                                 <div key={education.id}>
                                     <div></div>
-                                    <img src={education.photoUrl} width='60px' height='60px' />
+                                    <img src={education.photoUrl ? education.photoUrl : this.state.eduLogos[education.id]} width='60px' height='60px' />
                                     <div className="education">
                                         <div className='school'>{education.school}
                                         <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
-                                            <div  onClick={this.showItemForm('modalEdu', 'edit-edu', education.id)}><ImPencil /></div>
+                                            <div  onClick={this.showItemForm('modalEdu', 'edit-edu', education)}><ImPencil /></div>
                                         </div>
                                         </div>
                                         <p className='degree-subject' >{education.degree ? education.degree : ""}{education.degree && education.subject ? ", " : ""}{education.subject}</p>
@@ -242,7 +285,7 @@ export default class Profile extends React.Component {
                                 <div className="achievement">
                                     <div className='title'>{achievement.title}
                                     <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
-                                         <div  onClick={this.showItemForm('modalAch', 'edit-ach', achievement.id)}><ImPencil /></div>
+                                         <div  onClick={this.showItemForm('modalAch', 'edit-ach', achievement)}><ImPencil /></div>
                                     </div>
                                     </div>
                                     <p className='issuer-year' >{achievement.issuer ? achievement.issuer : ""}{achievement.issuer && achievement.year ? " · " : ""}{achievement.year}</p>
@@ -351,35 +394,35 @@ export default class Profile extends React.Component {
                                     <label>Title *
                                 </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.title : ""} required="required" type="text" onChange={this.handleItemChange('title','experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.title : ""} required="required" type="text" onChange={this.handleExpChange('title')} />
                                 </div>
                                 <br />
                                 <div >
                                     <label>Company *
                                 </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.company : ""} required="required" type="text" onChange={this.handleItemChange('company','experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.company : ""} required="required" type="text" onChange={this.handleExpChange('company')} />
                                 </div>
                                 <br />
                                 <div >
                                     <label>Start Date (e.g. Jun 2018) *
                                 </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleItemChange('start_date','experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleExpChange('start_date')} />
                                 </div>
                                 <br />
                                 <div >
                                     <label>End Date (if current position, state 'Present') *
                                     </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.endDate : ""} required="required" type="text" onChange={this.handleItemChange('end_date', 'experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.endDate : ""} required="required" type="text" onChange={this.handleExpChange('end_date')} />
                                 </div>
                                 <br/>
                                 <div >
                                     <label>Location
                                         </label>
                                     <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleItemChange('location', 'experience')} />
+                                <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleExpChange('location')} />
                                 </div>
                                 <br/>
                                 <div > 
@@ -387,11 +430,11 @@ export default class Profile extends React.Component {
                                         </label>
                                     <br /> 
 
-                                <textarea cols="30" rows="5" defaultValue={this.state.experience ? this.state.experience.description : ""} type="textarea" onChange={this.handleItemChange('description', 'experience')}></textarea>
+                                <textarea cols="30" rows="5" defaultValue={this.state.experience ? this.state.experience.description : ""} type="textarea" onChange={this.handleExpChange('description')}></textarea>
                                 </div>
                                 <br/>
                                 <div className='delete'>
-                                    <button onClick={this.handleDeleteExp(this.state.experience.id)} type="submit">Delete</button>
+                                    <button onClick={this.handleDeleteExp(this.state.experience)} type="submit">Delete</button>
                                 </div>
                                 <div className="submit">
                                 <button onClick={this.closeForm('modalExp')} type="submit">Save</button>
@@ -400,52 +443,53 @@ export default class Profile extends React.Component {
                         </form>
                     </div>
                 </div>
-                {/* <div className={`${this.state.modalExp}`}>
+                {/* Modal Form for education */}
+                <div className={`${this.state.modalEdu}`}>
                     <div className='modal-screen'>
 
                     </div>
 
-                    <div className='modal-exp-form'>
+                    <div className='modal-edu-form'>
                         <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
-                            <div className='close' onClick={this.closeForm('modalExp', 'expRef')}><GrClose /></div>
+                            <div className='close' onClick={this.closeForm('modalEdu', 'eduRef')}><GrClose /></div>
                         </IconContext.Provider>
 
-                        <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} experience</h1>
-                        <form ref={(el) => this['expRef'] = el}
-                            onSubmit={!this.state.experience ? this.handleCreateExp : this.state.experience.id ? this.handleEditExp : this.handleCreateExp}>
+                        <h1>{`${this.state.modalEdu.split('-')[0].charAt(0).toUpperCase() + this.state.modalEdu.split('-')[0].slice(1)}`} experience</h1>
+                        <form ref={(el) => this['eduRef'] = el}
+                            onSubmit={!this.state.education ? this.handleCreateEdu : this.state.education.id ? this.handleEditEdu : this.handleCreateEdu}>
                             <div >
-                                <label>Title *
+                                <label>School *
                                 </label>
                                 <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.title : ""} required="required" type="text" onChange={this.handleItemChange('title', 'experience')} />
+                                <input defaultValue={this.state.education ? this.state.education.school : ""} required="required" type="text" onChange={this.handleEduChange('school')} />
                             </div>
                             <br />
                             <div >
-                                <label>Company *
+                                <label>Degree 
                                 </label>
                                 <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.company : ""} required="required" type="text" onChange={this.handleItemChange('company', 'experience')} />
+                                <input defaultValue={this.state.education ? this.state.education.degree : ""}  type="text" onChange={this.handleEduChange('degree')} />
                             </div>
                             <br />
                             <div >
-                                <label>Start Date (e.g. Jun 2018) *
+                                <label>Subject 
                                 </label>
                                 <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleItemChange('start_date', 'experience')} />
+                                <input defaultValue={this.state.education ? this.state.education.subject : ""}  type="text" onChange={this.handleEduChange('subject')} />
                             </div>
                             <br />
                             <div >
-                                <label>End Date (if current position, state 'Present') *
+                                <label>Start Year
                                     </label>
                                 <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.endDate : ""} required="required" type="text" onChange={this.handleItemChange('end_date', 'experience')} />
+                                <input defaultValue={this.state.education ? this.state.education.startYear : ""}  type="text" onChange={this.handleEduChange('start_year')} />
                             </div>
                             <br />
                             <div >
-                                <label>Location
+                                <label>End Year
                                         </label>
                                 <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.location : ""} type="text" onChange={this.handleItemChange('location', 'experience')} />
+                                <input defaultValue={this.state.education ? this.state.education.endYear : ""} type="text" onChange={this.handleEduChange('end_year')} />
                             </div>
                             <br />
                             <div >
@@ -453,19 +497,19 @@ export default class Profile extends React.Component {
                                         </label>
                                 <br />
 
-                                <textarea cols="30" rows="5" defaultValue={this.state.experience ? this.state.experience.description : ""} type="textarea" onChange={this.handleItemChange('description', 'experience')}></textarea>
+                                <textarea cols="30" rows="5" defaultValue={this.state.education ? this.state.education.description : ""} type="textarea" onChange={this.handleEduChange('description')}></textarea>
                             </div>
                             <br />
                             <div className='delete'>
-                                <button onClick={this.handleDeleteItem('destroyExperience')} type="submit">Delete</button>
+                                <button onClick={this.handleDeleteEdu(this.state.education)} type="submit">Delete</button>
                             </div>
                             <div className="submit">
-                                <button onClick={this.closeForm('modalExp')} type="submit">Save</button>
+                                <button onClick={this.closeForm('modalEdu')} type="submit">Save</button>
                             </div>
                             <br />
                         </form>
                     </div>
-                </div> */}
+                </div>
                 <br/>
             </div>
         )
