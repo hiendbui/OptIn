@@ -238,7 +238,7 @@ export default class Profile extends React.Component {
                         <img  
                         src={this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}/>
                         <p>{this.state.profile.fullName}</p>
-                        <p>{this.state.profile.location}{this.props.connections ? this.props.connections > 1 ? ` · ${this.props.connections} connections` : ' · 1 connection' : ''}</p>
+                        <p>{this.state.profile.location}{this.state.profile.location ? this.props.connections ? this.props.connections > 1 ? ` · ${this.props.connections} connections` : ' · 1 connection' : '' : ''}</p>
                         <p>{this.state.profile.headline}</p>
                     </div>
                     <div className={this.myProfile() ? 'reveal' : 'hide'}>
