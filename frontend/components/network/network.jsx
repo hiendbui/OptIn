@@ -15,7 +15,6 @@ export default class Network extends React.Component {
 
     handleClick(profileId) {
         return (e) => {
-            console.log(this.status[profileId])
             if (this.status[profileId] === 'Disconnect') {
                 this.status[profileId] = 'Connect'
                 this.props.destroyConnection(profileId)

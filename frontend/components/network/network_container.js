@@ -6,9 +6,7 @@ import {fetchAllProfiles , fetchProfile} from '../../actions/profile_actions/pro
 
 const mapStateToProps = state => ({
     connected: state.entities.connections.followed ? state.entities.connections.followed.map((id) => state.entities.profiles[id]) : [],
-    connectedIds: state.entities.connections.followed ? state.entities.connections.followed : [],
     notConnected: state.entities.connections.followed ? Object.keys(state.entities.profiles).filter((id) => (!state.entities.connections.followed.includes(id))).map((id) => state.entities.profiles[id]) : [],
-    notConnectedIds: state.entities.connections.followed ? Object.keys(state.entities.profiles).filter((id) => (!state.entities.connections.followed.includes(id))) : [],
     userProfile: state.entities.users[state.session.id].profile
 })
 
