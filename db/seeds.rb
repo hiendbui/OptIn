@@ -9,15 +9,15 @@
 
 
 
-50.times do 
-    User.create(
-        email: Faker::Internet.email,
-        password: 'password'
-    )
-    Profile.create(
-        user_id: User.last.id,
-        full_name: Faker::Sports::Basketball.player,
-        location: Faker::Address.city,
-        headline: Faker::Job.title,
-    )
-end
+# 50.times do 
+#     User.create(
+#         email: Faker::Internet.email,
+#         password: 'password'
+#     )
+#     Profile.create(
+#         user_id: User.last.id,
+#         full_name: Faker::Sports::Basketball.player,
+#         location: Faker::Address.city,
+#         headline: Faker::Job.title,
+#     )
+# end
