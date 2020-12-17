@@ -66,11 +66,13 @@ export default class NavBar extends React.Component {
                         <br />
                         <span>Jobs</span>
                     </button>
+                    <Link to={'/mynetwork'}> 
                     <button>
                         <IoMdPeople />
                         <br/>
                         <span>My Network</span>
                     </button>
+                    </Link>
                     <Link to={'/feed'}> 
                     <button>  
                         <ImHome3 />

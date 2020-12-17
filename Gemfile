@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'byebug'
   gem 'pry-rails'
+  gem 'faker'
 end
 
 gem 'better_errors'

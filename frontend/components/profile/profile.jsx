@@ -5,7 +5,7 @@ import { GrClose } from 'react-icons/gr';
 import { AiOutlinePlus } from 'react-icons/ai';
 import NBATEAMS from '../../util/nba_teams';
 
-//Please forgive me for this file being way too long lol.
+
 
 export default class Profile extends React.Component {
     constructor (props) {
@@ -22,7 +22,10 @@ export default class Profile extends React.Component {
             education: {},
             achievement: {},
             experience: {},
+            status: ''
         };
+
+     
         this.handleSubmit = this.handleSubmit.bind(this);  
         this.handleFile = this.handleFile.bind(this);
         this.showItemForm = this.showItemForm.bind(this);
@@ -35,6 +38,7 @@ export default class Profile extends React.Component {
         this.handleCreateAch = this.handleCreateAch.bind(this);
         this.handleEditAch = this.handleEditAch.bind(this);
         this.handleDeleteAch = this.handleDeleteAch.bind(this);
+        this.handleConnect = this.handleConnect.bind(this);
     }
 
     
@@ -65,8 +69,8 @@ export default class Profile extends React.Component {
     componentDidMount() {
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
+        .then(()=> {if (this.props.connected) this.setState({status: !this.props.connected.includes(this.props.profileId) ? 'Disconnect' : 'Connect'})})
         .then(() => this.setState({profile: this.props.profile}))
-        // this.setState({ 'experience': {} })
         .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
         .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
     }
@@ -76,7 +80,6 @@ export default class Profile extends React.Component {
     }
     
     showItemForm(field, value, item) {
-        // console.log(item) 
         return (e) => {
             field === 'modalExp' ? this.setState({ 'experience': item }) : field === 'modalEdu' ? this.setState({ 'education': item }) : this.setState({'achievement' : item})
             this.setState({[field]: value})
@@ -199,6 +202,19 @@ export default class Profile extends React.Component {
         }
     }
 
+    handleConnect(profileId) {
+        return (e) => {
+            if (this.state.status === 'Disconnect') {
+                this.state.status = 'Connect'
+                this.props.destroyConnection(profileId)
+
+            } else {
+                this.state.status = 'Disconnect'
+                this.props.createConnection(profileId)
+            }
+        }
+    }
+
 
     render() {
         if (!this.props.profile) {
@@ -226,6 +242,7 @@ export default class Profile extends React.Component {
                             <div onClick={this.showForm('modalMain')}><ImPencil /></div>
                     </IconContext.Provider>
                     </div>
+                    <button className={this.myProfile() ? 'hide' : 'connect'} onClick={this.handleConnect(this.props.profileId)}>{this.state.status}</button>
                 </div>
                 <div className='prof-details'>
                     <div className='about'>
@@ -251,8 +268,9 @@ export default class Profile extends React.Component {
                                 return (<div key={experience.id}>
                                     <p fontSize="5px">{'\xa0'}</p>
                                     <img src={
-                                        NBATEAMS.includes(experience.company) ? 
-                                            `http://loodibee.com/wp-content/uploads/nba-${experience.company.toLowerCase().split(' ').join('-')}-logo.png` 
+                                        experience.company in NBATEAMS ? 
+                                            `https://sportsfly.cbsistatic.com/fly-62/bundles/sportsmediacss/images/team-logos/nba/${NBATEAMS[experience.company]}.svg` 
+                                            : experience.company === 'LinkedIn' || experience.company === 'OptIn' ? 'https://www.flaticon.com/svg/static/icons/svg/174/174857.svg' 
                                             : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id]}  width='60px' height='60px'></img>
                                     <div className="experience">
                                         <div className='title'>

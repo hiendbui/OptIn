@@ -25,6 +25,8 @@ class Api::ExperiencesController < ApplicationController
         @experience.delete if (@experience) 
     end
 
+    private
+    
     def experience_params
         params.require(:experience).permit(:title, :company, :start_date, :end_date, :location, :description) #photo?
     end

@@ -25,3 +25,11 @@ json.achievements do
         end
     end
 end
+
+json.followers do
+    json.array! @profile.followers.map {|follower| follower.id}
+end
+
+json.followed do
+    json.array! @profile.followed.map {|followed| followed.id}
+end
