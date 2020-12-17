@@ -66,7 +66,6 @@ export default class Profile extends React.Component {
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
         .then(() => this.setState({profile: this.props.profile}))
-        // this.setState({ 'experience': {} })
         .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
         .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
     }

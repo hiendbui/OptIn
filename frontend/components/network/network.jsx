@@ -36,14 +36,17 @@ export default class Network extends React.Component {
                         if (this.status[profile.id] !== 'Disconnect' )
                         return(
                             <div className='profile-block' key={profile.id}>
-                                <div><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` }}><div> <img className='profile-view' src={
+                                <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
+                                <div className='link'><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` }}><div> <img className='profile-img' src={
                                     profile.photoUrl ?
                                         profile.photoUrl :
                                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
-                                    width="100"
-                                    height="100" /><p>{profile.fullName}</p></div></Link></div>
+                                    width="105"
+                                    height="105" /><p>{profile.fullName}</p></div></Link>
+                                    
+                                <p className='headline'>{profile.headline}</p>
+                            </div>
                                 
-                                <p>{profile.headline}</p>
                                 
                             </div>
                             )}
@@ -57,14 +60,15 @@ export default class Network extends React.Component {
                             if (profile.id !== this.props.userProfile.id && (!this.props.connected.includes(profile) || this.status[profile.id] === 'Disconnect'))
                             return (
                                 <div className='profile-block' key={profile.id}>
-                                    <img className='profile-view' src={
+                                    <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
+                                    <div className='link'><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` }}><div> <img className='profile-img' src={
                                         profile.photoUrl ?
                                             profile.photoUrl :
                                             'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
-                                        width="100"
-                                        height="100" />
-                                    <div><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` }}><div> <span>{profile.fullName}</span></div></Link></div>
-                                    <p>{profile.headline}</p>
+                                        width="105"
+                                        height="105" /><p>{profile.fullName}</p></div></Link>
+                                        <p className='headline'>{profile.headline}</p>   
+                                    </div>
                                     <button onClick={this.handleClick(profile.id)}>{this.status[profile.id]}</button>
                                 </div>
                             )
