@@ -6,7 +6,7 @@
 #  profile_id  :integer          not null
 #  title       :string           not null
 #  issuer      :string
-#  year        :integer
+#  year        :string
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
