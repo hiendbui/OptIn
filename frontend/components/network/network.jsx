@@ -36,13 +36,12 @@ export default class Network extends React.Component {
                         if (this.status[profile.id] !== 'Disconnect' )
                         return(
                             <div className='profile-block' key={profile.id}>
-                                <img className='profile-view' src={
-                                    profile.photoUrl ? 
-                                    profile.photoUrl : 
-                                    'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'} 
-                                    width="100" 
-                                    height="100"/>
-                                <div><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` }}><div> <span>{profile.fullName}</span></div></Link></div>
+                                <div><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` }}><div> <img className='profile-view' src={
+                                    profile.photoUrl ?
+                                        profile.photoUrl :
+                                        'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
+                                    width="100"
+                                    height="100" /><p>{profile.fullName}</p></div></Link></div>
                                 
                                 <p>{profile.headline}</p>
                                 
