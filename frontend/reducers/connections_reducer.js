@@ -1,7 +1,7 @@
 import { RECEIVE_PROFILE } from '../actions/profile_actions/profile_actions'
 import { RECEIVE_CONNECTION, REMOVE_CONNECTION, RECEIVE_CURRENT_PROF_CONNECTIONS } from '../actions/connection_actions/connection_actions'
 
-const connectionsReducer = (state = {}, action) => {
+const connectionsReducer = (state = {profile:{}, current:{}}, action) => {
     Object.freeze(state);
     let newState = {...state};
 
@@ -11,13 +11,13 @@ const connectionsReducer = (state = {}, action) => {
             newState.profile.followed = action.profile.followed;
             return newState;
         case RECEIVE_CURRENT_PROF_CONNECTIONS:
-            newState.current.followers = action.profile.followers;
-            newState.current.followed = action.current.followed;
+            newState.current.followers = action.connections.followers;
+            newState.current.followed = action.connections.followed;
         case RECEIVE_CONNECTION:
             newState.current.followed.push(action.followeeId)
             return newState;
         case REMOVE_CONNECTION:
-            newState.current.followed.splice(newState.followed.indexOf(action.followeeId), 1);
+            newState.current.followed.splice(newState.current.followed.indexOf(action.followeeId), 1);
             return newState
         default:
             return state;

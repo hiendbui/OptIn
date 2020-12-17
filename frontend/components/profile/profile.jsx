@@ -22,7 +22,7 @@ export default class Profile extends React.Component {
             education: {},
             achievement: {},
             experience: {},
-            status: this.props.connected ? this.props.connected.includes(this.props.profileId) ? 'Disconnect' : 'Connect' : ''
+            status:  ''
         };
         
      
@@ -67,12 +67,13 @@ export default class Profile extends React.Component {
     }
     
     componentDidMount() {
+        this.props.fetchCurrentProfConnections()
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profile))
-        .then(()=> {if (this.props.connected) this.setState({status: this.props.connected.includes(this.props.profileId) ? 'Disconnect' : 'Connect'})})
         .then(() => this.setState({profile: this.props.profile}))
         .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
         .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
+        .then(()=> {if (this.props.connected) this.setState({status: this.props.connected.includes(this.props.profile ? this.props.profile.id : this.props.profileId) ? 'Disconnect' : 'Connect'})})
 
     }
     
@@ -206,12 +207,14 @@ export default class Profile extends React.Component {
     handleConnect(profileId) {
         return (e) => {
             if (this.state.status === 'Disconnect') {
-                this.state.status = 'Connect'
+                this.setState({status: 'Connect'})
                 this.props.destroyConnection(profileId)
+                .then(() => this.props.fetchProfile(this.props.profile))
 
             } else {
-                this.state.status = 'Disconnect'
+                this.setState({ status: 'Disconnect' })
                 this.props.createConnection(profileId)
+                    .then(() => this.props.fetchProfile(this.props.profile))
             }
         }
     }
@@ -235,7 +238,7 @@ export default class Profile extends React.Component {
                         <img  
                         src={this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}/>
                         <p>{this.state.profile.fullName}</p>
-                        <p>{this.state.profile.location}</p>
+                        <p>{this.state.profile.location}{this.props.connections ? this.props.connections > 1 ? ` · ${this.props.connections} connections` : ' · 1 connection' : ''}</p>
                         <p>{this.state.profile.headline}</p>
                     </div>
                     <div className={this.myProfile() ? 'reveal' : 'hide'}>
@@ -250,7 +253,7 @@ export default class Profile extends React.Component {
                         <br/>
                         <label>About</label>
                         <br/>
-                        <p>{this.state.profile.description}</p>
+                        <p>{this.state.profile.description ? this.state.profile.description : ''}</p>
                         <div className={this.myProfile() ? 'reveal' : 'hide'}>
                             <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                                 <div onClick={this.showForm('modalAbout')}><ImPencil /></div>

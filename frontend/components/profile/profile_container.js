@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Profile from './profile';
 import { updateProfile, fetchProfile, fetchAllProfiles } from '../../actions/profile_actions/profile_actions'
-import { createConnection, destroyConnection } from '../../actions/connection_actions/connection_actions'
+import { createConnection, destroyConnection, fetchCurrentProfConnections } from '../../actions/connection_actions/connection_actions'
 import { 
     createExperience,
     createEducation,
@@ -23,7 +23,8 @@ const mapStateToProps = (state, ownProps) => ({
     experiences: Object.values(state.entities.experiences),
     educations: Object.values(state.entities.educations),
     achievements: Object.values(state.entities.achievements),
-    connected: state.entities.connections.followed
+    connected: state.entities.connections.current.followed,
+    connections: state.entities.connections.profile.followed?.length + state.entities.connections.profile.followers?.length
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -40,7 +41,8 @@ const mapDispatchToProps = dispatch => ({
     destroyEducation: (educationId) => dispatch(destroyEducation(educationId)),
     destroyAchievement: (achievementId) => dispatch(destroyAchievement(achievementId)),
     createConnection: (id) => dispatch(createConnection(id)),
-    destroyConnection: (id) => dispatch(destroyConnection(id))
+    destroyConnection: (id) => dispatch(destroyConnection(id)),
+    fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections())
 })
 
 const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
