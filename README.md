@@ -1,1 +1,1 @@
-Link to App: https://optin-ntwrk.herokuapp.com/
+OptIn: https://optin-ntwrk.herokuapp.com/
