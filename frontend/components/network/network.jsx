@@ -10,7 +10,7 @@ export default class Network extends React.Component {
     
     componentDidMount() {
         this.props.fetchAllProfiles()
-        .then(() => this.props.fetchProfile(this.props.userProfile))
+        .then(() => this.props.fetchCurrentProfConnections());
     }
 
     handleClick(profileId) {
@@ -32,7 +32,7 @@ export default class Network extends React.Component {
                 <div className={/*this.props.connected.length > 0 ? */'connected' /*: 'hide'*/}> {/* May make change later to have connections block not display if user has no connections*/}
                 <h1>Connections</h1>
                     {this.props.connected.map((profile) => {
-                        if (this.status[profile.id] !== 'Disconnect' )
+                        if ( profile && this.status[profile.id] !== 'Disconnect' )
                         return(
                             <div className='profile-block' key={profile.id}>
                                 <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />

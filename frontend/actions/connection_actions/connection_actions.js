@@ -14,7 +14,7 @@ const removeConnection = followeeId => ({
     followeeId
 })
 
-const receiveCurrentProfConnections = () => ({
+const receiveCurrentProfConnections = (connections) => ({
     type: RECEIVE_CURRENT_PROF_CONNECTIONS,
     connections
 })
@@ -36,7 +36,7 @@ export const destroyConnection = profileId => dispatch => {
 export const fetchCurrentProfConnections = () => dispatch => {
     return APIUtil.fetchCurrentProfConnections()
         .then(
-            () => dispatch(receiveCurrentProfConnections())
+            (connections) => dispatch(receiveCurrentProfConnections(connections))
         );
 }
 
