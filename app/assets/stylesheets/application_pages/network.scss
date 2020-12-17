@@ -31,11 +31,15 @@
         }
         
     }
+
+    // .hide {
+    //     display: none;
+    // }
     
     .connected {
         margin-bottom: 20px;
         width: 800px;
-        min-height: 375px;
+        min-height: 50px;
         -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
         box-shadow: 0 0 1.5px rgb(167, 167, 167);
         border-radius: 10px;

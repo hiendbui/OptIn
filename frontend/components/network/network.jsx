@@ -29,7 +29,7 @@ export default class Network extends React.Component {
     render() {
         return (
             <div className='network'>
-                <div className="connected">
+                <div className={/*this.props.connected.length > 0 ? */'connected' /*: 'hide'*/}> {/* May make change later to have connections block not display if user has no connections*/}
                 <h1>Connections</h1>
                     {this.props.connected.map((profile) => {
                         if (this.status[profile.id] !== 'Disconnect' )
