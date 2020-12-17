@@ -12,3 +12,9 @@ export const destroyConnection = (followeeId) => (
         url: `/api/connections/${followeeId}`,
     })
 )
+
+export const fetchCurrentProfConnections = () => (
+    $.ajax({
+        url: `/api/connections/0` //id doesn't matter here since backend will know who current user is 
+    })
+)
