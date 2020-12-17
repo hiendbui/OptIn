@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :experiences, only: [ :create, :update, :destroy]
     resources :educations, only: [ :create, :update, :destroy]
     resources :achievements, only: [ :create, :update, :destroy]
-    resources :connections, only: [:create, :destroy]
+    resources :connections, only: [:create, :destroy, :show]
   end
 
   root 'static_pages#root'

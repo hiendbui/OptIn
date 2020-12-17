@@ -68,14 +68,11 @@ export default class Profile extends React.Component {
     
     componentDidMount() {
         this.props.fetchAllProfiles()
-        .then(() => this.props.fetchProfile(this.props.profiles[this.props.profileId]))
+        .then(() => this.props.fetchProfile(this.props.profile))
         .then(()=> {if (this.props.connected) this.setState({status: this.props.connected.includes(this.props.profileId) ? 'Disconnect' : 'Connect'})})
         .then(() => this.setState({profile: this.props.profile}))
-        .then(() => { if (this.props.connected) this.setState({ status: this.props.connected.includes(this.props.profileId) ? 'Disconnect' : 'Connect' }) })
         .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
-        .then(() => { if (this.props.connected) this.setState({ status: this.props.connected.includes(this.props.profileId) ? 'Disconnect' : 'Connect' }) })
         .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
-        .then(() => { if (this.props.connected) this.setState({ status: this.props.connected.includes(this.props.profileId) ? 'Disconnect' : 'Connect' }) })
 
     }
     

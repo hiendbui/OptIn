@@ -19,6 +19,13 @@ class Api::ConnectionsController < ApplicationController
         end
     end
 
+    def show
+        # @connections = Connection.all
+        # @current_user_connections = @connections.select {|connection| connection.follower_id = current_user.profile.id || connection.followee_id = current_user.profile.id}
+        # if @current_user_connections
+            render "api/connections/show"
+        # end
+    end
 
     private
 
