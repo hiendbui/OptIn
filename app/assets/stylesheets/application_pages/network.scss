@@ -1,0 +1,34 @@
+.network{
+    display: inline-block;
+    position: absolute;
+    margin-top: 10px;
+    left: 50px;
+    .profile-view {
+        border-radius: 100px;
+        box-sizing: border-box;
+        margin-bottom: -2.5px;
+    }
+    
+    .connected {
+        
+        width: 800px;
+        min-height: 375px;
+        -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
+        box-shadow: 0 0 1.5px rgb(167, 167, 167);
+        border-radius: 10px;
+        background-color: white;
+        
+
+    }
+
+
+    // .suggested {
+
+    
+
+    // }
+
+    .profile-block {
+        display: inline-grid;
+    }
+}
