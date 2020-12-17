@@ -77,34 +77,34 @@
     }
     .connect {
             font-family: Sans-Serif;
-            background-color: transparent;
-            color: #2977c9;
+            background: #2072ca;
+            color:white;
             font-weight: 600;
-            border-color: #2977c9;
             border-width: 1px;
             padding: 10px;
             padding-left: 15px;
             padding-right: 15px;
-            border-radius:50px;
+            border-radius:25px;
             height: 7.5px;
             text-align: center;
             padding-bottom: 17.5px;
-            width:125px;
-            margin-top: 115px;
+            width:90px;
+            margin-top: 110px;
             margin-left: 12px;
-            }
+            position:absolute;
+            right:40px;
+            top:105px;
+        }
 
     .connect:hover {
-            border-color:  #2977c9;
-            background-color:  #e3eefa;
+            background-color: #12447a;
             border-width: 2px;
             margin: -1px;
-            margin-top: 115px;
-            margin-left: 11px;
-            margin-right: 11px;
+            margin-top: 109px;
             cursor: pointer;
     }
 }
+ 
 
 .prof-details {
     display: inline-block;

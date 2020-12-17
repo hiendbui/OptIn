@@ -242,6 +242,7 @@ export default class Profile extends React.Component {
                             <div onClick={this.showForm('modalMain')}><ImPencil /></div>
                     </IconContext.Provider>
                     </div>
+                    <button className={this.myProfile() ? 'hide' : 'connect'} onClick={this.handleConnect(this.props.profileId)}>{this.state.status}</button>
                 </div>
                 <div className='prof-details'>
                     <div className='about'>
@@ -254,13 +255,12 @@ export default class Profile extends React.Component {
                                 <div onClick={this.showForm('modalAbout')}><ImPencil /></div>
                             </IconContext.Provider>
                         </div>
-                        <button className={this.myProfile() ? 'hide' : 'reveal'} onClick={this.handleConnect(this.props.profileId)}>{this.state.status}</button>
                     </div>
                     <br/>
                     <div className='exp-edu'>
                         <div className='experiences'>
                             <label>Experience
-                            <div className={this.myProfile() ? 'connect' : 'hide'}>  
+                            <div className={this.myProfile() ? 'reveal' : 'hide'}>  
                             <div className='add' onClick={this.showItemForm('modalExp','add-exp')}><AiOutlinePlus /></div>
                             </div>  
                             </label>
