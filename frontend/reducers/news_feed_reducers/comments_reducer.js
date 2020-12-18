@@ -13,7 +13,7 @@ const commentsReducer = (state = {}, action) => {
             delete newState[action.commentId];
             return newState;
         case RECEIVE_ALL_POSTS: 
-            newState = action.posts.comments;
+            if (action.posts.comments) newState = action.posts.comments
             return newState;
         default:
             return state;
