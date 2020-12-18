@@ -8,8 +8,14 @@ import ReactTimeAgo from 'react-time-ago';
 export default class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {post:{}}
+        
+        TimeAgo.addLocale(en)
+
         this.profile = this.props.currentUser.profile
-        TimeAgo.addDefaultLocale(en)
+        this.handleFile = this.handleFile.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -17,6 +23,28 @@ export default class NewsFeed extends React.Component {
         this.props.fetchAllProfiles();
         this.props.fetchAllPosts();
     }
+
+    handleFile(e) {
+        const img = e.currentTarget.files[0]
+        const reader = new FileReader();
+        reader.onloadend = (event) => {
+            this.setState({ post: { ...this.state.post, ['photoUrl']: reader.result, ['photoFile']: img } })
+        };
+        reader.readAsDataURL(img);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('post[body]', this.state.post.body);
+        if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
+        this.props.createPost(formData);
+    }
+
+    handleChange(e) {
+        this.setState({ post: { ...this.state.post, ['body']: e.target.value}})
+    }
+
     render() {
         return (
             <div className='news-feed'>
@@ -41,10 +69,14 @@ export default class NewsFeed extends React.Component {
                 </div>
                 <div className='post-block'>
                     <div className='create-post'>
-
+                        <form onSubmit={this.handleSubmit}>
+                            <textarea placeholder="Start a Post" required="required" id="input" cols="10" rows="5" onChange={this.handleChange}></textarea>
+                            <input className='img-input' type="file" onChange={this.handleFile} />
+                            <button>Post</button>
+                        </form>
                     </div>
                     
-                    {this.props.posts.map((post) => {
+                    {this.props.postsArr.map((post) => {
                         let profile = this.props.profiles[post.authorId]
                         if (profile)
                         return <div className="post" key={post.id}>
@@ -58,7 +90,7 @@ export default class NewsFeed extends React.Component {
                             <div className="comments">
                                 {this.props.comments.map((comment => {
                                     if (comment.postId == post.id)
-                                        return <p>{comment.body}</p>
+                                        return <p key={comment.id}>{comment.body}</p>
                                 }))}
                             </div>
                         </div>
