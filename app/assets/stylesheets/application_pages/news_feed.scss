@@ -1,51 +1,90 @@
 .news-feed {
     position: absolute; 
-    top:70px;
-    left: 70px;
+    // top:70px;
+    left: 30px;
     font-family:sans-serif;
+    margin-top: 10px;
      .user-profile {
+         position: fixed;
          background-color: white;
-         display: inline-grid;
-         margin:5px;
-         width: 180px;
-         height: 200px;
+         width: 215px;
+         min-height:240px;
          border: 1px solid rgb(230, 230, 230);
-         border-radius: 10px;
+         border-radius: 7.5px;
+       
          p {
              text-align: center;
          }
          .cover {
              width:100%;
              height: 60px;
-             border-top-left-radius: 10px;
-             border-top-right-radius: 10px;
+             border-top-left-radius: 7.5px;
+             border-top-right-radius: 7.5px;
              display:inline;
          }
+         .name {
+             font-size:16px;
+             padding-top:10px;
+         }
          .headline {
-             font-size: 14.5px;
+             font-size: 12px;
              color: rgb(128, 128, 128);
              font-weight: 300;
              width: 87.5%;
-             margin-top: 2.5px;
+             padding-top: 5px;
+            
+
          }
          .profile-img {
-              border-radius: 100px;
-             box-sizing: border-box;
+            border-radius: 75px;
+            box-sizing: border-box;
+            box-sizing: border-box;
+            border: 2px solid white;
          }
          .link {
              display: inline;
              position: absolute;
-             margin-top: 10px;
-             margin-right: 37.5px;
+             left: 0px;
+             top: 20px;
              text-align: center;
              font-weight: 500;
              align-items: center;
              align-content: center;
              font-size:17px;
-             width: 180px;
+             width: 100%;
+             
              p {
                  margin:auto;
              }
          }
-    }
+         .num {
+             color: #2977c9;
+             font-size: 12px;
+             padding-right: 15px;
+             display:flex;
+             justify-content: space-between;
+         }
+         .connection {
+             font-size: 12px;
+             display:flex;
+             justify-content: space-between;
+             margin-top: 20px;
+             padding-top: 15px;
+             padding-left: 15px;
+             border-top: 1px solid rgb(230, 230, 230);
+             color: grey
+         }
+         .line {
+             font-size: 12px;
+             display:flex;
+             justify-content:flex-start;
+             padding-left: 15px;
+             font-weight: 500;
+         }
+         
+        }
+        .post-block {
+            position: absolute;
+            left: 250px;
+        }
 }
