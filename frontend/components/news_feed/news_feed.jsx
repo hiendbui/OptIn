@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import ReactTimeAgo from 'react-time-ago';
+import { BsPencilSquare } from 'react-icons/bs';
+import { IconContext } from "react-icons"
+
 
 
 export default class NewsFeed extends React.Component {
@@ -70,23 +73,27 @@ export default class NewsFeed extends React.Component {
                 <div className='post-block'>
                     <div className='create-post'>
                         <form onSubmit={this.handleSubmit}>
-                            <textarea placeholder="Start a Post" required="required" id="input" cols="10" rows="5" onChange={this.handleChange}></textarea>
-                            <input className='img-input' type="file" onChange={this.handleFile} />
+                            <div className="body"><IconContext.Provider value={{ style: { fontSize: '20px' } }}><BsPencilSquare /></IconContext.Provider><textarea placeholder="Start a Post" required="required" id="input" cols="30" width="100%" onChange={this.handleChange}></textarea></div>
+                            <span className='img-input'>Upload Photo:</span><input type="file" onChange={this.handleFile} />
                             <button>Post</button>
                         </form>
                     </div>
                     
-                    {this.props.postsArr.map((post) => {
+                    {[...this.props.postsArr].reverse().map((post) => {
                         let profile = this.props.profiles[post.authorId]
                         if (profile)
                         return <div className="post" key={post.id}>
                             <div className='prof'>
-                                <p>{profile.fullName}</p>
+                                <img src={profile.photoUrl ? profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'} alt=""/>
+                                <div className='dets'>
+                                <p >{profile.fullName}</p>
                                 <p>{profile.headline}</p>
-                                <p><ReactTimeAgo date={new Date(post.createdAt)} locale="en" timeStyle="twitter" /></p>
+                                <p><ReactTimeAgo fontSize="12px" date={new Date(post.createdAt)} locale="en" timeStyle="twitter-minute-now" /></p>
+                                </div>
                             </div>
-                            <p>{post.body}</p>
+                            <p className='body'>{post.body}</p>
                             {post.photoUrl ? <img src={post.photoUrl} alt=""/> : ""}
+                            <p className='br'></p><p/>
                             <div className="comments">
                                 {this.props.comments.map((comment => {
                                     if (comment.postId == post.id)
