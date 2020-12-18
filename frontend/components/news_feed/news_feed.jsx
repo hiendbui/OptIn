@@ -11,7 +11,7 @@ import { IconContext } from "react-icons"
 export default class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {post:{}}
+        this.state = {post:{}, comment:{}}
         
         TimeAgo.addLocale(en)
 
@@ -19,6 +19,8 @@ export default class NewsFeed extends React.Component {
         this.handleFile = this.handleFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleComment = this.handleComment.bind(this);
+        this.handleComChange = this.handleComChange.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +44,15 @@ export default class NewsFeed extends React.Component {
         formData.append('post[body]', this.state.post.body);
         if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
         this.props.createPost(formData);
+    }
+
+    handleComChange(e) {
+        this.setState({ comment: {['body']: e.target.value }} )
+    }
+    handleComment(postId) {
+        return (e) => {
+            this.props.createComment(this.state.comment, postId)
+        }
     }
 
     handleChange(e) {
@@ -78,7 +89,7 @@ export default class NewsFeed extends React.Component {
                             <button>Post</button>
                         </form>
                     </div>
-                    
+                    <div id='line'></div>
                     {[...this.props.postsArr].reverse().map((post) => {
                         let profile = this.props.profiles[post.authorId]
                         if (profile)
@@ -93,7 +104,18 @@ export default class NewsFeed extends React.Component {
                             </div>
                             <p className='body'>{post.body}</p>
                             {post.photoUrl ? <img src={post.photoUrl} alt=""/> : ""}
-                            <p className='br'></p><p/>
+                            <p className='br'></p>
+                            <div>
+                            <img className='img-comment' src={
+                                this.profile.photoUrl ?
+                                    this.profile.photoUrl :
+                                    'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
+                                 />
+                            <form onSubmit={this.handleComment(post.id)}>
+                            <input className='comment' placeholder="Add a comment..." type="text" onChange={this.handleComChange}/>
+                            <button>Post</button>
+                            </form>
+                            </div>
                             <div className="comments">
                                 {this.props.comments.map((comment => {
                                     if (comment.postId == post.id)

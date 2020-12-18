@@ -87,15 +87,19 @@
             position: absolute;
             left: 250px;
            
+            #line {
+                border-bottom:.5px solid rgb(202, 202, 202);
+                margin-bottom: 15px;
+            }
         }
         .create-post {
             background: white;
             width: 570px;
-            border: 1px solid rgb(230, 230, 230);
-            border-radius: 7.5px;
+            border: 1px solid rgb(236, 236, 236);
+            border-radius: 10px;
             display: flex;
             align-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             .body {
                 margin: 20px;
                 display: flex;
@@ -108,7 +112,7 @@
             textarea {
                 width:450px;
                 padding-left:10px;
-                height:75px;
+                height:62.5px;
                 resize: none;
             }
             .img-input {
@@ -195,12 +199,57 @@
                 font-weight: 300;
             }
 
+            .img-comment {
+                width:40px;
+                height:40px;
+                border-radius: 40px;
+                box-sizing: border-box;
+                box-sizing: border-box;
+                display:inline-block;
+                margin:5px;
+                margin-left:15px;
+            }
             .br{
                 border-bottom: 1px solid rgb(236, 236, 236);
-                padding-bottom: 25px;
+                margin-bottom: 15px;
             }
-
-
+            .comment {
+                display: inline;
+                width: 460px;
+                margin-right: 25px;
+                float: right;
+                margin-top: -50px;
+                height: 30px;
+                border-radius: 30px;
+                padding:5px;
+                padding-left:10px;
+                font-size:15px;
+                border-color: rgb(163, 163, 163);
+            }
+             button {
+                
+                float:right;
+                font-family: Sans-Serif;
+                background: #2072ca;
+                color:white;
+                font-weight: 600;
+                border-width: 1px;
+                padding: 10px;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 20px;
+                border-radius:25px;
+                height: 5px;
+                text-align: center;
+                font-size: 13px;
+                margin-right: 15px;
+                margin-bottom: 5px;
+            }
+            button:hover { 
+                background-color: #12447a;
+                cursor: pointer;
+            }
+            
         }
-
-}
+        
+    }
