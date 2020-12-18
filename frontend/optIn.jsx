@@ -21,14 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
         
     }
-    window.state = store.getState()
-    window.dispatch = store.dispatch;
-    window.createPost = createPost
-    window.destroyPost = destroyPost
-    window.updatePost = updatePost
-    window.createComment = createComment
-    window.destroyComment = destroyComment
-    window.updateComment = updateComment
     const rootEl = document.getElementById("root");
     ReactDOM.render(<Root store={store}/>, rootEl);
 });
