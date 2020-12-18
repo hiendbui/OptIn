@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     resources :educations, only: [ :create, :update, :destroy]
     resources :achievements, only: [ :create, :update, :destroy]
     resources :connections, only: [:create, :destroy, :show]
+    resources :posts, only: [:create, :index, :update, :destroy] do 
+      resources :comments, only: [:create]
+    end
+    resources :comments, only: [:update, :destroy]
   end
 
   root 'static_pages#root'
