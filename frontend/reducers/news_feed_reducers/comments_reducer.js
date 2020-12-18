@@ -1,4 +1,5 @@
 import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../../actions/news_feed_actions/comment_action'
+import { RECEIVE_ALL_POSTS } from '../../actions/news_feed_actions/post_actions'
 
 const commentsReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -10,7 +11,11 @@ const commentsReducer = (state = {}, action) => {
             return newState;
         case REMOVE_COMMENT:
             delete newState[action.commentId];
-            return newState
+            return newState;
+        case RECEIVE_ALL_POSTS: 
+            console.log(action.posts)
+            newState = action.posts.comments;
+            return newState;
         default:
             return state;
     }

@@ -94,6 +94,7 @@ export default class NewsFeed extends React.Component {
                         let profile = this.props.profiles[post.authorId]
                         if (profile)
                         return <div className="post" key={post.id}>
+                            <Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` } }>
                             <div className='prof'>
                                 <img src={profile.photoUrl ? profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'} alt=""/>
                                 <div className='dets'>
@@ -102,6 +103,7 @@ export default class NewsFeed extends React.Component {
                                 <p><ReactTimeAgo fontSize="12px" date={new Date(post.createdAt)} locale="en" timeStyle="twitter-minute-now" /></p>
                                 </div>
                             </div>
+                            </Link>
                             <p className='body'>{post.body}</p>
                             {post.photoUrl ? <img src={post.photoUrl} alt=""/> : ""}
                             <p className='br'></p>
@@ -117,9 +119,17 @@ export default class NewsFeed extends React.Component {
                             </form>
                             </div>
                             <div className="comments">
-                                {this.props.comments.map((comment => {
+                                {[...this.props.comments].reverse().map((comment => {
+                                    let profile = this.props.profiles[comment.authorId]
                                     if (comment.postId == post.id)
-                                        return <p key={comment.id}>{comment.body}</p>
+                                        return <div key={comment.id}>
+                                                    <img className='img-comment' src={
+                                                    profile.photoUrl ?
+                                                    profile.photoUrl :
+                                                    'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
+                                                    />
+                                                    <p >{comment.body}</p>
+                                                </div>
                                 }))}
                             </div>
                         </div>

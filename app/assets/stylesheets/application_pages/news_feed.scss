@@ -249,7 +249,16 @@
                 background-color: #12447a;
                 cursor: pointer;
             }
-            
+            .comments {
+                .img-comment {
+                    box-sizing: border-box;
+                    box-sizing: border-box;
+                    display:inline-block;
+                }
+                p {
+                    display:inline-block;
+                }
+            }
         }
         
     }
