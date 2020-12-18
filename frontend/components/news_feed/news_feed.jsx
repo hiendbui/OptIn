@@ -107,6 +107,26 @@ export default class NewsFeed extends React.Component {
                             <p className='body'>{post.body}</p>
                             {post.photoUrl ? <img src={post.photoUrl} alt=""/> : ""}
                             <p className='br'></p>
+                            <br/>
+                            <div className="comments">
+                                {[...this.props.comments].reverse().map((comment => {
+                                    let profile = this.props.profiles[comment.authorId]
+                                    if (comment.postId == post.id)
+                                        return <div className='item'key={comment.id}>
+                                                <Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}` } }>
+                                                    <img className='img-comment' src={
+                                                    profile.photoUrl ?
+                                                    profile.photoUrl :
+                                                    'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
+                                                    />
+                                                </Link> 
+                                                 <div className="body">
+                                                <p className="full">{profile.fullName}</p><p className="time"><ReactTimeAgo fontSize="12px" date={new Date(post.createdAt)} locale="en" timeStyle="twitter-minute-now" /></p>
+                                                <p className="head">{profile.headline}</p>
+                                                <p className="bod">{comment.body}</p>
+                                                </div>
+                                                </div>
+                                }))}
                             <div>
                             <img className='img-comment' src={
                                 this.profile.photoUrl ?
@@ -118,19 +138,6 @@ export default class NewsFeed extends React.Component {
                             <button>Post</button>
                             </form>
                             </div>
-                            <div className="comments">
-                                {[...this.props.comments].reverse().map((comment => {
-                                    let profile = this.props.profiles[comment.authorId]
-                                    if (comment.postId == post.id)
-                                        return <div key={comment.id}>
-                                                    <img className='img-comment' src={
-                                                    profile.photoUrl ?
-                                                    profile.photoUrl :
-                                                    'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
-                                                    />
-                                                    <p >{comment.body}</p>
-                                                </div>
-                                }))}
                             </div>
                         </div>
                     }
