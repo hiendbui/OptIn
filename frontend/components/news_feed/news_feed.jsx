@@ -121,7 +121,7 @@ export default class NewsFeed extends React.Component {
                                                     />
                                                 </Link> 
                                                  <div className="body">
-                                                <p className="full">{profile.fullName}</p><p className="time"><ReactTimeAgo fontSize="12px" date={new Date(post.createdAt)} locale="en" timeStyle="twitter-minute-now" /></p>
+                                                <p className="full">{profile.fullName}</p><p className="time"><ReactTimeAgo fontSize="12px" date={new Date(comment.createdAt)} locale="en" timeStyle="twitter-minute-now" /></p>
                                                 <p className="head">{profile.headline}</p>
                                                 <p className="bod">{comment.body}</p>
                                                 </div>
