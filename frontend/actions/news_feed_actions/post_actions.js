@@ -5,12 +5,12 @@ export const REMOVE_POST = 'REMOVE_POST';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 
 const receivePost = post => ({
-    type: RECEIVE_CONNECTION,
+    type: RECEIVE_POST,
     post
 })
 
 const removePost = postId => ({
-    type: REMOVE_CONNECTION,
+    type: REMOVE_POST,
     postId
 })
 
