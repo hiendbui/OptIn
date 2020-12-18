@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from './store/store';
 import Root from './components/root';
-import { createConnection, destroyConnection } from './actions/connection_actions/connection_actions'
+import { createPost, destroyPost, updatePost } from './actions/news_feed_actions/post_actions'
+import { createComment, destroyComment, updateComment} from './actions/news_feed_actions/comment_action'
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,9 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     window.state = store.getState()
     window.dispatch = store.dispatch;
-    window.createConnection = createConnection;
-    window.destroyConnection = destroyConnection;
-    
+    window.createPost = createPost
+    window.destroyPost = destroyPost
+    window.updatePost = updatePost
+    window.createComment = createComment
+    window.destroyComment = destroyComment
+    window.updateComment = updateComment
     const rootEl = document.getElementById("root");
     ReactDOM.render(<Root store={store}/>, rootEl);
 });

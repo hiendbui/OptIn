@@ -38,15 +38,17 @@
     
     .connected {
         margin-bottom: 20px;
-        width: 800px;
+        width: 785px;
         min-height: 50px;
         -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
         box-shadow: 0 0 1.5px rgb(167, 167, 167);
         border-radius: 10px;
         background-color: white;
-        padding-left: 30px;
+        padding-left: 15px;
+        
         padding-bottom: 20px;
         .profile-block {
+            justify-items: center;
             display: inline-grid;
             margin:5px;
             width: 180px;
@@ -76,14 +78,15 @@
 
     .suggested {
 
-        width: 800px;
+        width: 785px;
         min-height: 50px;
         -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
         box-shadow: 0 0 1.5px rgb(167, 167, 167);
         border-radius: 10px;
         background-color: white;
-        padding-left: 30px;
+        padding-left: 15px;
         padding-bottom: 20px;
+        
         .profile-block {
             display: inline-grid;
             margin:5px;

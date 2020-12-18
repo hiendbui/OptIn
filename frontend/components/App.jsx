@@ -7,7 +7,8 @@ import { LoggedInAuthRoute, LoggedOutAuthRoute } from '../util/route_util';
 import NavBarContainer from './nav_bar/nav_bar_container'
 import NewsFeedContainer from './news_feed/news_feed_container';
 import ProfileContainer from './profile/profile_container';
-import NetworkContainer from './network/network_container'
+import NetworkContainer from './network/network_container';
+import SideBarContainer from './sidebar/sidebar_container';
 
 
 
@@ -21,7 +22,8 @@ const App = () => (
             <LoggedOutAuthRoute exact path="/login" component={LoginFormContainer} />
             <LoggedOutAuthRoute exact path="/signup" component={SignUpFormContainer} />
             <LoggedOutAuthRoute exact path='/' component={Greeting} /> 
-        </Switch>   
+        </Switch>  
+        {/* <LoggedInAuthRoute component={SideBarContainer} /> */}
     </div>
 );
 
