@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_122224) do
+ActiveRecord::Schema.define(version: 2020_12_18_000453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 2020_12_17_122224) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.integer "author_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
   create_table "connections", force: :cascade do |t|
     t.integer "follower_id", null: false
     t.datetime "created_at", null: false
@@ -81,6 +91,14 @@ ActiveRecord::Schema.define(version: 2020_12_17_122224) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_experiences_on_profile_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "body", null: false
+    t.integer "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
   create_table "profiles", force: :cascade do |t|
