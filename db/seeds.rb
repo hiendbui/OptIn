@@ -22,4 +22,4 @@
 #     )
 # end
 
-User.find_by(id: 279).destroy
+Connection.find_by(followee_id: 16).destroy
