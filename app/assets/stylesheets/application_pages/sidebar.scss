@@ -1,0 +1,113 @@
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: 990px;
+    font-family:sans-serif;
+    background-color: white;
+    height:1000px;
+    display: flex;
+    justify-content: center;
+    .user-profile {
+       position: fixed;
+         background-color: white;
+         width: 215px;
+         height:300px;
+         border: 1px solid rgb(230, 230, 230);
+         border-radius: 7.5px;
+         p {
+             text-align: center;
+         }
+         .cover {
+             
+             width:100%;
+             height: 60px;
+             border-top-left-radius: 7.5px;
+             border-top-right-radius: 7.5px;
+             display:inline;
+         }
+         .name {
+             font-size:16px;
+             padding-top:10px;
+         }
+         .headline {
+             font-size: 12px;
+             color: rgb(128, 128, 128);
+             font-weight: 300;
+             width: 87.5%;
+             padding-top: 5px;
+            
+
+         }
+         .profile-img {
+            border-radius: 75px;
+            box-sizing: border-box;
+            box-sizing: border-box;
+            border: 2px solid white;
+         }
+         .link {
+             
+             margin-top: 0px;
+             display: inline;
+             position: absolute;
+             left: 0px;
+             top: 20px;
+             text-align: center;
+             font-weight: 500;
+             align-items: center;
+             align-content: center;
+             font-size:17px;
+             width: 100%;
+             
+             p {
+                 margin:auto;
+             }
+         }
+         .num {
+             color: #2977c9;
+             font-size: 12px;
+             padding-right: 15px;
+             display:flex;
+             justify-content: space-between;
+         }
+         .connection {
+             font-size: 12px;
+             display:flex;
+             justify-content: space-between;
+             margin-top: 20px;
+             padding-top: 15px;
+             padding-left: 15px;
+             border-top: 1px solid rgb(230, 230, 230);
+             color: grey
+         }
+         .line {
+             font-size: 12px;
+             display:flex;
+             justify-content:flex-start;
+             padding-left: 15px;
+             font-weight: 500;
+         }
+         #logo {
+             display: block;
+        margin-top: 5px;
+        margin: auto;    
+        border: none;
+        img {
+           width: 75px;
+        height: auto; 
+        }
+    }
+    #linkedin {
+        display:block;
+        width: 115px;
+        height: auto; 
+        margin: auto;
+    }
+    #github {
+        display:block;
+        width: 115px;
+        height: auto; 
+        margin: auto;
+    }
+
+}
+}

@@ -13,7 +13,7 @@ import SideBarContainer from './sidebar/sidebar_container';
 
 
 const App = () => (
-    <div>  
+    <div className='app'>  
         <LoggedInAuthRoute component={NavBarContainer} />
         <LoggedInAuthRoute exact path="/feed" component={NewsFeedContainer} />
         <LoggedInAuthRoute exact path="/myNetwork" component={NetworkContainer} />
@@ -23,7 +23,7 @@ const App = () => (
             <LoggedOutAuthRoute exact path="/signup" component={SignUpFormContainer} />
             <LoggedOutAuthRoute exact path='/' component={Greeting} /> 
         </Switch>  
-        {/* <LoggedInAuthRoute component={SideBarContainer} /> */}
+        <LoggedInAuthRoute component={SideBarContainer} />
     </div>
 );
 

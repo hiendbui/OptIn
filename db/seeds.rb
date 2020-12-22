@@ -21,3 +21,5 @@
 #         headline: Faker::Job.title,
 #     )
 # end
+
+User.find_by(id: 279).destroy
