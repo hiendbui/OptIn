@@ -100,7 +100,7 @@ export default class NewsFeed extends React.Component {
                                 <div className='dets'>
                                 <p >{profile.fullName}</p>
                                 <p>{profile.headline}</p>
-                                <p><ReactTimeAgo fontSize="12px" date={new Date(post.createdAt)} locale="en" timeStyle="twitter-minute-now" /></p>
+                                        <p><ReactTimeAgo fontSize="12px" date={new Date(post.createdAt)} locale="en" timeStyle="mini-minute-now" /></p>
                                 </div>
                             </div>
                             </Link>
@@ -109,7 +109,7 @@ export default class NewsFeed extends React.Component {
                             <p className='br'></p>
                             <br/>
                             <div className="comments">
-                                {[...this.props.comments].reverse().map((comment => {
+                                {[...this.props.comments].map((comment => {
                                     let profile = this.props.profiles[comment.authorId]
                                     if (comment.postId == post.id)
                                         return <div className='item'key={comment.id}>
@@ -121,7 +121,7 @@ export default class NewsFeed extends React.Component {
                                                     />
                                                 </Link> 
                                                  <div className="body">
-                                                <p className="full">{profile.fullName}</p><p className="time"><ReactTimeAgo fontSize="12px" date={new Date(comment.createdAt)} locale="en" timeStyle="twitter-minute-now" /></p>
+                                                <p className="full">{profile.fullName}</p><p className="time"><ReactTimeAgo fontSize="12px" date={new Date(comment.createdAt)} locale="en" timeStyle="mini-minute-now" /></p>
                                                 <p className="head">{profile.headline}</p>
                                                 <p className="bod">{comment.body}</p>
                                                 </div>
