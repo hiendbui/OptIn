@@ -63,7 +63,7 @@ export default class Profile extends React.Component {
     };
 
     myProfile() {
-        if (this.props.profile) return this.props.currentUser.id === this.props.profile.userId;
+        if (this.props.currentUser) return this.props.currentUser.profile.id == this.props.profileId;
     }
     
     componentDidMount() {
@@ -74,6 +74,8 @@ export default class Profile extends React.Component {
         .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
         .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
         .then(()=> {if (this.props.connected) this.setState({status: this.props.connected.includes(this.props.profile ? this.props.profile.id : this.props.profileId) ? 'Disconnect' : 'Connect'})})
+        // .then(() => this.setState({ profile: this.props.profile }))
+
 
     }
     
