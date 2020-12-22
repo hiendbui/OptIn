@@ -109,7 +109,7 @@ export default class NewsFeed extends React.Component {
                             <p className='br'></p>
                             <br/>
                             <div className="comments">
-                                {[...this.props.comments].map((comment => {
+                                {this.props.comments.map((comment => {
                                     let profile = this.props.profiles[comment.authorId]
                                     if (comment.postId == post.id)
                                         return <div className='item'key={comment.id}>
