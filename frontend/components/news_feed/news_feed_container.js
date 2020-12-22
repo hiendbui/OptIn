@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
         state.entities.connections.current.followed.concat(
             state.entities.connections.current.followers ? state.entities.connections.current.followers : []
         ) : state.entities.connections.current.followers ? state.entities.connections.current.followers : [])
-    ].length
+    ].filter((id) => (id !== undefined)).length
 })
 
 const mapDispatchToProps = dispatch => ({
