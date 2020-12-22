@@ -24,7 +24,11 @@ const mapStateToProps = (state, ownProps) => ({
     educations: Object.values(state.entities.educations),
     achievements: Object.values(state.entities.achievements),
     connected: state.entities.connections.current.followed,
-    connections: state.entities.connections.profile.followed?.length + state.entities.connections.profile.followers?.length
+    connections: [...new Set(state.entities.connections.profile.followed ? 
+                    state.entities.connections.profile.followed.concat(
+                    state.entities.connections.profile.followers ? state.entities.connections.profile.followers : []
+                    ) : state.entities.connections.profile.followers ? state.entities.connections.profile.followers : [])
+                ].length
 })
 
 const mapDispatchToProps = dispatch => ({

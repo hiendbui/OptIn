@@ -8,11 +8,15 @@ import { fetchCurrentProfConnections } from '../../actions/connection_actions/co
 
 const mapStateToProps = state => ({
     currentUser: state.entities.users[state.session.id],
-    connections: state.entities.connections.current.followed?.length + state.entities.connections.current.followers?.length,
     postsArr: Object.values(state.entities.posts),
     posts: state.entities.posts,
     comments: Object.values(state.entities.comments),
-    profiles: state.entities.profiles
+    profiles: state.entities.profiles,
+    connections: [...new Set(state.entities.connections.current.followed ?
+        state.entities.connections.current.followed.concat(
+            state.entities.connections.current.followers ? state.entities.connections.current.followers : []
+        ) : state.entities.connections.current.followers ? state.entities.connections.current.followers : [])
+    ].length
 })
 
 const mapDispatchToProps = dispatch => ({
