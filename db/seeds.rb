@@ -22,4 +22,3 @@
 #     )
 # end
 
-Connection.find_by(followee_id: 16).destroy
