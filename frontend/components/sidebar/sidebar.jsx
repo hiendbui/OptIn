@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ export default class Sidebar extends React.Component {
                 {/* <span> Developer Profile</span> */}
             <div className='user-profile'>
                 <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
-                <div className='link'><Link to={{ pathname: `/in/${this.state.profile.fullName?.toLowerCase().split(' ').join('-')}-${this.state.profile?.id}` }}><div> <img className='profile-img' src={
+                    <div className='link'><Link target="_blank" to={{ pathname: `/in/${this.state.profile.fullName?.toLowerCase().split(' ').join('-')}-${this.state.profile?.id}` }}><div> <img className='profile-img' src={
                     this.state.profile.photoUrl ?
                         this.state.profile.photoUrl :
                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
@@ -32,11 +32,11 @@ export default class Sidebar extends React.Component {
 
                     <p className='headline'>{this.state.profile?.headline}</p>
                     <br/>
-                        <Link to={`/in/${this.state.profile.fullName?.toLowerCase().split(' ').join('-')}-${this.state.profile?.id}`}><button id="logo"><img src={window.logo} /></button></Link>
-                    <a href="https://www.linkedin.com/in/hiendbui/">
+                        <Link target="_blank" to={`/in/${this.state.profile.fullName?.toLowerCase().split(' ').join('-')}-${this.state.profile?.id}`}><button id="logo"><img src={window.logo} /></button></Link>
+                        <a href="https://www.linkedin.com/in/hiendbui/" target="_blank">
                         <img id="linkedin" src="https://upload.wikimedia.org/wikipedia/commons/8/80/LinkedIn_Logo_2013.svg" />
                     </a>
-                        <a href="https://github.com/hiendbui">
+                        <a href="https://github.com/hiendbui" target="_blank">
                             <img id="github" src="https://pngimg.com/uploads/github/github_PNG15.png" />
                         </a>
                     
