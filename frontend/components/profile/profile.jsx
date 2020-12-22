@@ -221,6 +221,12 @@ export default class Profile extends React.Component {
         }
     }
 
+    orderDates(x) {
+        if (x === 'Present') return new Date().getFullYear() + 1; 
+        const parsed = parseInt(x.slice(x.length - 4));
+        if (isNaN(parsed)) return 0;
+        return parsed;
+    }
 
     render() {
         if (!this.props.profile) {
@@ -270,7 +276,7 @@ export default class Profile extends React.Component {
                             <div className='add' onClick={this.showItemForm('modalExp','add-exp')}><AiOutlinePlus /></div>
                             </div>  
                             </label>
-                            {this.props.experiences.map((experience) => {
+                            {this.props.experiences.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)}).map((experience) => {
                                 return (<div key={experience.id}>
                                     <p fontSize="5px">{'\xa0'}</p>
                                     <img src={
@@ -306,7 +312,7 @@ export default class Profile extends React.Component {
                             </div>
                             </label>
                  
-                            {this.props.educations.map((education) => (
+                            {this.props.educations.sort((a, b) => { return b.endYear - a.endYear }).map((education) => (
                                 <div key={education.id}>
                                     <div></div>
                                     <img src={education.photoUrl ? education.photoUrl : this.state.eduLogos[education.id]} width='60px' height='60px' />
