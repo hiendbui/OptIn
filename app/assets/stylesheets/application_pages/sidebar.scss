@@ -12,7 +12,8 @@
          background-color: white;
          width: 215px;
          height:300px;
-         border: 1px solid rgb(230, 230, 230);
+         -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
+        box-shadow: 0 0 1.5px rgb(167, 167, 167);
          border-radius: 7.5px;
          p {
              text-align: center;

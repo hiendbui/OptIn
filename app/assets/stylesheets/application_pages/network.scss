@@ -53,7 +53,8 @@
             margin:5px;
             width: 180px;
             height: 200px;
-            border: 1px solid rgb(230, 230, 230);
+            -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
+            box-shadow: 0 0 1.5px rgb(167, 167, 167);
             border-radius: 10px;
             p {
                 text-align: center;
