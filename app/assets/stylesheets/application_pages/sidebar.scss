@@ -1,3 +1,19 @@
+// .header {
+//     position: fixed;
+//     top: 80px;
+//     left: 882.5px;
+//     font-family:sans-serif;
+//     background-color: white;
+//     width: 215px;
+//     text-align: center;
+//     font-size: 14px;
+//     -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
+//     box-shadow: 0 0 1.5px rgb(167, 167, 167);
+//     border-radius: 5px;
+//     padding-bottom: 5px;
+//     padding-top: 5px;
+//     font-family: sans-serif;
+// }
 .sidebar {
     position: fixed;
     top: 80px;
@@ -11,7 +27,7 @@
        position: fixed;
          background-color: white;
          width: 215px;
-         height:300px;
+         height:275px;
          -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
         box-shadow: 0 0 1.5px rgb(167, 167, 167);
          border-radius: 7.5px;
@@ -102,10 +118,21 @@
         width: 115px;
         height: auto; 
         margin: auto;
+        width: 115px; /* width of container */
+        height: 50px; /* height of container */
+        overflow: hidden;
+        margin-bottom: -12.5px;
     }
     #github {
         display:block;
-        width: 115px;
+        width: 100px;
+        height: auto; 
+        margin: auto;
+        margin-bottom: 5px;
+    }
+    #angellist {
+        display:block;
+        width: 100px;
         height: auto; 
         margin: auto;
     }

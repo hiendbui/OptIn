@@ -19,8 +19,10 @@ export default class Sidebar extends React.Component {
 
     render() {
         return (
+            <div className='header'>
+                {/* <h1>Developer</h1> */}
             <div className='sidebar'>
-                {/* <span> Developer Profile</span> */}
+                
             <div className='user-profile'>
                 <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
                     <div className='link'><Link target="_blank" to={{ pathname: `/in/${this.state.profile.fullName?.toLowerCase().split(' ').join('-')}-${this.state.profile?.id}` }}><div> <img className='profile-img' src={
@@ -31,16 +33,19 @@ export default class Sidebar extends React.Component {
                     height="75" /> <p className='name'>{this.state.profile?.fullName}</p></div></Link>
 
                     <p className='headline'>{this.state.profile?.headline}</p>
-                    <br/>
-                        <Link target="_blank" to={`/in/${this.state.profile.fullName?.toLowerCase().split(' ').join('-')}-${this.state.profile?.id}`}><button id="logo"><img src={window.logo} /></button></Link>
+                    
                         <a href="https://www.linkedin.com/in/hiendbui/" target="_blank">
-                        <img id="linkedin" src="https://upload.wikimedia.org/wikipedia/commons/8/80/LinkedIn_Logo_2013.svg" />
-                    </a>
+                        <img id="linkedin" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" />
+                        </a>
                         <a href="https://github.com/hiendbui" target="_blank">
                             <img id="github" src="https://pngimg.com/uploads/github/github_PNG15.png" />
                         </a>
+                        <a href="https://angel.co/u/hien-bui-6" target="_blank">
+                            <img id="angellist" src="https://angel.co/images/static_pages/homepage/logo-angellist.png" />
+                        </a>
                     
                 </div>
+            </div>
             </div>
             </div>
             
