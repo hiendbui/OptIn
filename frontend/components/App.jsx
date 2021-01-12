@@ -15,15 +15,15 @@ import SideBarContainer from './sidebar/sidebar_container';
 const App = () => (
     <div className='app'>  
         <LoggedInAuthRoute component={NavBarContainer} />
-        <LoggedInAuthRoute exact path="/feed" component={NewsFeedContainer} />
-        <LoggedInAuthRoute exact path="/myNetwork" component={NetworkContainer} />
-        <LoggedInAuthRoute exact path="/in/:fullNameprofileId" component={ProfileContainer} />
         <Switch>
             <LoggedOutAuthRoute exact path="/login" component={LoginFormContainer} />
             <LoggedOutAuthRoute exact path="/signup" component={SignUpFormContainer} />
             <LoggedOutAuthRoute exact path='/' component={Greeting} /> 
+            <LoggedInAuthRoute exact path="/feed" component={NewsFeedContainer} />
+            <LoggedInAuthRoute exact path="/myNetwork" component={NetworkContainer} />
+            <LoggedInAuthRoute exact path="/in/:fullNameprofileId" component={ProfileContainer} />
         </Switch>  
-        <LoggedInAuthRoute component={SideBarContainer} />
+        {/* <LoggedInAuthRoute component={SideBarContainer} /> */}
     </div>
 );
 

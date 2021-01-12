@@ -5,24 +5,26 @@ export default class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {profile: {} }
+        this.props.profiles.forEach(prof => {
+                if (prof.fullName === 'Hien Bui') this.state.profile =prof;
+        })
     }
     componentDidMount () {
-        this.props.fetchAllProfiles()
-        .then(() => {
-        if (this.props.profiles) {
-            this.props.profiles.forEach(prof => {
-                if (prof.fullName === 'Hien Bui') this.setState({profile:prof});
+        if (this.state.profile.fullName !== 'Hien Bui') {
+            this.props.fetchAllProfiles()
+            .then(() => {
+            if (this.props.profiles) {
+                this.props.profiles.forEach(prof => {
+                    if (prof.fullName === 'Hien Bui') this.setState({profile:prof});
+                })
+            }
             })
         }
-        })
     }
 
     render() {
         return (
-            <div className='header'>
-                {/* <h1>Developer</h1> */}
-            <div className='sidebar'>
-                
+            <div className="sidebar">
             <div className='user-profile'>
                 <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
                     <div className='link'><Link target="_blank" to={{ pathname: `/in/${this.state.profile.fullName?.toLowerCase().split(' ').join('-')}-${this.state.profile?.id}` }}><div> <img className='profile-img' src={
@@ -47,8 +49,6 @@ export default class Sidebar extends React.Component {
                 </div>
             </div>
             </div>
-            </div>
-            
         );
     }
 }

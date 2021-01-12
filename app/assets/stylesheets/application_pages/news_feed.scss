@@ -1,5 +1,8 @@
 .news-feed {
-    position: absolute; 
+    display:flex;
+    margin: auto;
+    position: relative; 
+    width: 1128px;
     // top:70px;
     left: 30px;
     font-family:sans-serif;
@@ -86,9 +89,10 @@
          
         }
         .post-block {
-            position: absolute;
+            position: relative;
+            display: inline-block;
             left: 250px;
-           
+            width: 570px;
             #line {
                 border-bottom:.5px solid rgb(202, 202, 202);
                 margin-bottom: 15px;
@@ -96,6 +100,7 @@
         }
         .create-post {
             background: white;
+            display:inline-block;
             width: 570px;
             -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
             box-shadow: 0 0 1.5px rgb(167, 167, 167);
@@ -159,9 +164,9 @@
             -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
             box-shadow: 0 0 1.5px rgb(167, 167, 167);
             border-radius: 7.5px;
-            display: inline-grid;
+            display: inline-block;
             align-content: center;
-            margin-bottom: 5px;
+            margin-bottom: 7.5px;
             .prof {
                 margin:10px;
                 img{

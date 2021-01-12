@@ -5,7 +5,7 @@ import en from 'javascript-time-ago/locale/en';
 import ReactTimeAgo from 'react-time-ago';
 import { BsPencilSquare } from 'react-icons/bs';
 import { IconContext } from "react-icons"
-
+import  SideBarContainer from '../sidebar/sidebar_container'
 
 
 export default class NewsFeed extends React.Component {
@@ -143,6 +143,7 @@ export default class NewsFeed extends React.Component {
                     }
                     )}
                 </div>
+                <SideBarContainer/>
             </div>
         )
     }

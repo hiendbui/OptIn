@@ -15,16 +15,19 @@
 //     font-family: sans-serif;
 // }
 .sidebar {
-    position: fixed;
-    top: 80px;
-    left: 990px;
-    font-family:sans-serif;
-    background-color: white;
-    height:1000px;
-    display: flex;
-    justify-content: center;
+    // display:block;
+    // margin: auto;
+    // position: relative;
+    // top: 80px;
+    // left: 1250px;
+    // font-family:sans-serif;
+    // background-color: white;
+    // height:1000px;
+    
     .user-profile {
        position: fixed;
+       justify-content:flex-end;
+       margin-left: 285px;
          background-color: white;
          width: 215px;
          height:275px;
@@ -138,4 +141,14 @@
     }
 
 }
+}
+
+.sidebar-profile {
+    margin-left: 600px;
+    margin-top: -8px;
+    font-family: sans-serif;
+}
+
+.sidebar-network {
+    margin-left: 550px;
 }

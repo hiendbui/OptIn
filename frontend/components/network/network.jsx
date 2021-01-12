@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SideBarContainer from '../sidebar/sidebar_container';
 
 export default class Network extends React.Component {
     constructor(props) {
@@ -29,6 +30,9 @@ export default class Network extends React.Component {
     render() {
         return (
             <div className='network'>
+                <div className='sidebar-network'>
+                    <SideBarContainer/>
+                </div>
                 <div className={/*this.props.connected.length > 0 ? */'connected' /*: 'hide'*/}> {/* May make change later to have connections block not display if user has no connections*/}
                 <h1>Connections</h1>
                     {this.props.connected.map((profile) => {
@@ -75,6 +79,7 @@ export default class Network extends React.Component {
                         )}  
                 </div>
             </div>
+            
         )
     }
 }

@@ -3,6 +3,7 @@ import { ImPencil} from 'react-icons/im';
 import { IconContext } from "react-icons"
 import { GrClose } from 'react-icons/gr';
 import { AiOutlinePlus } from 'react-icons/ai';
+import SideBarContainer from '../sidebar/sidebar_container';
 import NBATEAMS from '../../util/nba_teams';
 
 
@@ -622,6 +623,9 @@ export default class Profile extends React.Component {
                     </div>
                 </div>
                 <br/>
+                <div className="sidebar-profile">
+                    <SideBarContainer />
+                </div>
             </div>
         )
     }
