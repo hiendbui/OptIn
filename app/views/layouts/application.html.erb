@@ -5,12 +5,20 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag asset_path('favicon.ico') %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <script type="text/javascript">
         window.logo = "<%= image_url('optin_logo.png') %>";
     </script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <meta property="og:title" content="OptIn" />
+    <meta property='og:image' content="<%= image_url('project_gif.gif') %>"/>
+    <meta property="og:description"
+      content="Full stack clone of LinkedIn built using Rails, React, and Redux"
+    />
+    <meta property="og:url"
+      content="https://optin-ntwrk.herokuapp.com/"
+    />
   </head>
 
   <body  style="background-color:#f3f2ef">
