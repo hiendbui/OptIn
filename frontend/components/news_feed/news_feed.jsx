@@ -13,6 +13,7 @@ export default class NewsFeed extends React.Component {
         super(props);
         this.state = {post:{}, comment:{}}
         this.btn = 'hide-btn';
+        
         TimeAgo.addLocale(en)
 
         this.profile = this.props.currentUser.profile
@@ -21,6 +22,7 @@ export default class NewsFeed extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleComment = this.handleComment.bind(this);
         this.handleComChange = this.handleComChange.bind(this);
+        this.showPostUpdate = this.showPostUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -61,6 +63,16 @@ export default class NewsFeed extends React.Component {
 
     handleChange(e) {
         this.setState({ post: { ...this.state.post, ['body']: e.target.value}})
+    }
+
+    showPostUpdate(e) {
+        e.preventDefault();
+        return (
+            <div>
+                <p>Edit Post</p>
+                <p>Delete Post</p>
+            </div>
+        )
     }
 
     render() {
@@ -114,13 +126,14 @@ export default class NewsFeed extends React.Component {
                     </div>
                     <div id='line'></div>
                     {[...this.props.postsArr].reverse().map((post) => {
-                        let profile = this.props.profiles[post.authorId];
-                        let profilePath = profile?.fullName.toLowerCase().split(' ').join('-');
+                        const profile = this.props.profiles[post.authorId];
+                        const profilePath = profile?.fullName.toLowerCase().split(' ').join('-');
                         if (profile)
                         return <div className="post" key={post.id}>
-                            <IconContext.Provider value={{ style: { fontSize: '20px', float:'right' } }}>
-                                <BsThreeDots />
-                            </IconContext.Provider>
+                            {profile.id === this.profile.id ? 
+                                <button onClick={this.showPostUpdate} className='edit-btn'><BsThreeDots /></button> : ''
+                            }
+                            
                             <Link to={{ pathname: `/in/${profilePath}-${profile.id}` } }>
                             <div className='prof'>
                                 <img src={profile.photoUrl ? 
