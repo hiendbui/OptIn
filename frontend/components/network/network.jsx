@@ -27,6 +27,10 @@ export default class Network extends React.Component {
         }
     }
 
+    profilePath(profile) {
+        return `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}`
+    }
+
     render() {
         return (
             <div className='network'>
@@ -40,7 +44,7 @@ export default class Network extends React.Component {
                         return(
                             <div className='profile-block' key={profile.id}>
                                 <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
-                                <div className='link'><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}`, state:{profile: {profile} }}}><div> <img className='profile-img' src={
+                                <div className='link'><Link to={{ pathname: this.profilePath(profile), state:{profile: {profile} }}}><div> <img className='profile-img' src={
                                     profile.photoUrl ?
                                         profile.photoUrl :
                                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
@@ -64,7 +68,7 @@ export default class Network extends React.Component {
                             return (
                                 <div className='profile-block' key={profile.id}>
                                     <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
-                                    <div className='link'><Link to={{ pathname: `/in/${profile.fullName.toLowerCase().split(' ').join('-')}-${profile.id}`, state: { profile: profile } }}><div> <img className='profile-img' src={
+                                    <div className='link'><Link to={{ pathname: this.profilePath(profile), state: { profile: profile } }}><div> <img className='profile-img' src={
                                         profile.photoUrl ?
                                             profile.photoUrl :
                                             'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
