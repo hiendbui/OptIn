@@ -22,7 +22,7 @@ export default class NewsFeed extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleComment = this.handleComment.bind(this);
         this.handleComChange = this.handleComChange.bind(this);
-        this.showPostUpdate = this.showPostUpdate.bind(this);
+        this.showDropdown = this.showDropdown.bind(this);
     }
 
     componentDidMount() {
@@ -65,10 +65,12 @@ export default class NewsFeed extends React.Component {
         this.setState({ post: { ...this.state.post, ['body']: e.target.value}})
     }
 
-    showPostUpdate(postId) {
+    showDropdown(postId) {
         return (e) => {
-            this.postId = postId;
-            this.setState({dropdown: 'show'});
+            if (this.state.dropdown === 'hidden' || this.postId !== postId) {
+                this.postId = postId;
+                this.setState({dropdown: 'show'})
+            } else this.setState({dropdown:'hidden'})
         }
     }
 
@@ -128,13 +130,11 @@ export default class NewsFeed extends React.Component {
                         if (profile)
                         return <div className="post" key={post.id}>
                             {profile.id === this.profile.id ? 
-                                <button onClick={this.showPostUpdate(post.id)} className='edit-btn'><BsThreeDots /></button> : ''
+                                <button onClick={this.showDropdown(post.id)} className='edit-btn'><BsThreeDots /></button> : ''
                             }
                             <div className={this.postId === post.id ? this.state.dropdown : 'hidden'}>
-                                <div className='dropdown'>
                                     <p>Edit Post</p>
                                     <p>Delete Text</p>
-                                </div>
                             </div>
                             <Link to={{ pathname: `/in/${profilePath}-${profile.id}` } }>
                             <div className='prof'>
