@@ -1,4 +1,4 @@
-import { RECEIVE_PROFILE, RECEIVE_ALL_PROFILES} from '../../actions/profile_actions/profile_actions';
+import { RECEIVE_PROFILE, CLEAR_PROFILE_ITEMS} from '../../actions/profile_actions/profile_actions';
 import { RECEIVE_EDUCATION, REMOVE_EDUCATION } from '../../actions/profile_actions/profile_item_actions'
 
 const educationsReducer = (state = {}, action) => {
@@ -6,7 +6,7 @@ const educationsReducer = (state = {}, action) => {
     let newState = { ...state }
 
     switch (action.type) {
-        case RECEIVE_ALL_PROFILES:
+        case CLEAR_PROFILE_ITEMS:
             return [];
         case RECEIVE_PROFILE:
             (action.profile.educations) ? newState = action.profile.educations : newState={};
