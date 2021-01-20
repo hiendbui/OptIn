@@ -12,7 +12,7 @@ export default class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {post:{}, comment:{}}
-        
+        this.btn = 'hide-btn';
         TimeAgo.addLocale(en)
 
         this.profile = this.props.currentUser.profile
@@ -46,8 +46,12 @@ export default class NewsFeed extends React.Component {
         this.props.createPost(formData);
     }
 
-    handleComChange(e) {
-        this.setState({ comment: {['body']: e.target.value }} )
+    handleComChange(postId) {
+        return (e) => {
+            this.postId = postId;
+            e.target.value ? this.btn = 'show-btn' : this.btn = 'hide-btn';
+            this.setState({ comment: {['body']: e.target.value }} );
+        }
     }
     handleComment(postId) {
         return (e) => {
@@ -168,21 +172,21 @@ export default class NewsFeed extends React.Component {
                                                 </div>
                                                 </div>
                                 }))}
-                            <div>
-                            <img className='img-comment' src={
-                                this.profile?.photoUrl ?
-                                    this.profile.photoUrl :
-                                    'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
-                                 />
-                            <form onSubmit={this.handleComment(post.id)}>
-                            <input 
-                                className='comment' 
-                                placeholder="Add a comment..." 
-                                type="text" 
-                                onChange={this.handleComChange}
-                            />
-                            <button>Post</button>
-                            </form>
+                            <div className='add-cmmt'>
+                                <img className='img-comment' src={
+                                    this.profile?.photoUrl ?
+                                        this.profile.photoUrl :
+                                        'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
+                                     />
+                                <form onSubmit={this.handleComment(post.id)}>
+                                    <input 
+                                        className='comment' 
+                                        placeholder="Add a comment..." 
+                                        type="text" 
+                                        onChange={this.handleComChange(post.id)}
+                                    />
+                                    <button className={this.postId === post.id ? this.btn : 'hide'}>Post</button>
+                                </form>
                             </div>
                             </div>
                         </div>
