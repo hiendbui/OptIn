@@ -12,7 +12,7 @@ export default class Profile extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            profile: {...this.props.profile, photoFile: null}, 
+            profile: {...this.props.profile, photoFile: null},
             modalMain: 'hidden-modal', 
             modalAbout: 'hidden-modal', 
             modalExp: 'hidden-modal' ,
@@ -64,7 +64,7 @@ export default class Profile extends React.Component {
     };
 
     myProfile() {
-        if (this.props.currentUser) return this.props.currentUser.profile.id == this.props.profileId;
+        if (this.props.currentUser) return this.props.currentUser.profile.id === this.props.profileId;
     }
     
     componentDidMount() {
@@ -230,7 +230,7 @@ export default class Profile extends React.Component {
     }
 
     render() {
-        if (!this.props.profile) {
+        if (this.props.profile?.id !== this.props.profileId) {
             this.state.profile = {
                 fullName: '',
                 location:'',

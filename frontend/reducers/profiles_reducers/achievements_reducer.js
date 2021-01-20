@@ -1,4 +1,4 @@
-import { RECEIVE_PROFILE } from '../../actions/profile_actions/profile_actions';
+import { RECEIVE_PROFILE, RECEIVE_ALL_PROFILES } from '../../actions/profile_actions/profile_actions';
 import { RECEIVE_ACHIEVEMENT, REMOVE_ACHIEVEMENT } from '../../actions/profile_actions/profile_item_actions'
 
 const achievementsReducer = (state = {}, action) => {
@@ -6,6 +6,8 @@ const achievementsReducer = (state = {}, action) => {
     let newState = { ...state }
 
     switch (action.type) {
+        case RECEIVE_ALL_PROFILES:
+            return [];
         case RECEIVE_PROFILE:
             (action.profile.achievements) ? newState = action.profile.achievements : newState = {};
             return newState;

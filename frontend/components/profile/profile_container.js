@@ -18,7 +18,7 @@ import {
 const mapStateToProps = (state, ownProps) => ({
     profile: state.entities.profiles[ownProps.match.params.fullNameprofileId.split('-').slice(-1)[0]],
     profiles: state.entities.profiles,
-    profileId: ownProps.match.params.fullNameprofileId.split('-').slice(-1)[0],
+    profileId: parseInt(ownProps.match.params.fullNameprofileId.split('-').slice(-1)[0]),
     currentUser: state.entities.users[state.session.id],
     experiences: Object.values(state.entities.experiences),
     educations: Object.values(state.entities.educations),
