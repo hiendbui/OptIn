@@ -1,7 +1,7 @@
 import Network from './network';
 import { connect } from 'react-redux';
 import { createConnection, destroyConnection, fetchCurrentProfConnections } from '../../actions/connection_actions/connection_actions';
-import {fetchAllProfiles , fetchProfile} from '../../actions/profile_actions/profile_actions';
+import {fetchAllProfiles , fetchProfile, clearProfileItems} from '../../actions/profile_actions/profile_actions';
 
 
 const mapStateToProps = state => ({
@@ -15,7 +15,8 @@ const mapDispatchToProps = dispatch => ({
     destroyConnection: (id) => dispatch(destroyConnection(id)),
     fetchAllProfiles: () => dispatch(fetchAllProfiles()),
     fetchProfile: (profile) => dispatch(fetchProfile(profile)),
-    fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections())
+    fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections()),
+    clearProfileItems: () => dispatch(clearProfileItems()),
 })
 
 const NetworkContainer = connect(mapStateToProps, mapDispatchToProps)(Network);
