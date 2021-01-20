@@ -5,6 +5,8 @@ import en from 'javascript-time-ago/locale/en';
 import ReactTimeAgo from 'react-time-ago';
 import { BsPencilSquare, BsThreeDots } from 'react-icons/bs';
 import { IconContext } from "react-icons"
+import { ImPencil } from 'react-icons/im';
+import { FaTrashAlt } from 'react-icons/fa';
 import  SideBarContainer from '../sidebar/sidebar_container'
 
 
@@ -133,8 +135,20 @@ export default class NewsFeed extends React.Component {
                                 <button onClick={this.showDropdown(post.id)} className='edit-btn'><BsThreeDots /></button> : ''
                             }
                             <div className={this.postId === post.id ? this.state.dropdown : 'hidden'}>
-                                    <p>Edit Post</p>
-                                    <p>Delete Text</p>
+                                    <button>
+                                        <IconContext.Provider 
+                                            value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
+                                            <ImPencil></ImPencil>
+                                        </IconContext.Provider>
+                                        <span>Edit Post</span>
+                                    </button>
+                                    <button>
+                                        <IconContext.Provider 
+                                            value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
+                                            <FaTrashAlt></FaTrashAlt>
+                                        </IconContext.Provider>
+                                        <span>Delete Post</span>
+                                    </button>
                             </div>
                             <Link to={{ pathname: `/in/${profilePath}-${profile.id}` } }>
                             <div className='prof'>
