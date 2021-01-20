@@ -11,7 +11,7 @@ import  SideBarContainer from '../sidebar/sidebar_container'
 export default class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {post:{}, comment:{}}
+        this.state = {post:{}, comment:{}, dropdown: 'hidden'}
         this.btn = 'hide-btn';
         
         TimeAgo.addLocale(en)
@@ -65,14 +65,11 @@ export default class NewsFeed extends React.Component {
         this.setState({ post: { ...this.state.post, ['body']: e.target.value}})
     }
 
-    showPostUpdate(e) {
-        e.preventDefault();
-        return (
-            <div>
-                <p>Edit Post</p>
-                <p>Delete Post</p>
-            </div>
-        )
+    showPostUpdate(postId) {
+        return (e) => {
+            this.postId = postId;
+            this.setState({dropdown: 'show'});
+        }
     }
 
     render() {
@@ -131,9 +128,14 @@ export default class NewsFeed extends React.Component {
                         if (profile)
                         return <div className="post" key={post.id}>
                             {profile.id === this.profile.id ? 
-                                <button onClick={this.showPostUpdate} className='edit-btn'><BsThreeDots /></button> : ''
+                                <button onClick={this.showPostUpdate(post.id)} className='edit-btn'><BsThreeDots /></button> : ''
                             }
-                            
+                            <div className={this.postId === post.id ? this.state.dropdown : 'hidden'}>
+                                <div className='dropdown'>
+                                    <p>Edit Post</p>
+                                    <p>Delete Text</p>
+                                </div>
+                            </div>
                             <Link to={{ pathname: `/in/${profilePath}-${profile.id}` } }>
                             <div className='prof'>
                                 <img src={profile.photoUrl ? 
