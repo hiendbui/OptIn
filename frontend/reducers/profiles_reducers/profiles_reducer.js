@@ -9,7 +9,7 @@ const profilesReducer = (state = {}, action) => {
             newState[action.profile.id] = (({ id, userId, fullName, headline, location, description, photoUrl }) => ({ id, userId, fullName, headline, location, description, photoUrl }))(action.profile);
             return newState;
         case RECEIVE_ALL_PROFILES:
-            newState = action.profiles;
+            newState = {...action.profiles, ...newState};
             return newState;
         default:
             return state;
