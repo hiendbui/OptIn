@@ -242,8 +242,9 @@ export default class Profile extends React.Component {
             this.state.experiences = this.props.experiences;
             this.state.educations = this.props.educations;
             this.state.achievements = this.props.achievements;
-            this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) });
-            this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) });
+            // this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) });
+            // this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) });
+            
         }
        
         return (
@@ -291,7 +292,8 @@ export default class Profile extends React.Component {
                                         experience.company in NBATEAMS ? 
                                             `https://sportsfly.cbsistatic.com/fly-62/bundles/sportsmediacss/images/team-logos/nba/${NBATEAMS[experience.company]}.svg` 
                                             : experience.company === 'LinkedIn' || experience.company === 'OptIn' ? 'https://www.flaticon.com/svg/static/icons/svg/174/174857.svg' 
-                                            : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id]}  width='60px' height='60px'></img>
+                                            : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id] ? this.state.expLogos[experience.id] : 
+                                            this.fetchExpLogo(experience.company, experience.id) }  width='60px' height='60px'></img>
                                     <div className="experience">
                                         <div className='title'>
                                             <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
@@ -323,7 +325,10 @@ export default class Profile extends React.Component {
                             {this.state.educations?.sort((a, b) => { return b.endYear - a.endYear })?.map((education) => (
                                 <div key={education.id}>
                                     <div></div>
-                                    <img src={education.photoUrl ? education.photoUrl : this.state.eduLogos[education.id]} width='60px' height='60px' />
+                                    <img src={education.photoUrl ? education.photoUrl : 
+                                        this.state.eduLogos[education.id] ? this.state.eduLogos[education.id] : 
+                                        this.fetchEduLogo(education.school, education.id)} width='60px' height='60px' 
+                                    />
                                     <div className="education">
                                         <div className='school'>{education.school}
                                         <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
