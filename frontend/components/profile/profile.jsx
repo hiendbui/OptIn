@@ -108,13 +108,13 @@ export default class Profile extends React.Component {
         formData.append('profile[location]', this.state.profile.location);
         formData.append('profile[description]', this.state.profile.description);
         if (this.state.profile.photoFile) formData.append('profile[profile_pic]', this.state.profile.photoFile);
+        console.log(this.state.profile, formData)
         this.props.updateProfile(formData, this.state.profile.id);
         if (this['mainRef']) this['mainRef'].reset();
     }
     
     handleChange(field) {
         return (e) => {
-            e.preventDefault();
             this.setState({ profile: { ...this.state.profile, [field]: e.target.value }})
         }
     }
@@ -230,21 +230,19 @@ export default class Profile extends React.Component {
     }
 
     render() {
-        if (this.props.profile?.id !== this.props.profileId) {
+        if (!this.props.profile) {
             this.state.profile = {
                 fullName: '',
                 location:'',
                 headline:'',
                 description: ''
             }
-        } else {
+        } else if (this.state.profile.id !== this.props.profile.id) {
             this.state.profile = this.props.profile;
+        } else {
             this.state.experiences = this.props.experiences;
             this.state.educations = this.props.educations;
             this.state.achievements = this.props.achievements;
-            // this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) });
-            // this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) });
-            
         }
        
         return (
