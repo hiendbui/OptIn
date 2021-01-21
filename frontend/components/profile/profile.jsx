@@ -398,14 +398,14 @@ export default class Profile extends React.Component {
                                 <label>Full Name *
                                 </label>
                                 <br/>
-                                <input defaultValue={this.props.profile?.fullName} required="required" type="text" onChange={this.handleChange('fullName')}/>    
+                                <input defaultValue={this.state.profile.fullName} required="required" type="text" onChange={this.handleChange('fullName')}/>    
                             </div>
                              <br />
                             <div >
                                 <label>Headline *
                                 </label>
                                  <br />
-                                <input defaultValue={this.props.profile?.headline} required="required" type="text" onChange={this.handleChange('headline')}/>
+                                <input defaultValue={this.state.profile.headline} required="required" type="text" onChange={this.handleChange('headline')}/>
                             </div>
                              <br />
                              <div >
