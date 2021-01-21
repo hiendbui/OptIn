@@ -142,7 +142,7 @@ export default class NewsFeed extends React.Component {
                                         </IconContext.Provider>
                                         <span>Edit Post</span>
                                     </button>
-                                    <button>
+                                    <button onClick={() => this.props.destroyPost(post.id)}>
                                         <IconContext.Provider 
                                             value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
                                             <FaTrashAlt></FaTrashAlt>
