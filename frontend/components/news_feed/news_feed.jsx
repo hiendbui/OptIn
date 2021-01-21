@@ -131,7 +131,7 @@ export default class NewsFeed extends React.Component {
                         const profilePath = profile?.fullName.toLowerCase().split(' ').join('-');
                         if (profile)
                         return <div className="post" key={post.id}>
-                            {profile.id === this.profile.id ? 
+                            {profile?.id === this.profile?.id ? 
                                 <button onClick={this.showDropdown(post.id)} className='edit-btn'><BsThreeDots /></button> : ''
                             }
                             <div className={this.postId === post.id ? this.state.dropdown : 'hidden'}>
