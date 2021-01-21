@@ -72,8 +72,8 @@ export default class Profile extends React.Component {
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profile))
         .then(() => this.setState({profile: this.props.profile}))
-        .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
-        .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
+        // .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
+        // .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
         .then(()=> {if (this.props.connected) this.setState({status: this.props.connected.includes(this.props.profile ? this.props.profile.id : this.props.profileId) ? 'Disconnect' : 'Connect'})})
         // .then(() => this.setState({ profile: this.props.profile }))
 
@@ -237,6 +237,13 @@ export default class Profile extends React.Component {
                 headline:'',
                 description: ''
             }
+        } else {
+            this.state.profile = this.props.profile;
+            this.state.experiences = this.props.experiences;
+            this.state.educations = this.props.educations;
+            this.state.achievements = this.props.achievements;
+            this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) });
+            this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) });
         }
        
         return (
@@ -277,7 +284,7 @@ export default class Profile extends React.Component {
                             <div className='add' onClick={this.showItemForm('modalExp','add-exp')}><AiOutlinePlus /></div>
                             </div>  
                             </label>
-                            {this.props.experiences.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)}).map((experience) => {
+                            {this.state.experiences?.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
                                 return (<div key={experience.id}>
                                     <p fontSize="5px">{'\xa0'}</p>
                                     <img src={
@@ -313,7 +320,7 @@ export default class Profile extends React.Component {
                             </div>
                             </label>
                  
-                            {this.props.educations.sort((a, b) => { return b.endYear - a.endYear }).map((education) => (
+                            {this.state.educations?.sort((a, b) => { return b.endYear - a.endYear })?.map((education) => (
                                 <div key={education.id}>
                                     <div></div>
                                     <img src={education.photoUrl ? education.photoUrl : this.state.eduLogos[education.id]} width='60px' height='60px' />
@@ -339,7 +346,7 @@ export default class Profile extends React.Component {
                                 <div className='add' onClick={this.showItemForm('modalAch', 'add-ach')}><AiOutlinePlus /></div>
                             </div>
                         </label>
-                        {this.props.achievements.map((achievement) => (
+                        {this.state.achievements?.map((achievement) => (
                             <div key={achievement.id}>
                                 <div className="achievement">
                                     <div className='title'>{achievement.title}
@@ -388,14 +395,14 @@ export default class Profile extends React.Component {
                                 <label>Full Name *
                                 </label>
                                 <br/>
-                                <input defaultValue={this.state.profile.fullName} required="required" type="text" onChange={this.handleChange('fullName')}/>    
+                                <input defaultValue={this.props.profile?.fullName} required="required" type="text" onChange={this.handleChange('fullName')}/>    
                             </div>
                              <br />
                             <div >
                                 <label>Headline *
                                 </label>
                                  <br />
-                                <input defaultValue={this.state.profile.headline} required="required" type="text" onChange={this.handleChange('headline')}/>
+                                <input defaultValue={this.props.profile?.headline} required="required" type="text" onChange={this.handleChange('headline')}/>
                             </div>
                              <br />
                              <div >

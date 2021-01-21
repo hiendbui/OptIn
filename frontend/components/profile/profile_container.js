@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Profile from './profile';
 import { updateProfile, fetchProfile, fetchAllProfiles } from '../../actions/profile_actions/profile_actions'
 import { createConnection, destroyConnection, fetchCurrentProfConnections } from '../../actions/connection_actions/connection_actions'
@@ -49,5 +50,5 @@ const mapDispatchToProps = dispatch => ({
     fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections())
 })
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+const ProfileContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));
 export default ProfileContainer;

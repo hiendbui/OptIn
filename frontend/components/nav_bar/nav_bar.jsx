@@ -4,14 +4,15 @@ import { ImHome3 } from 'react-icons/im';
 import { IoMdPeople, IoMdNotifications } from 'react-icons/io'; 
 import { BsFillBriefcaseFill, BsPersonFill } from 'react-icons/bs';
 import { RiMessage2Fill } from 'react-icons/ri';
-import { IconContext } from "react-icons"
+import { IconContext } from "react-icons";
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { profile: this.props.users[this.props.session.id].profile, dropdown: 'hidden'}
-        this.handleClick = this.handleClick.bind(this)
-        this.props.fetchAllProfiles()
+        this.state = { profile: this.props.users[this.props.session.id].profile, dropdown: 'hidden'};
+        this.handleClick = this.handleClick.bind(this);
+        this.props.fetchAllProfiles();
+        this.goToMyProfile = this.goToMyProfile.bind(this);
     }
     
     handleClick(e) {
@@ -20,6 +21,12 @@ export default class NavBar extends React.Component {
         this.setState({ profile: this.props.users[this.props.session.id].profile})
     }
 
+    goToMyProfile() {
+        const curProfId = this.props.users[this.props.session.id].profile.id;
+        this.props.clearProfileItems();
+        this.props.fetchProfile({id: curProfId});
+        this.props.history.push(`/in/${this.state.profile?.fullName.toLowerCase().split(' ').join('-')}-${curProfId}`);
+    }
     render() {
         let fullName = ""
         let headline = ""
@@ -44,7 +51,7 @@ export default class NavBar extends React.Component {
                             <img id='dropdown-pic' src={url} width="45" height="45"/>
                             <p>{fullName}</p>
                             <p>{headline}</p>
-                                <div><Link to={{pathname: this.state.profile ? `/in/${fullName.toLowerCase().split(' ').join('-')}-${this.props.users[this.props.session.id].profile.id}` : null, state:{}}} ><div> <span>View Profile</span></div></Link></div>
+                                <div onClick={this.goToMyProfile}> <div> <span>View Profile</span></div></div> 
                             <p>{'\xa0'}</p>
                             <div onClick={() => this.props.logout()}><span>Log out</span></div>
                         </div>
