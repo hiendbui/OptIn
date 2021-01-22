@@ -81,15 +81,20 @@ export default class NewsFeed extends React.Component {
 
     handleComChange(postId) {
         return (e) => {
-            this.postId = postId;
+            this.postCmtId = postId;
             e.target.value ? this.btn = 'show-btn' : this.btn = 'hide-btn';
             this.setState({ comment: {['body']: e.target.value }} );
         }
     }
     handleComment(postId) {
         return (e) => {
+            e.preventDefault();
+            this.postCmtId = -1
             this.props.createComment(this.state.comment, postId)
-            .then(()=>this.commentRefs[postId].current.reset());
+            .then(()=>{
+                this.commentRefs[postId].current.reset()
+                
+            });
         }
     }
 
@@ -340,7 +345,7 @@ export default class NewsFeed extends React.Component {
                                         type="text" 
                                         onChange={this.handleComChange(post.id)}
                                     />
-                                    <button className={this.postId === post.id ? this.btn : 'hide'}>Post</button>
+                                    <button className={this.postCmtId === post.id ? this.btn : 'hide'}>Post</button>
                                 </form>
                             </div>
                             </div>
