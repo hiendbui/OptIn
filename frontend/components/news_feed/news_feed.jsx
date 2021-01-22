@@ -14,7 +14,7 @@ import  SideBarContainer from '../sidebar/sidebar_container'
 export default class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {post:{}, comment:{}, dropdown: 'hidden', postEditId: -1, content: ''}
+        this.state = {post:{}, comment:{}, dropdown: 'hidden', cmtDropdown: 'hidden', postEditId: -1, content: ''}
         this.btn = 'hide-btn';
         this.postRef = React.createRef();
         this.commentRef = React.createRef();
@@ -90,11 +90,19 @@ export default class NewsFeed extends React.Component {
             } else this.setState({dropdown:'hidden'})
         }
     }
+    
+    showCmtDropdown(commentId) {
+        return (e) => {
+            if (this.state.cmtDropdown === 'hidden' || this.commentId !== commentId) {
+                this.commentId = commentId;
+                this.setState({cmtDropdown: 'show'})
+            } else this.setState({cmtDropdown:'hidden'})
+        }
+    }
 
     editPost(postId) {
         
         return (e) => {
-            console.log('btn clicked')
             this.setState({dropdown: 'hidden'})
             this.setState({postEditId: postId})
         }
@@ -239,14 +247,35 @@ export default class NewsFeed extends React.Component {
                                                 </Link> 
                                                  <div className="body">
                                                 <p className="full">{profile.fullName}</p>
-                                                <p className="time">
-                                                    <ReactTimeAgo 
-                                                        fontSize="12px" 
-                                                        date={new Date(comment.createdAt)} 
-                                                        locale="en" 
-                                                        timeStyle="mini-minute-now" 
-                                                    />
-                                                </p>
+                                                <div className='cmt-dets'>
+                                                    <span className="time">
+                                                        <ReactTimeAgo 
+                                                            fontSize="12px" 
+                                                            date={new Date(comment.createdAt)} 
+                                                            locale="en" 
+                                                            timeStyle="mini-minute-now" 
+                                                        />
+                                                    </span>
+                                                    {profile?.id === this.profile?.id ? 
+                                                        <button onClick={this.showDropdown(comment.id)} className='edit-cmt-btn'><BsThreeDots /></button> : ''
+                                                    }
+                                                </div>
+                                                <div className={this.commentId === comment.id ? this.state.dropdown : 'hidden'}>
+                                                        <button onClick={this.editPost(post.id)}>
+                                                            <IconContext.Provider 
+                                                                value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
+                                                                <ImPencil></ImPencil>
+                                                            </IconContext.Provider>
+                                                            <span>Edit Post</span>
+                                                        </button>
+                                                        <button onClick={() => this.props.destroyPost(post.id)}>
+                                                            <IconContext.Provider 
+                                                                value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
+                                                                <FaTrashAlt></FaTrashAlt>
+                                                            </IconContext.Provider>
+                                                            <span>Delete Post</span>
+                                                        </button>
+                                                </div>
                                                 <p className="head">{profile.headline}</p>
                                                 <p className="bod">{comment.body}</p>
                                                 </div>

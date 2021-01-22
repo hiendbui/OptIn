@@ -267,8 +267,8 @@
                         font-size: 14px;
                     }
                     .time {
-                        float:right;
-                        margin-top:-15px;
+                        display:inline-block;
+                        // padding-top:-10px;
                     }
                     .img-comment{
                         display: inline-block;
@@ -427,6 +427,32 @@
  
 }
 
+.edit-cmt-btn {
+    display:inline-block;
+    border:none;
+    // height:25px;
+    // width: 25px;
+    // margin-right: 10px;
+    // margin-top: 5px;
+    // padding: 5px;
+    color: rgb(112, 112, 112);
+    font-size: 16px;
+    >* {
+        margin-bottom:-4px;
+        margin-left:3px;
+        margin-top: 1px;
+    }
+}
+.edit-cmt-btn:hover {
+    border-radius: 50%;
+    background-color: rgb(240, 240, 240);
+    
+}
+
+.cmt-dets {
+    float:right;
+    margin-top:-17px;
+}
 
 
 
