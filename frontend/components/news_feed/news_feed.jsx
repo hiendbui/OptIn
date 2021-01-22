@@ -7,6 +7,7 @@ import { BsPencilSquare, BsThreeDots } from 'react-icons/bs';
 import { IconContext } from "react-icons"
 import { ImPencil } from 'react-icons/im';
 import { FaTrashAlt } from 'react-icons/fa';
+import { HiPhotograph } from 'react-icons/hi';
 import  SideBarContainer from '../sidebar/sidebar_container'
 
 
@@ -53,12 +54,11 @@ export default class NewsFeed extends React.Component {
         formData.append('post[body]', this.state.post.body);
         if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
         this.props.createPost(formData)
-        .then(()=>this.postRef.current.value = "")
+        .then(()=> this.postRef.current.reset())
     }
 
     updatePost(post) {
         return (e) => {
-            
             this.props.updatePost(post);
             this.setState({postEditId: -1})
         }
@@ -130,13 +130,13 @@ export default class NewsFeed extends React.Component {
                 </div>
                 <div className='post-block'>
                     <div className='create-post'>
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSubmit} ref={this.postRef}>
                             <div className="body">
                                 <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                                     <BsPencilSquare />
                                 </IconContext.Provider>
                                 <textarea
-                                        ref={this.postRef}
+                                        
                                         placeholder="Start a Post" 
                                         required="required" 
                                         id="input" 
@@ -145,8 +145,14 @@ export default class NewsFeed extends React.Component {
                                         onChange={this.handleChange}>
                                 </textarea>
                             </div>
-                            <span className='img-input'>Upload Photo:</span>
-                            <input type="file" onChange={this.handleFile} />
+                            <div className='img-upload'>
+                                <span className='img-input'>
+                                    <IconContext.Provider value={{ style: { fontSize: '25px' } }}>
+                                        <HiPhotograph/>
+                                    </IconContext.Provider>
+                                </span>                       
+                                <input className='file-input'  type='file'  onChange={this.handleFile} />
+                            </div>
                             <button>Post</button>
                         </form>
                     </div>
