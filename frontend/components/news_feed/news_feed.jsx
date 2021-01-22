@@ -15,7 +15,8 @@ export default class NewsFeed extends React.Component {
         super(props);
         this.state = {post:{}, comment:{}, dropdown: 'hidden', postEditId: -1, content: ''}
         this.btn = 'hide-btn';
-        this.ref = React.createRef();
+        this.postRef = React.createRef();
+        this.commentRef = React.createRef();
         
         TimeAgo.addLocale(en)
 
@@ -52,7 +53,7 @@ export default class NewsFeed extends React.Component {
         formData.append('post[body]', this.state.post.body);
         if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
         this.props.createPost(formData)
-        .then(()=>this.ref.current.value = "")
+        .then(()=>this.postRef.current.value = "")
     }
 
     updatePost(post) {
@@ -73,7 +74,7 @@ export default class NewsFeed extends React.Component {
     handleComment(postId) {
         return (e) => {
             this.props.createComment(this.state.comment, postId)
-            .then(()=>this.ref.current.value = "")
+            .then(()=>this.commentRef.current.value = "")
         }
     }
 
@@ -135,7 +136,7 @@ export default class NewsFeed extends React.Component {
                                     <BsPencilSquare />
                                 </IconContext.Provider>
                                 <textarea
-                                        ref={this.ref}
+                                        ref={this.postRef}
                                         placeholder="Start a Post" 
                                         required="required" 
                                         id="input" 
@@ -253,7 +254,7 @@ export default class NewsFeed extends React.Component {
                                      />
                                 <form onSubmit={this.handleComment(post.id)}>
                                     <input
-                                        ref={this.ref} 
+                                        ref={this.commentRef} 
                                         className='comment' 
                                         placeholder="Add a comment..." 
                                         type="text" 
