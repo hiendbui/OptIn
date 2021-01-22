@@ -13,7 +13,7 @@ import  SideBarContainer from '../sidebar/sidebar_container'
 export default class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {post:{}, comment:{}, dropdown: 'hidden'}
+        this.state = {post:{}, comment:{}, dropdown: 'hidden', postEditId: -1, content: ''}
         this.btn = 'hide-btn';
         
         TimeAgo.addLocale(en)
@@ -25,6 +25,9 @@ export default class NewsFeed extends React.Component {
         this.handleComment = this.handleComment.bind(this);
         this.handleComChange = this.handleComChange.bind(this);
         this.showDropdown = this.showDropdown.bind(this);
+        this.editPost = this.editPost.bind(this);
+        this.updatePost = this.updatePost.bind(this);
+        
     }
 
     componentDidMount() {
@@ -48,6 +51,14 @@ export default class NewsFeed extends React.Component {
         formData.append('post[body]', this.state.post.body);
         if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
         this.props.createPost(formData);
+    }
+
+    updatePost(post) {
+        return (e) => {
+            
+            this.props.updatePost(post);
+            this.setState({postEditId: -1})
+        }
     }
 
     handleComChange(postId) {
@@ -76,7 +87,16 @@ export default class NewsFeed extends React.Component {
         }
     }
 
-    render() {
+    editPost(postId) {
+        
+        return (e) => {
+            console.log('btn clicked')
+            this.setState({dropdown: 'hidden'})
+            this.setState({postEditId: postId})
+        }
+    }
+
+    render() { 
         return (
             <div className='news-feed'>
                 <div className='user-profile'>
@@ -129,13 +149,14 @@ export default class NewsFeed extends React.Component {
                     {[...this.props.postsArr].reverse().map((post) => {
                         const profile = this.props.profiles[post.authorId];
                         const profilePath = profile?.fullName.toLowerCase().split(' ').join('-');
+                        const edit = this.state.postEditId === post.id
                         if (profile)
                         return <div className="post" key={post.id}>
                             {profile?.id === this.profile?.id ? 
                                 <button onClick={this.showDropdown(post.id)} className='edit-btn'><BsThreeDots /></button> : ''
                             }
                             <div className={this.postId === post.id ? this.state.dropdown : 'hidden'}>
-                                    <button>
+                                    <button onClick={this.editPost(post.id)}>
                                         <IconContext.Provider 
                                             value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
                                             <ImPencil></ImPencil>
@@ -169,10 +190,29 @@ export default class NewsFeed extends React.Component {
                                 </div>
                             </div>
                             </Link>
-                            <p className='body'>{post.body}</p>
+                            
+                                <div
+                                    id={post.id}
+                                    className='body' 
+                                    contentEditable={edit ? true : false} 
+                                    style={edit ? {border: 'solid 1px rgb(163, 163, 163)', padding:'7.5px'}: {border: 'none'}}                              
+                                    required="required" 
+                                    onInput={e => this.setState({content: e.currentTarget.textContent} )}
+                                    >
+                                    {post.body}
+                                </div>
+                                <button
+                                    className='update-post'
+                                    hidden={edit ? false : true}
+                                    onClick={this.updatePost({id:post.id, body:this.state.content})}>
+                                    Save
+                                </button>
+                                <br hidden={edit ? false : true}/>
+                                <br hidden={edit ? false : true}/>
                             {post.photoUrl ? <img src={post.photoUrl} alt=""/> : ""}
                             <p className='br'></p>
                             <br/>
+
                             <div className="comments">
                                 {this.props.comments.map((comment => {
                                     let profile = this.props.profiles[comment.authorId];
