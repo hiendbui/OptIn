@@ -17,8 +17,7 @@ export default class NewsFeed extends React.Component {
         this.state = {post:{}, comment:{}, dropdown: 'hidden', cmtDropdown: 'hidden', postEditId: -1, content: ''}
         this.btn = 'hide-btn';
         this.postRef = React.createRef();
-        // this.commentRef = React.createRef();
-        
+        this.commentRefs = {};
         TimeAgo.addLocale(en)
 
         this.profile = this.props.currentUser.profile
@@ -32,6 +31,13 @@ export default class NewsFeed extends React.Component {
         this.updatePost = this.updatePost.bind(this);
         
     }
+
+    commentRef(postId) {
+        const commentRef = React.createRef();
+        this.commentRefs[postId] = commentRef;
+        return commentRef
+    }
+        
 
     componentDidMount() {
         this.props.fetchCurrentProfConnections();
@@ -54,7 +60,7 @@ export default class NewsFeed extends React.Component {
         formData.append('post[body]', this.state.post.body);
         if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
         this.props.createPost(formData)
-        this.postRef.current.reset()
+        .then(()=>this.postRef.current.reset())
     }
 
     updatePost(post) {
@@ -75,7 +81,7 @@ export default class NewsFeed extends React.Component {
     handleComment(postId) {
         return (e) => {
             this.props.createComment(this.state.comment, postId)
-            this.commentRef.current.reset();
+            .then(()=>this.commentRefs[postId].current.reset());
         }
     }
 
@@ -294,7 +300,7 @@ export default class NewsFeed extends React.Component {
                                         this.profile.photoUrl :
                                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
                                      />
-                                <form ref={this.commentRef = React.createRef()}  onSubmit={this.handleComment(post.id)}>
+                                <form ref={this.commentRef(post.id)}  onSubmit={this.handleComment(post.id)}>
                                     <input
                                         required="required"
                                         className='comment' 
