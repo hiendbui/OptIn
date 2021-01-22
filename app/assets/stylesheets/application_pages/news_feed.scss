@@ -242,6 +242,42 @@
             }
              
             .comments {
+                .hidden {
+                display:none;
+                }
+                .show {
+                    border-radius: 5px;
+                    border-top-right-radius: 0px;
+                    text-align: left;
+                    font-family: sans-serif;
+                    font-size: 15px;
+                    font-weight: 500;
+                    display: inline-block;
+                    width: 250px;
+                    height: 90px;
+                    position: absolute;
+                    right:25px;
+                    margin-top: 10px;
+                    background-color: white;
+                    color: rgb(95, 95, 95);
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    
+                    z-index: 1;
+                    span {
+                        font-size: 14px;
+                        color: black;
+                    }
+                    button {
+                        border:none;
+                        width:92%;
+                        margin-top: 4px;
+                        margin-bottom: 4px;
+                        padding: 10px;
+                    }
+                    button:hover {
+                        background-color:rgb(232, 238, 240);
+                    }
+                }
                 .item {
                     display: flex;
                     font-size: 12px;
