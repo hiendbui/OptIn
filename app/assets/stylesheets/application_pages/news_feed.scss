@@ -102,6 +102,7 @@
             background: white;
             display:inline-block;
             width: 570px;
+            height: 180px;
             -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
             box-shadow: 0 0 1.5px rgb(167, 167, 167);
             border-radius: 10px;
@@ -138,8 +139,8 @@
             }
             button {
                 position: relative;
-                right: -125px;
-                bottom:10px;
+                right: -475px;
+                bottom:41px;
                  font-family: Sans-Serif;
                 background: #2072ca;
                 color:white;
@@ -385,3 +386,47 @@
         background-color: #12447a;
         cursor: pointer;
     }
+
+.img-upload {
+    display: flex;
+    padding-right: 10px;
+    padding-top:20px;
+    justify-content:flex-start;
+    width:85px;
+    height:25px;
+    margin-left:30px;
+    margin-top: -15px;
+    border-radius: 5px;
+}
+
+.img-upload:hover {
+    cursor:pointer;
+    
+        background-color: rgba(230, 230, 230, 0.692);
+    
+}
+.img-input {
+    color:rgb(78, 169, 243);
+    margin-right: -5px;
+    margin-left:-15px;
+}
+.file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.file-input::before {
+  content: 'Photo';
+  cursor: pointer;
+  display: inline-block;
+  padding-top:3px;
+  padding-left: 5px;
+  margin-right: 5px;
+  font-weight: 600;
+  color: rgb(155, 155, 155);
+  font-size: 16px;
+ 
+}
+
+
+
+
