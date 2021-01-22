@@ -17,7 +17,7 @@ export default class NewsFeed extends React.Component {
         this.state = {post:{}, comment:{}, dropdown: 'hidden', cmtDropdown: 'hidden', postEditId: -1, content: ''}
         this.btn = 'hide-btn';
         this.postRef = React.createRef();
-        this.commentRef = React.createRef();
+        // this.commentRef = React.createRef();
         
         TimeAgo.addLocale(en)
 
@@ -54,11 +54,12 @@ export default class NewsFeed extends React.Component {
         formData.append('post[body]', this.state.post.body);
         if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
         this.props.createPost(formData)
-        .then(()=> this.postRef.current.reset())
+        this.postRef.current.reset()
     }
 
     updatePost(post) {
         return (e) => {
+            e.preventDefault();
             this.props.updatePost(post);
             this.setState({postEditId: -1})
         }
@@ -74,7 +75,7 @@ export default class NewsFeed extends React.Component {
     handleComment(postId) {
         return (e) => {
             this.props.createComment(this.state.comment, postId)
-            .then(()=>this.commentRef.current.value = "")
+            this.commentRef.current.reset();
         }
     }
 
@@ -84,8 +85,10 @@ export default class NewsFeed extends React.Component {
 
     showDropdown(postId) {
         return (e) => {
+            e.preventDefault();
             if (this.state.dropdown === 'hidden' || this.postId !== postId) {
                 this.postId = postId;
+                this.commentId = -1;
                 this.setState({dropdown: 'show'})
             } else this.setState({dropdown:'hidden'})
         }
@@ -93,8 +96,11 @@ export default class NewsFeed extends React.Component {
     
     showCmtDropdown(commentId) {
         return (e) => {
+            e.preventDefault();
+            console.log('hello!')
             if (this.state.cmtDropdown === 'hidden' || this.commentId !== commentId) {
                 this.commentId = commentId;
+                this.postId = -1;
                 this.setState({cmtDropdown: 'show'})
             } else this.setState({cmtDropdown:'hidden'})
         }
@@ -103,6 +109,7 @@ export default class NewsFeed extends React.Component {
     editPost(postId) {
         
         return (e) => {
+            e.preventDefault();
             this.setState({dropdown: 'hidden'})
             this.setState({postEditId: postId})
         }
@@ -257,23 +264,23 @@ export default class NewsFeed extends React.Component {
                                                         />
                                                     </span>
                                                     {profile?.id === this.profile?.id ? 
-                                                        <button onClick={this.showDropdown(comment.id)} className='edit-cmt-btn'><BsThreeDots /></button> : ''
+                                                        <button onClick={this.showCmtDropdown(comment.id)} className='edit-cmt-btn'><BsThreeDots /></button> : ''
                                                     }
                                                 </div>
-                                                <div className={this.commentId === comment.id ? this.state.dropdown : 'hidden'}>
+                                                <div className={this.commentId === comment.id ? this.state.cmtDropdown : 'hidden'}>
                                                         <button onClick={this.editPost(post.id)}>
                                                             <IconContext.Provider 
                                                                 value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
                                                                 <ImPencil></ImPencil>
                                                             </IconContext.Provider>
-                                                            <span>Edit Post</span>
+                                                            <span>Edit Comment</span>
                                                         </button>
-                                                        <button onClick={() => this.props.destroyPost(post.id)}>
+                                                        <button onClick={() => this.props.destroyComment(comment.id)}>
                                                             <IconContext.Provider 
                                                                 value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
                                                                 <FaTrashAlt></FaTrashAlt>
                                                             </IconContext.Provider>
-                                                            <span>Delete Post</span>
+                                                            <span>Delete Comment</span>
                                                         </button>
                                                 </div>
                                                 <p className="head">{profile.headline}</p>
@@ -287,9 +294,9 @@ export default class NewsFeed extends React.Component {
                                         this.profile.photoUrl :
                                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
                                      />
-                                <form onSubmit={this.handleComment(post.id)}>
+                                <form ref={this.commentRef = React.createRef()}  onSubmit={this.handleComment(post.id)}>
                                     <input
-                                        ref={this.commentRef} 
+                                        required="required"
                                         className='comment' 
                                         placeholder="Add a comment..." 
                                         type="text" 
