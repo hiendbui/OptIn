@@ -15,6 +15,7 @@ export default class NewsFeed extends React.Component {
         super(props);
         this.state = {post:{}, comment:{}, dropdown: 'hidden', postEditId: -1, content: ''}
         this.btn = 'hide-btn';
+        this.ref = React.createRef();
         
         TimeAgo.addLocale(en)
 
@@ -50,7 +51,8 @@ export default class NewsFeed extends React.Component {
         const formData = new FormData();
         formData.append('post[body]', this.state.post.body);
         if (this.state.post.photoFile) formData.append('post[photo]', this.state.post.photoFile);
-        this.props.createPost(formData);
+        this.props.createPost(formData)
+        .then(()=>this.ref.current.value = "")
     }
 
     updatePost(post) {
@@ -71,6 +73,7 @@ export default class NewsFeed extends React.Component {
     handleComment(postId) {
         return (e) => {
             this.props.createComment(this.state.comment, postId)
+            .then(()=>this.ref.current.value = "")
         }
     }
 
@@ -131,7 +134,8 @@ export default class NewsFeed extends React.Component {
                                 <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                                     <BsPencilSquare />
                                 </IconContext.Provider>
-                                <textarea 
+                                <textarea
+                                        ref={this.ref}
                                         placeholder="Start a Post" 
                                         required="required" 
                                         id="input" 
@@ -248,7 +252,8 @@ export default class NewsFeed extends React.Component {
                                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
                                      />
                                 <form onSubmit={this.handleComment(post.id)}>
-                                    <input 
+                                    <input
+                                        ref={this.ref} 
                                         className='comment' 
                                         placeholder="Add a comment..." 
                                         type="text" 
