@@ -14,7 +14,7 @@ import  SideBarContainer from '../sidebar/sidebar_container'
 export default class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {post:{}, comment:{}, dropdown: 'hidden', cmtDropdown: 'hidden', postEditId: -1, content: ''}
+        this.state = {post:{}, comment:{}, dropdown: 'hidden', cmtDropdown: 'hidden', postEditId: -1, commentEditId:-1, content: ''}
         this.btn = 'hide-btn';
         this.postRef = React.createRef();
         this.commentRefs = {};
@@ -71,6 +71,14 @@ export default class NewsFeed extends React.Component {
         }
     }
 
+    updateComment(comment) {
+        return (e) => {
+            e.preventDefault();
+            this.props.updateComment(comment);
+            this.setState({commentEditId: -1})
+        }
+    }
+
     handleComChange(postId) {
         return (e) => {
             this.postId = postId;
@@ -113,11 +121,18 @@ export default class NewsFeed extends React.Component {
     }
 
     editPost(postId) {
-        
         return (e) => {
             e.preventDefault();
             this.setState({dropdown: 'hidden'})
             this.setState({postEditId: postId})
+        }
+    }
+
+    editComment(commentId) {
+        return (e) => {
+            e.preventDefault();
+            this.setState({cmtDropdown: 'hidden'})
+            this.setState({commentEditId: commentId})
         }
     }
 
@@ -249,6 +264,7 @@ export default class NewsFeed extends React.Component {
                                 {this.props.comments.map((comment => {
                                     let profile = this.props.profiles[comment.authorId];
                                     let profilePath = profile?.fullName.toLowerCase().split(' ').join('-');
+                                    const cmtEdit = this.state.commentEditId === comment.id
                                     if (comment.postId == post.id)
                                         return <div className='item'key={comment.id}>
                                                 <Link to={{ pathname: `/in/${profilePath}-${profile.id}` } }>
@@ -274,7 +290,7 @@ export default class NewsFeed extends React.Component {
                                                     }
                                                 </div>
                                                 <div className={this.commentId === comment.id ? this.state.cmtDropdown : 'hidden'}>
-                                                        <button onClick={this.editPost(post.id)}>
+                                                        <button onClick={this.editComment(comment.id)}>
                                                             <IconContext.Provider 
                                                                 value={{ style: { float:'left', margin:'0px 10px 0px 5px' } }}>
                                                                 <ImPencil></ImPencil>
@@ -289,8 +305,24 @@ export default class NewsFeed extends React.Component {
                                                             <span>Delete Comment</span>
                                                         </button>
                                                 </div>
+                                                
                                                 <p className="head">{profile.headline}</p>
-                                                <p className="bod">{comment.body}</p>
+                                                <div
+                                                    id={comment.id}
+                                                    className='bod' 
+                                                    contentEditable={cmtEdit ? true : false} 
+                                                    style={cmtEdit ? {borderRadius:'10px',border: 'solid 1px rgb(163, 163, 163)', padding:'7.5px'}: {border: 'none'}}                              
+                                                    required="required" 
+                                                    onInput={e => this.setState({content: e.currentTarget.textContent} )}
+                                                    >
+                                                    {comment.body}
+                                                </div>
+                                                <button
+                                                    className='update-cmt'
+                                                    hidden={cmtEdit ? false : true}
+                                                    onClick={this.updateComment({id:comment.id, body:this.state.content})}>
+                                                    Save
+                                                </button>
                                                 </div>
                                                 </div>
                                 }))}
