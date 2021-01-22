@@ -8,6 +8,7 @@ import { IconContext } from "react-icons"
 import { ImPencil } from 'react-icons/im';
 import { FaTrashAlt } from 'react-icons/fa';
 import { HiPhotograph } from 'react-icons/hi';
+import { IoMdGlobe } from 'react-icons/io';
 import  SideBarContainer from '../sidebar/sidebar_container'
 
 
@@ -177,7 +178,6 @@ export default class NewsFeed extends React.Component {
                                     <BsPencilSquare />
                                 </IconContext.Provider>
                                 <textarea
-                                        
                                         placeholder="Start a Post" 
                                         required="required" 
                                         id="input" 
@@ -232,13 +232,19 @@ export default class NewsFeed extends React.Component {
                                 <div className='dets'>
                                 <p >{profile.fullName}</p>
                                 <p>{profile.headline}</p>
-                                        <p><ReactTimeAgo 
-                                                fontSize="12px" 
+                                        <span><ReactTimeAgo 
+                                                
                                                 date={new Date(post.createdAt)} 
                                                 locale="en" 
                                                 timeStyle="mini-minute-now" 
                                             />
-                                        </p>
+                                            <span>{post.createdAt !== post.updatedAt ? "・Edited":''}</span>
+                                            <span>・
+                                                <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.75px' } }}>
+                                                    <IoMdGlobe></IoMdGlobe>
+                                                </IconContext.Provider>
+                                            </span>
+                                        </span>
                                 </div>
                             </div>
                             </Link>
@@ -289,6 +295,7 @@ export default class NewsFeed extends React.Component {
                                                             locale="en" 
                                                             timeStyle="mini-minute-now" 
                                                         />
+                                                        {comment.createdAt !== comment.updatedAt ? " (edited)":''}
                                                     </span>
                                                     {profile?.id === this.profile?.id ? 
                                                         <button onClick={this.showCmtDropdown(comment.id)} className='edit-cmt-btn'><BsThreeDots /></button> : ''
