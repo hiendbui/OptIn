@@ -10,6 +10,9 @@ export const REMOVE_EXPERIENCE = 'REMOVE_EXPERIENCE';
 export const REMOVE_EDUCATION = 'REMOVE_EDUCATION';
 export const REMOVE_ACHIEVEMENT = 'REMOVE_ACHIEVEMENT';
 
+export const RECEIVE_ALL_EXPERIENCES = 'RECEIVE_ALL_EXPERIENCES';
+export const RECEIVE_ALL_EDUCATIONS = 'RECEIVE_ALL_EDUCATIONS';
+
 const receiveExperience = experience => ({
     type: RECEIVE_EXPERIENCE,
     experience: experience
@@ -38,6 +41,16 @@ const removeEducation = educationId => ({
 const removeAchievement = achievementId => ({
     type: REMOVE_ACHIEVEMENT,
     achievementId: achievementId
+})
+
+const receiveAllExperiences = experiences => ({
+    type: RECEIVE_ALL_EXPERIENCES,
+    experiences: experiences
+})
+
+const receiveAllEducations = educations => ({
+    type: RECEIVE_ALL_EDUCATIONS,
+    educations: educations
 })
 
 export const createExperience = experience => dispatch => {
@@ -83,5 +96,15 @@ export const destroyEducation = educationId => dispatch => {
 export const destroyAchievement = achievementId => dispatch => {
     return AchUtil.destroyAchievement(achievementId)
         .then(() => dispatch(removeAchievement(achievementId)))
+}
+
+export const fetchAllExperiences = () => dispatch => {
+    return ExpUtil.fetchAllExperiences()
+        .then((experiences) => dispatch(receiveAllExperiences(experiences)))
+}
+
+export const fetchAllEducations = () => dispatch => {
+    return EduUtil.fetchAllEducations()
+        .then((educations) => dispatch(receiveAllEducations(educations)))
 }
 
