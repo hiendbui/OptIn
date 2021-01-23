@@ -38,7 +38,7 @@ export default class Network extends React.Component {
                 <div className='sidebar-network'>
                     <SideBarContainer/>
                 </div>
-                <div className={/*this.props.connected.length > 0 ? */'connected' /*: 'hide'*/}> {/* May make change later to have connections block not display if user has no connections*/}
+                <div className={'connected'}> 
                 <h1>Connections</h1>
                     {this.props.connected.map((profile) => {
                         if ( profile && this.status[profile.id] !== 'Disconnect' )
