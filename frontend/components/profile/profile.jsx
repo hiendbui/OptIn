@@ -324,7 +324,6 @@ export default class Profile extends React.Component {
                                 const domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
                                 const cursor = !domain ? 'default' : '';
                                 const event = !domain ? 'none' : '';
-                                console.log(company, cursor, event)
                                 return (<div key={experience.id}>
                                     <p fontSize="5px">{'\xa0'}</p>
                                     <a href={domain} target="_blank" style={{cursor:cursor, pointerEvents:event }} >
@@ -364,13 +363,20 @@ export default class Profile extends React.Component {
                             </div>
                             </label>
                  
-                            {this.state.educations?.sort((a, b) => { return b.endYear - a.endYear })?.map((education) => (
+                            {this.state.educations?.sort((a, b) => { return b.endYear - a.endYear })?.map((education) => {
+                                if (!this.state.eduLogos[education.id]) this.fetchEduLogo(education.school, education.id);
+                                const domain = this.state.eduLogos[education.id]?.length > 1 ? `https://www.${this.state.eduLogos[education.id][1]}`: '' 
+                                const cursor = !domain ? 'default' : '';
+                                const event = !domain ? 'none' : '';
+                                return (
                                 <div key={education.id}>
                                     <div></div>
-                                    <img src={education.photoUrl ? education.photoUrl : 
-                                        this.state.eduLogos[education.id] ? this.state.eduLogos[education.id][0] : 
-                                        this.fetchEduLogo(education.school, education.id)} width='60px' height='60px' 
-                                    />
+                                    <a href={domain} target="_blank" style={{cursor:cursor, pointerEvents:event }} >
+                                        <img src={education.photoUrl ? education.photoUrl : 
+                                            this.state.eduLogos[education.id] ? this.state.eduLogos[education.id][0] : 
+                                            this.fetchEduLogo(education.school, education.id)} width='60px' height='60px' 
+                                        />
+                                    </a>
                                     <div className="education">
                                         <div className='school'>{education.school}
                                         <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
@@ -383,7 +389,7 @@ export default class Profile extends React.Component {
                                         <br />
                                     </div>
                                 </div>
-                            ))}
+                            )})}
                         </div>
                     </div>
                     <div className='ach-container'>
