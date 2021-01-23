@@ -155,7 +155,7 @@ export default class Profile extends React.Component {
 
     handleEditExp(e){
         e.preventDefault();
-         if (
+        if (
                 this.state.experience.title &&
                 this.state.experience.company &&
                 this.state.experience.startDate &&
@@ -184,6 +184,7 @@ export default class Profile extends React.Component {
 
     handleCreateEdu(e) {
         e.preventDefault();
+        if (this.state.education.school) this.closeSavedForm('modalEdu');
         this['eduRef'].reset();
         this.props.createEducation(this.state.education)
             .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
@@ -191,6 +192,7 @@ export default class Profile extends React.Component {
 
     handleEditEdu(e) {
         e.preventDefault();
+        if (this.state.education.school) this.closeSavedForm('modalEdu');
         this['eduRef'].reset();
         this.props.updateEducation(this.state.education)
             .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
@@ -200,6 +202,7 @@ export default class Profile extends React.Component {
         return (e) => {
             e.preventDefault();
             this.props.destroyEducation(education.id);
+            this.closeSavedForm('modalEdu');
         }
     }
 
@@ -211,12 +214,14 @@ export default class Profile extends React.Component {
 
     handleCreateAch(e) {
         e.preventDefault();
+        if (this.state.achievement.title) this.closeSavedForm('modalAch');
         this['achRef'].reset();
         this.props.createAchievement(this.state.achievement)
     }
 
     handleEditAch(e) {
         e.preventDefault();
+        if (this.state.achievement.title) this.closeSavedForm('modalAch');
         this['achRef'].reset();
         this.props.updateAchievement(this.state.achievement)
     }
@@ -225,6 +230,7 @@ export default class Profile extends React.Component {
         return (e) => {
             e.preventDefault();
             this.props.destroyAchievement(achievement.id);
+            this.closeSavedForm('modalAch');
         }
     }
 
@@ -600,7 +606,7 @@ export default class Profile extends React.Component {
                                 <button onClick={this.handleDeleteEdu(this.state.education)} type="submit">Delete</button>
                             </div>
                             <div className="submit">
-                                <button onClick={this.closeForm('modalEdu')} type="submit">Save</button>
+                                <button type="submit">Save</button>
                             </div>
                             <br />
                         </form>
@@ -653,7 +659,7 @@ export default class Profile extends React.Component {
                                 <button onClick={this.handleDeleteAch(this.state.achievement)} type="submit">Delete</button>
                             </div>
                             <div className="submit">
-                                <button onClick={this.closeForm('modalAch')} type="submit">Save</button>
+                                <button type="submit">Save</button>
                             </div>
                             <br />
                         </form>
