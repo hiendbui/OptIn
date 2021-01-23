@@ -94,21 +94,31 @@ export default class Profile extends React.Component {
     closeForm(field, ref) {
         return (e) => {
             if (ref) this[ref].reset();
-            this.setState({ [field]: 'hidden-modal' });
+            this.setState({ [field]: 'hidden-modal' })   
         }
     }
     
-    
+    closeMainForm(field, ref) {
+        if (ref) this[ref].reset();
+        this.setState({ [field]: 'hidden-modal' })    
+    }
     
     handleSubmit(e) {
         e.preventDefault();
+        if (
+                this.state.profile.fullName &&
+                this.state.profile.headline &&
+                this.state.profile.location
+            ) {
+                
+            this.closeMainForm('modalMain', 'mainRef')
+        }
         const formData = new FormData();
         formData.append('profile[full_name]', this.state.profile.fullName);
         formData.append('profile[headline]', this.state.profile.headline);
         formData.append('profile[location]', this.state.profile.location);
         formData.append('profile[description]', this.state.profile.description);
         if (this.state.profile.photoFile) formData.append('profile[profile_pic]', this.state.profile.photoFile);
-        console.log(this.state.profile, formData)
         this.props.updateProfile(formData, this.state.profile.id);
         if (this['mainRef']) this['mainRef'].reset();
     }
@@ -416,7 +426,7 @@ export default class Profile extends React.Component {
                              </div>
                              <br />
                             <div className="submit">
-                                <button onClick={this.closeForm('modalMain', 'mainRef')} type="submit">Save</button>
+                                <button type="submit">Save</button>
                              </div>
                              <br/>
                         </form>
