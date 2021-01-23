@@ -1,4 +1,9 @@
 class Api::EducationsController < ApplicationController
+    def index
+        @educations = Education.all
+        render 'api/educations/index'
+    end
+
     def create
         @education = Education.new(education_params)
         @education.profile_id = current_user.profile.id

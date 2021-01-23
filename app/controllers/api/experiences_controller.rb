@@ -1,4 +1,9 @@
 class Api::ExperiencesController < ApplicationController
+    def index
+        @experiences = Experience.all
+        render 'api/experiences/index'
+    end
+
     def create
         @experience = Experience.new(experience_params)
         @experience.profile_id = current_user.profile.id
