@@ -240,7 +240,7 @@ export default class NewsFeed extends React.Component {
                                     />
                                     <span>{post.createdAt !== post.updatedAt ? "・Edited":''}</span>
                                     <span>・
-                                        <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.75px' } }}>
+                                        <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.6px' } }}>
                                             <IoMdGlobe></IoMdGlobe>
                                         </IconContext.Provider>
                                     </span>
