@@ -20,3 +20,9 @@ export const destroyExperience = (experienceId) => (
         url: `/api/experiences/${experienceId}`,
     })
 )
+
+export const fetchAllExperiences = () => (
+    $.ajax({
+        url: '/api/experiences',
+    })
+)

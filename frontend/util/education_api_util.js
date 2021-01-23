@@ -20,3 +20,9 @@ export const destroyEducation = (educationId) => (
         url: `/api/educations/${educationId}`,
     })
 )
+
+export const fetchAllEducations = () => (
+    $.ajax({
+        url: '/api/educations',
+    })
+)
