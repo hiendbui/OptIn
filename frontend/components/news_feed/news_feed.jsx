@@ -43,7 +43,7 @@ export default class NewsFeed extends React.Component {
     componentDidMount() {
         this.props.fetchCurrentProfConnections();
         this.props.fetchAllProfiles();
-        this.props.fetchAllPosts();
+        this.props.fetchAllPosts()
     }
 
     handleFile(e) {
@@ -142,7 +142,7 @@ export default class NewsFeed extends React.Component {
         }
     }
 
-    render() { 
+    render() {
         return (
             <div className='news-feed'>
                 <div className='user-profile'>

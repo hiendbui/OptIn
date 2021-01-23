@@ -2,7 +2,7 @@ import NewsFeed from './news_feed';
 import { connect } from 'react-redux';
 import { createPost, updatePost, fetchAllPosts, destroyPost } from '../../actions/news_feed_actions/post_actions';
 import { createComment, updateComment, destroyComment } from '../../actions/news_feed_actions/comment_action';
-import { fetchAllProfiles } from '../../actions/profile_actions/profile_actions';
+import { fetchAllProfiles, clearProfileItems } from '../../actions/profile_actions/profile_actions';
 import { fetchCurrentProfConnections } from '../../actions/connection_actions/connection_actions';
 
 
@@ -28,7 +28,8 @@ const mapDispatchToProps = dispatch => ({
     createComment: (comment, postId) => dispatch(createComment(comment, postId)),
     updateComment: comment => dispatch(updateComment(comment)),
     destroyComment: commentId => dispatch(destroyComment(commentId)),
-    fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections())
+    fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections()),
+    clearProfileItems: () => dispatch(clearProfileItems())
 })
 
 const NewsFeedContainer = connect(mapStateToProps,mapDispatchToProps)(NewsFeed);

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Profile from './profile';
-import { updateProfile, fetchProfile, fetchAllProfiles } from '../../actions/profile_actions/profile_actions'
+import { updateProfile, fetchProfile, fetchAllProfiles,clearProfileItems } from '../../actions/profile_actions/profile_actions'
 import { createConnection, destroyConnection, fetchCurrentProfConnections } from '../../actions/connection_actions/connection_actions'
 import { 
     createExperience,
@@ -47,7 +47,8 @@ const mapDispatchToProps = dispatch => ({
     destroyAchievement: (achievementId) => dispatch(destroyAchievement(achievementId)),
     createConnection: (id) => dispatch(createConnection(id)),
     destroyConnection: (id) => dispatch(destroyConnection(id)),
-    fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections())
+    fetchCurrentProfConnections: () => dispatch(fetchCurrentProfConnections()),
+    clearProfileItems: () => dispatch(clearProfileItems()),
 })
 
 const ProfileContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));

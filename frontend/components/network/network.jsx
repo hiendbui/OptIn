@@ -7,6 +7,7 @@ export default class Network extends React.Component {
         super(props);
         this.status = {};
         this.handleClick = this.handleClick.bind(this)
+        this.props.clearProfileItems();
     }
     
     componentDidMount() {
@@ -44,7 +45,7 @@ export default class Network extends React.Component {
                         return(
                             <div className='profile-block' key={profile.id}>
                                 <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
-                                <div className='link'><Link to={{ pathname: this.profilePath(profile), state:{profile: {profile} }}} onClick={this.props.clearProfileItems}><div> <img className='profile-img' src={
+                                <div className='link'><Link to={{ pathname: this.profilePath(profile), state:{profile: {profile} }}} ><div> <img className='profile-img' src={
                                     profile.photoUrl ?
                                         profile.photoUrl :
                                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
@@ -68,7 +69,7 @@ export default class Network extends React.Component {
                             return (
                                 <div className='profile-block' key={profile.id}>
                                     <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
-                                    <div className='link'><Link to={{ pathname: this.profilePath(profile), state: { profile: profile } }} onClick={this.props.clearProfileItems}><div> <img className='profile-img' src={
+                                    <div className='link'><Link to={{ pathname: this.profilePath(profile), state: { profile: profile } }} ><div> <img className='profile-img' src={
                                         profile.photoUrl ?
                                             profile.photoUrl :
                                             'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}

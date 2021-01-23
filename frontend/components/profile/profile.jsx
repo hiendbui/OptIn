@@ -11,6 +11,7 @@ import NBATEAMS from '../../util/nba_teams';
 export default class Profile extends React.Component {
     constructor (props) {
         super(props);
+        this.props.clearProfileItems();
         this.state = {
             profile: {...this.props.profile, photoFile: null},
             modalMain: 'hidden-modal', 
