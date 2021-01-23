@@ -94,11 +94,11 @@ export default class Profile extends React.Component {
     closeForm(field, ref) {
         return (e) => {
             if (ref) this[ref].reset();
-            this.setState({ [field]: 'hidden-modal' })   
-        }
+            this.setState({ [field]: 'hidden-modal' }) 
+        }  
     }
     
-    closeMainForm(field, ref) {
+    closeSavedForm(field, ref) {
         if (ref) this[ref].reset();
         this.setState({ [field]: 'hidden-modal' })    
     }
@@ -110,9 +110,9 @@ export default class Profile extends React.Component {
                 this.state.profile.headline &&
                 this.state.profile.location
             ) {
-                
-            this.closeMainForm('modalMain', 'mainRef')
+            this.closeSavedForm('modalMain', 'mainRef')
         }
+        this.closeSavedForm('modalAbout', 'aboutRef')
         const formData = new FormData();
         formData.append('profile[full_name]', this.state.profile.fullName);
         formData.append('profile[headline]', this.state.profile.headline);
@@ -140,6 +140,14 @@ export default class Profile extends React.Component {
 
     handleCreateExp(e) {
         e.preventDefault();
+        if (
+                this.state.experience.title &&
+                this.state.experience.company &&
+                this.state.experience.start_date &&
+                this.state.experience.end_date
+            ) {
+            this.closeSavedForm('modalExp');
+        }
         this['expRef'].reset();
         this.props.createExperience(this.state.experience)
         .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
@@ -147,6 +155,14 @@ export default class Profile extends React.Component {
 
     handleEditExp(e){
         e.preventDefault();
+         if (
+                this.state.experience.title &&
+                this.state.experience.company &&
+                this.state.experience.startDate &&
+                this.state.experience.endDate
+            ) {
+            this.closeSavedForm('modalExp');
+        }
         this['expRef'].reset();
         this.props.updateExperience(this.state.experience)
         .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
@@ -156,6 +172,7 @@ export default class Profile extends React.Component {
         return (e) => {
             e.preventDefault();
             this.props.destroyExperience(experience.id);
+            this.closeSavedForm('modalExp');
         }
     }
 
@@ -449,7 +466,7 @@ export default class Profile extends React.Component {
                             <br/>
                             <textarea defaultValue={this.state.profile.description} cols="30" rows="10" onChange={this.handleChange('description')}></textarea>
                             <div className="submit">
-                                <button onClick={this.closeForm('modalAbout', 'aboutRef')} type="submit">Save</button>
+                                <button type="submit">Save</button>
                             </div>
                         </form>
                     </div>
@@ -516,7 +533,7 @@ export default class Profile extends React.Component {
                                     <button onClick={this.handleDeleteExp(this.state.experience)} type="submit">Delete</button>
                                 </div>
                                 <div className="submit">
-                                <button onClick={this.closeForm('modalExp')} type="submit">Save</button>
+                                <button type="submit">Save</button>
                                 </div>
                                 <br />
                         </form>
