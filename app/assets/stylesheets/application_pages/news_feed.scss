@@ -180,7 +180,7 @@
                     box-sizing: border-box;
                     box-sizing: border-box;
                     display:inline-block;
-                    margin-bottom: -2.5px;
+                    margin-bottom: -4px;
                 }
             }
             img {
@@ -201,6 +201,9 @@
                 }
                 :nth-child(3){
                     height: 2px;
+                }
+                :nth-child(2){
+                    margin-bottom:-2px;
                 }
             }
             .body {
@@ -302,6 +305,7 @@
                         font-size: 14px;
                     }
                     .time {
+                        font-size:12px;
                         display:inline-block;
                         color: rgb(104, 103, 103);
                     }

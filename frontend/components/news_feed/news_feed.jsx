@@ -232,19 +232,19 @@ export default class NewsFeed extends React.Component {
                                 <div className='dets'>
                                 <p >{profile.fullName}</p>
                                 <p>{profile.headline}</p>
-                                        <span><ReactTimeAgo 
-                                                
-                                                date={new Date(post.createdAt)} 
-                                                locale="en" 
-                                                timeStyle="mini-minute-now" 
-                                            />
-                                            <span>{post.createdAt !== post.updatedAt ? "・Edited":''}</span>
-                                            <span>・
-                                                <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.75px' } }}>
-                                                    <IoMdGlobe></IoMdGlobe>
-                                                </IconContext.Provider>
-                                            </span>
-                                        </span>
+                                <span><ReactTimeAgo 
+                                        
+                                        date={new Date(post.createdAt)} 
+                                        locale="en" 
+                                        timeStyle="mini-minute-now" 
+                                    />
+                                    <span>{post.createdAt !== post.updatedAt ? "・Edited":''}</span>
+                                    <span>・
+                                        <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.75px' } }}>
+                                            <IoMdGlobe></IoMdGlobe>
+                                        </IconContext.Provider>
+                                    </span>
+                                </span>
                                 </div>
                             </div>
                             </Link>
