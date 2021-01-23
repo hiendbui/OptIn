@@ -50,7 +50,6 @@ export default class Profile extends React.Component {
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
-                console.log(data)
                 this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png']}})
             })
     };
