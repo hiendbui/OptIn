@@ -50,7 +50,8 @@ export default class Profile extends React.Component {
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
-                this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? data[0]['logo'] : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png'}})
+                console.log(data)
+                this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png']}})
             })
     };
 
@@ -60,7 +61,7 @@ export default class Profile extends React.Component {
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
-                this.setState({ eduLogos: { ...this.state.eduLogos, [id]: data[0] ? data[0]['logo'] : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png' } })
+                this.setState({ eduLogos: { ...this.state.eduLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png'] } })
             })
     };
 
@@ -318,14 +319,23 @@ export default class Profile extends React.Component {
                             </div>  
                             </label>
                             {this.state.experiences?.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
+                                if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
+                                const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
+                                const domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
+                                const cursor = !domain ? 'default' : '';
+                                const event = !domain ? 'none' : '';
+                                console.log(company, cursor, event)
                                 return (<div key={experience.id}>
                                     <p fontSize="5px">{'\xa0'}</p>
-                                    <img src={
+                                    <a href={domain} target="_blank" style={{cursor:cursor, pointerEvents:event }} >
+                                        <img src={
                                         experience.company in NBATEAMS ? 
                                             `https://sportsfly.cbsistatic.com/fly-62/bundles/sportsmediacss/images/team-logos/nba/${NBATEAMS[experience.company]}.svg` 
                                             : experience.company === 'LinkedIn' || experience.company === 'OptIn' ? 'https://www.flaticon.com/svg/static/icons/svg/174/174857.svg' 
-                                            : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id] ? this.state.expLogos[experience.id] : 
-                                            this.fetchExpLogo(experience.company, experience.id) }  width='60px' height='60px'></img>
+                                            : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id] ? this.state.expLogos[experience.id][0] : 
+                                            '' }  width='60px' height='60px'>
+                                        </img>
+                                    </a>
                                     <div className="experience">
                                         <div className='title'>
                                             <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
@@ -358,7 +368,7 @@ export default class Profile extends React.Component {
                                 <div key={education.id}>
                                     <div></div>
                                     <img src={education.photoUrl ? education.photoUrl : 
-                                        this.state.eduLogos[education.id] ? this.state.eduLogos[education.id] : 
+                                        this.state.eduLogos[education.id] ? this.state.eduLogos[education.id][0] : 
                                         this.fetchEduLogo(education.school, education.id)} width='60px' height='60px' 
                                     />
                                     <div className="education">
