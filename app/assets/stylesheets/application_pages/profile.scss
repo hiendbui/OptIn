@@ -138,6 +138,12 @@
     background-color: white;
     padding-left: 25px;
     font-family: helvetica, arial;
+
+    .loading {
+        position:absolute;
+        left:375px;
+        margin-top:25px;
+    }
     label {
         font-size: 18px;
     }
@@ -256,6 +262,11 @@
     font-family: helvetica, arial;
     margin-top:5px;
     min-height: 35px;
+    .loading {
+        position:absolute;
+        left:375px;
+        margin-top:-30px;
+    }
     label {
         font-size: 18px;
     }
@@ -358,6 +369,11 @@
     font-family: helvetica, arial;
     min-height: 35px;
     padding-bottom: 25px;
+    .loading {
+        position:absolute;
+        left:375px;
+        margin-top:-15px;
+    }
     label {
         font-size: 18px;
     }
@@ -467,7 +483,11 @@
     border-bottom: 1px solid  #e4dede;
 }
 .achievements {
-
+    .loading {
+        position:absolute;
+        left:375px;
+        bottom:20px;
+    }
     margin-top:5px;
     font-family: helvetica, arial;
     label {
