@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from './store/store';
 import Root from './components/root';
-import { createPost, destroyPost, updatePost } from './actions/news_feed_actions/post_actions'
-import { createComment, destroyComment, updateComment} from './actions/news_feed_actions/comment_action'
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
         
     }
+   
     const rootEl = document.getElementById("root");
     ReactDOM.render(<Root store={store}/>, rootEl);
 });

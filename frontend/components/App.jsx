@@ -8,7 +8,7 @@ import NavBarContainer from './nav_bar/nav_bar_container'
 import NewsFeedContainer from './news_feed/news_feed_container';
 import ProfileContainer from './profile/profile_container';
 import NetworkContainer from './network/network_container';
-import SideBarContainer from './sidebar/sidebar_container';
+import JobsFeedContainer from './jobs/jobs_feed_container';
 
 
 
@@ -21,9 +21,10 @@ const App = () => (
             <LoggedOutAuthRoute exact path='/' component={Greeting} /> 
             <LoggedInAuthRoute exact path="/feed" component={NewsFeedContainer} />
             <LoggedInAuthRoute exact path="/myNetwork" component={NetworkContainer} />
+            <LoggedInAuthRoute exact path="/jobs" component={JobsFeedContainer} />
             <LoggedInAuthRoute exact path="/in/:fullNameprofileId" component={ProfileContainer} />
         </Switch>  
-        {/* <LoggedInAuthRoute component={SideBarContainer} /> */}
+        
     </div>
 );
 
