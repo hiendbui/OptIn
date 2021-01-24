@@ -34,6 +34,11 @@ export default class Network extends React.Component {
     //         })
     // };
 
+    loading() {
+        return (
+            <img className="loading" src={window.loading} width="25" height="25" />
+        )
+    }
     render() {
         
         this.props.experiences.forEach((experience,i) => {
@@ -42,6 +47,7 @@ export default class Network extends React.Component {
                 if (this.state.expLogos[experience.id]) this.done = true;
             }
         })
+        
         return (
             <div className='network'>
                 <div className='sidebar-network'>
@@ -49,13 +55,12 @@ export default class Network extends React.Component {
                 </div>
                 <div className={'connected'}> 
                 <h1>Companies within your network</h1>
-                    {this.props.experiences.map((experience) => {
-                        // if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
+                    {!this.done ? this.loading() : this.props.experiences.map((experience) => {
                         const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
                         let domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
                         if (experience.company === 'OptIn') domain = 'https://optin-ntwrk.herokuapp.com/';
                         if (!domain) return;
-                        if (this.done) return(
+                        return(
                             <div className='exp-block' key={experience.id}>
                                 <img className='cover' src={window.company_cover} alt="" />
                                 <div className='link'>
@@ -71,7 +76,8 @@ export default class Network extends React.Component {
                                     <p>{experience.company}</p>   
                                 </div>
                             </div>
-                            )}
+                        )
+                    }
                     )}
                 </div>
                 {/* <div className='connected'>
