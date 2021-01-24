@@ -8,6 +8,7 @@ export default class Network extends React.Component {
         this.props.clearProfileItems();
         this.state = {expLogos: {}}
         this.done = false;
+        this.companies = [];
     }
     
     componentDidMount() {
@@ -41,7 +42,8 @@ export default class Network extends React.Component {
     }
     render() {
         
-        this.props.experiences.forEach((experience,i) => {
+        if (!this.done) this.props.experiences.forEach((experience,i) => {
+            if (this.companies.length >= 36) return;
             if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
             if (i === this.props.experiences.length-1) {
                 if (this.state.expLogos[experience.id]) this.done = true;
@@ -56,10 +58,12 @@ export default class Network extends React.Component {
                 <div className={'connected'}> 
                 <h1>Companies within your network</h1>
                     {!this.done ? this.loading() : this.props.experiences.map((experience) => {
+                        if (!this.companies.includes(experience.id) && this.companies.length >= 36) return;
                         const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
                         let domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
                         if (experience.company === 'OptIn') domain = 'https://optin-ntwrk.herokuapp.com/';
                         if (!domain) return;
+                        this.companies.push(experience.id);
                         return(
                             <div className='exp-block' key={experience.id}>
                                 <img className='cover' src={window.company_cover} alt="" />
