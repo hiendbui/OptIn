@@ -6,7 +6,7 @@ id = 1
             json.extract! experience, :id, :company
             json.photoUrl url_for(experience.photo) if experience.photo.attached?
         end
+        companies.push(experience.company)
+        id += 1
     end
-    companies.push(experience.company)
-    id += 1
 end
