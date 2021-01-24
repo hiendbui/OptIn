@@ -142,6 +142,12 @@ export default class NewsFeed extends React.Component {
         }
     }
 
+    loading() {
+        return (
+            <img className="loading" src={window.loading} width="25" height="25" />
+        )
+    }
+
     render() {
         return (
             <div className='news-feed'>
@@ -198,7 +204,8 @@ export default class NewsFeed extends React.Component {
                         </form>
                     </div>
                     <div id='line'></div>
-                    {[...this.props.postsArr].reverse().map((post) => {
+                    {this.props.postsArr.length === 0 ? this.loading() :
+                        [...this.props.postsArr].reverse().map((post) => {
                         const profile = this.props.profiles[post.authorId];
                         const profilePath = profile?.fullName.toLowerCase().split(' ').join('-');
                         const edit = this.state.postEditId === post.id

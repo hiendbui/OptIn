@@ -59,13 +59,13 @@ export default class NavBar extends React.Component {
                     </button>
                     <div className='dropdown'></div>
                     <div className='no-hover'>
-                        <span class="tooltip">Feature not available</span>    
+                        <span className="tooltip">Feature not available</span>    
                         <IoMdNotifications />
                         <br />
                         <span>Notifications</span>
                     </div>
                     <div className='no-hover'>
-                        <span class="tooltip" >Feature not available</span>    
+                        <span className="tooltip" >Feature not available</span>    
                         <RiMessage2Fill />
                         <br />
                         <span>Messaging</span>

@@ -7,7 +7,7 @@ const experiencesReducer = (state = {}, action) => {
 
     switch (action.type) {
         case CLEAR_PROFILE_ITEMS:
-            return [];
+            return {};
         case RECEIVE_PROFILE:
             (action.profile.experiences) ? newState = action.profile.experiences : newState = {};
             return newState;

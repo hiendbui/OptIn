@@ -12,6 +12,7 @@ export default class Profile extends React.Component {
     constructor (props) {
         super(props);
         this.props.clearProfileItems();
+        this.done = false;
         this.state = {
             profile: {...this.props.profile, photoFile: null},
             modalMain: 'hidden-modal', 
@@ -72,6 +73,7 @@ export default class Profile extends React.Component {
         this.props.fetchCurrentProfConnections()
         this.props.fetchAllProfiles()
         .then(() => this.props.fetchProfile(this.props.profile))
+        .then(() => this.done = true)
         .then(() => this.setState({profile: this.props.profile}))
         // .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
         // .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
@@ -263,6 +265,12 @@ export default class Profile extends React.Component {
         return parsed;
     }
 
+    loading() {
+        return (
+            <img className="loading" src={window.loading} width="25" height="25" />
+        )
+    }
+
     render() {
         if (!this.props.profile) {
             this.state.profile = {
@@ -278,6 +286,7 @@ export default class Profile extends React.Component {
             this.state.educations = this.props.educations;
             this.state.achievements = this.props.achievements;
         }
+
        
         return (
             <div className='profile'>
@@ -287,7 +296,7 @@ export default class Profile extends React.Component {
                         <img  
                         src={this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}/>
                         <p>{this.state.profile.fullName}</p>
-                        <p>{this.state.profile.location}{this.state.profile.location ? this.props.connections ? this.props.connections > 1 ? ` · ${this.props.connections} connections` : ' · 1 connection' : '' : ''}</p>
+                        <p>{this.state.profile.location}{this.state.profile.location ? this.props.connections && this.done ? this.props.connections > 1 ? ` · ${this.props.connections} connections` : ' · 1 connection' : '' : ''}</p>
                         <p>{this.state.profile.headline}</p>
                     </div>
                     <div className={this.myProfile() ? 'reveal' : 'hide'}>
@@ -302,7 +311,7 @@ export default class Profile extends React.Component {
                         <br/>
                         <label>About</label>
                         <br/>
-                        <p>{this.state.profile.description ? this.state.profile.description : ''}</p>
+                        <p>{this.done ? this.state.profile.description : this.loading()}</p>
                         <div className={this.myProfile() ? 'reveal' : 'hide'}>
                             <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
                                 <div onClick={this.showForm('modalAbout')}><ImPencil /></div>
@@ -317,7 +326,8 @@ export default class Profile extends React.Component {
                             <div className='add' onClick={this.showItemForm('modalExp','add-exp')}><AiOutlinePlus /></div>
                             </div>  
                             </label>
-                            {this.state.experiences?.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
+                            {!this.done ? this.loading() : 
+                            this.state.experiences?.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
                                 if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
                                 const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
                                 const domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
@@ -362,7 +372,7 @@ export default class Profile extends React.Component {
                             </div>
                             </label>
                  
-                            {this.state.educations?.sort((a, b) => { return b.endYear - a.endYear })?.map((education) => {
+                            {!this.done ? this.loading() : this.state.educations?.sort((a, b) => { return b.endYear - a.endYear })?.map((education) => {
                                 if (!this.state.eduLogos[education.id]) this.fetchEduLogo(education.school, education.id);
                                 const domain = this.state.eduLogos[education.id]?.length > 1 ? `https://www.${this.state.eduLogos[education.id][1]}`: '' 
                                 const cursor = !domain ? 'default' : '';
@@ -398,7 +408,7 @@ export default class Profile extends React.Component {
                                 <div className='add' onClick={this.showItemForm('modalAch', 'add-ach')}><AiOutlinePlus /></div>
                             </div>
                         </label>
-                        {this.state.achievements?.map((achievement) => (
+                        {!this.done ? this.loading() : this.state.achievements?.map((achievement) => (
                             <div key={achievement.id}>
                                 <div className="achievement">
                                     <div className='title'>{achievement.title}
