@@ -6,13 +6,12 @@ export default class Network extends React.Component {
     constructor(props) {
         super(props);
         this.props.clearProfileItems();
-        this.state = {expLogos: {}, eduLogos: {}};
+        this.state = {expLogos: {}}
         this.done = false;
     }
     
     componentDidMount() {
         this.props.fetchAllExperiences();
-        this.props.fetchAllEducations()
     }
 
     fetchExpLogo(institution, id) {
@@ -53,7 +52,8 @@ export default class Network extends React.Component {
                     {this.props.experiences.map((experience) => {
                         // if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
                         const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
-                        const domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
+                        let domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
+                        if (experience.company === 'OptIn') domain = 'https://optin-ntwrk.herokuapp.com/';
                         if (!domain) return;
                         if (this.done) return(
                             <div className='exp-block' key={experience.id}>
