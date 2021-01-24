@@ -42,7 +42,7 @@ export default class NavBar extends React.Component {
                 <IconContext.Provider value={{ style: { fontSize: '20px'} }}>
                     <button></button>
                     <button></button>
-                    <button onClick={this.handleClick}>
+                    <button className='hover'onClick={this.handleClick}>
                         <div className='dropdown'>
                         <img id='navbar-pic' src={url} width="22.5" height="22.5"/>
                         <br />
@@ -58,30 +58,34 @@ export default class NavBar extends React.Component {
                         </div>
                     </button>
                     <div className='dropdown'></div>
-                    <button>
+                    <div className='no-hover'>
+                        <span class="tooltip">Feature not available</span>    
                         <IoMdNotifications />
                         <br />
                         <span>Notifications</span>
-                    </button>
-                    <button>
+                    </div>
+                    <div className='no-hover'>
+                        <span class="tooltip" >Feature not available</span>    
                         <RiMessage2Fill />
                         <br />
                         <span>Messaging</span>
-                    </button>
-                    <button>
+                    </div>
+                    <Link to={'/jobs'}>
+                    <button className='hover'>
                         <BsFillBriefcaseFill />
                         <br />
                         <span>Jobs</span>
                     </button>
+                    </Link>
                     <Link to={'/mynetwork'}> 
-                    <button>
+                    <button className='hover'>
                         <IoMdPeople />
                         <br/>
                         <span>My Network</span>
                     </button>
                     </Link>
                     <Link to={'/feed'}> 
-                    <button>  
+                    <button className='hover'>  
                         <ImHome3 />
                         <br/>
                         <span>Home</span>
