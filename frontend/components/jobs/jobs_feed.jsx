@@ -57,7 +57,7 @@ export default class Network extends React.Component {
                         if (!domain) return;
                         if (this.done) return(
                             <div className='exp-block' key={experience.id}>
-                                <img className='cover' src="https://static-exp1.licdn.com/sc/h/cn3fr66ht7m34az3utaneh6ld" alt="" />
+                                <img className='cover' src={window.company_cover} alt="" />
                                 <div className='link'>
                                     <a href={domain} target="_blank"  >
                                         <img className='logo-img' src={
