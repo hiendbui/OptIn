@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 import { ImHome3 } from 'react-icons/im';
 import { IoMdPeople, IoMdNotifications } from 'react-icons/io'; 
 import { BsFillBriefcaseFill, BsPersonFill } from 'react-icons/bs';
@@ -28,8 +28,13 @@ export default class NavBar extends React.Component {
         this.props.history.push(`/in/${this.state.profile?.fullName.toLowerCase().split(' ').join('-')}-${curProfId}`);
     }
     render() {
+        window.addEventListener('resize', (e) =>{
+            this.width = window.innerWidth
+        }); 
+        if (this.width >680) console.log('yo!!')
         let fullName = ""
         let headline = ""
+        console.log(this.props.params)
         if (this.state.profile) {
             fullName = this.state.profile.fullName;
             headline = this.state.profile.headline
@@ -40,8 +45,7 @@ export default class NavBar extends React.Component {
             <div className="nav-bar">
                 <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>
                 <IconContext.Provider value={{ style: { fontSize: '20px'} }}>
-                    <button></button>
-                    <button></button>
+                    <button className='gap'></button>
                     <button className='hover'onClick={this.handleClick}>
                         <div className='dropdown'>
                         <img id='navbar-pic' src={url} width="22.5" height="22.5"/>
@@ -70,27 +74,27 @@ export default class NavBar extends React.Component {
                         <br />
                         <span>Messaging</span>
                     </div>
-                    <Link to={'/jobs'}>
+                    <NavLink to={'/jobs'} activeClassName='active'>
                     <button className='hover'>
                         <BsFillBriefcaseFill />
                         <br />
                         <span>Jobs</span>
                     </button>
-                    </Link>
-                    <Link to={'/mynetwork'}> 
+                    </NavLink>
+                    <NavLink to={'/mynetwork'} activeClassName='active'> 
                     <button className='hover'>
                         <IoMdPeople />
                         <br/>
                         <span>My Network</span>
                     </button>
-                    </Link>
-                    <Link to={'/feed'}> 
-                    <button className='hover'>  
+                    </NavLink>
+                    <NavLink to={'/feed'} activeClassName='active'> 
+                    <button className='hover' >  
                         <ImHome3 />
                         <br/>
                         <span>Home</span>
                     </button>
-                    </Link>
+                    </NavLink>
                 </IconContext.Provider>
             </div>
             <div id="gap"></div>
