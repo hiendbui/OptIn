@@ -10,6 +10,8 @@
     left: 30px;
     font-family:sans-serif;
     margin-top: 10px;
+   
+    
      .user-profile {
          position: fixed;
          background-color: white;
@@ -92,6 +94,7 @@
          
         }
         .post-block {
+            overflow-x: hidden;
             position: relative;
             display: inline-block;
             left: 250px;

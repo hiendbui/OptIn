@@ -7,7 +7,7 @@ export default class Greeting extends React.Component {
             <div className='landing'>
                 <img src={window.logo} id="logo" />
                 <section className='form-buttons'>
-                    <Link to='/signup'><button>Join Now</button></Link>
+                    <Link to='/signup'><button className='signup'>Join Now</button></Link>
                     <Link to='/login'><button>Sign In</button></Link> 
                 </section>
                 
