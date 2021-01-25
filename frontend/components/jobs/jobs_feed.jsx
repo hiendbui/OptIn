@@ -22,8 +22,8 @@ export default class Network extends React.Component {
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
+                if (this.companies.length>=36) this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : []}})
                 if (data[0]) this.companies.push(id)
-                this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : []}})
             })
     };
 
