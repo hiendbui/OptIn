@@ -9,7 +9,8 @@ import { IconContext } from "react-icons";
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { profile: this.props.users[this.props.session.id].profile, dropdown: 'hidden'};
+        this.resize;
+        this.state = { profile: this.props.users[this.props.session.id].profile, dropdown: 'hidden', width: window.innerWidth};
         this.handleClick = this.handleClick.bind(this);
         this.props.fetchAllProfiles();
         this.goToMyProfile = this.goToMyProfile.bind(this);
@@ -29,12 +30,14 @@ export default class NavBar extends React.Component {
     }
     render() {
         window.addEventListener('resize', (e) =>{
-            this.width = window.innerWidth
+            const width = window.innerWidth
+            if (this.resize && width > 850) this.setState({width: width});
+            else if (!this.resize && width <= 850) this.setState({width: width})
         }); 
-        if (this.width >680) console.log('yo!!')
+        this.resize = (this.state.width < 850) ? 'small-nav' : ''
         let fullName = ""
         let headline = ""
-        console.log(this.props.params)
+        
         if (this.state.profile) {
             fullName = this.state.profile.fullName;
             headline = this.state.profile.headline
@@ -42,7 +45,7 @@ export default class NavBar extends React.Component {
         const url = this.props.session && this.state.profile && this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'
         return (
             <div>
-            <div className="nav-bar">
+            <div className={'nav-bar' +` ${this.resize}`}>
                 <Link to="/feed"><button id="logo-navbar"><img src={window.logo} /></button></Link>
                 <IconContext.Provider value={{ style: { fontSize: '20px'} }}>
                     <button className='gap'></button>
@@ -55,9 +58,9 @@ export default class NavBar extends React.Component {
                             <img id='dropdown-pic' src={url} width="45" height="45"/>
                             <p>{fullName}</p>
                             <p>{headline}</p>
-                                <div onClick={this.goToMyProfile}> <div> <span>View Profile</span></div></div> 
+                                <div onClick={this.goToMyProfile}> <div> <span className='drop-span'>View Profile</span></div></div> 
                             <p>{'\xa0'}</p>
-                            <div onClick={() => this.props.logout()}><span>Log out</span></div>
+                            <div onClick={() => this.props.logout()}><span className='drop-span'>Log out</span></div>
                         </div>
                         </div>
                     </button>
