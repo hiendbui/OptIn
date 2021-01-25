@@ -330,7 +330,7 @@ export default class Profile extends React.Component {
                             this.state.experiences?.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
                                 if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
                                 const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
-                                const domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
+                                let domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
                                 if (experience.company === 'OptIn') domain = 'https://optin-ntwrk.herokuapp.com/';
                                 const cursor = !domain ? 'default' : '';
                                 const event = !domain ? 'none' : '';
