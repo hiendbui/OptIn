@@ -42,26 +42,39 @@ export default class Profile extends React.Component {
         this.handleEditAch = this.handleEditAch.bind(this);
         this.handleDeleteAch = this.handleDeleteAch.bind(this);
         this.handleConnect = this.handleConnect.bind(this);
+        this.defaultPic = ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png']
     }
 
     
     fetchExpLogo(institution, id) {
+        const company = institution.split(' ').join('').toLowerCase()
         return $.ajax({
             method: 'GET',
-            url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
+            url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${company}`,
         })
             .then((data) => {
-                this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png']}})
+                this.setState({
+                        expLogos: {
+                        ...this.state.expLogos, 
+                        [id]: data[0] ? [ data[0]['logo'], data[0]['domain'] ] : this.defaultPic
+                    }
+                })        
             })
     };
 
     fetchEduLogo(institution, id) {
+        const school = institution.split(' ').join('').toLowerCase()
         return $.ajax({
             method: 'GET',
-            url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
+            url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${school}`,
         })
             .then((data) => {
-                this.setState({ eduLogos: { ...this.state.eduLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png'] } })
+                this.setState({
+                        eduLogos: {
+                        ...this.state.eduLogos, 
+                        [id]: data[0] ? [ data[0]['logo'], data[0]['domain'] ] : this.defaultPic
+                    }
+                })        
             })
     };
 
@@ -75,12 +88,7 @@ export default class Profile extends React.Component {
         .then(() => this.props.fetchProfile(this.props.profile))
         .then(() => this.done = true)
         .then(() => this.setState({profile: this.props.profile}))
-        // .then(() => this.props.experiences.forEach((experience) => { this.fetchExpLogo(experience.company, experience.id) }))
-        // .then(() => this.props.educations.forEach((education) => { this.fetchEduLogo(education.school, education.id) }))
         .then(()=> {if (this.props.connected) this.setState({status: this.props.connected.includes(this.props.profile ? this.props.profile.id : this.props.profileId) ? 'Disconnect' : 'Connect'})})
-        // .then(() => this.setState({ profile: this.props.profile }))
-
-
     }
     
     showForm(field) {

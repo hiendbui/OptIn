@@ -231,29 +231,29 @@ export default class NewsFeed extends React.Component {
                                     </button>
                             </div>
                             <Link to={{ pathname: `/in/${profilePath}-${profile.id}` } }>
-                            <div className='prof'>
-                                <img src={profile.photoUrl ? 
-                                            profile.photoUrl : 
-                                            'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'} 
-                                />
-                                <div className='dets'>
-                                <p >{profile.fullName}</p>
-                                <p>{profile.headline}</p>
-                                <span><ReactTimeAgo 
-                                        
-                                        date={new Date(post.createdAt)} 
-                                        locale="en" 
-                                        timeStyle="mini-minute-now" 
+                                <div className='prof'>
+                                    <img src={profile.photoUrl ? 
+                                                profile.photoUrl : 
+                                                'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'} 
                                     />
-                                    <span>{post.createdAt !== post.updatedAt ? "・Edited":''}</span>
-                                    <span>・
-                                        <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.6px' } }}>
-                                            <IoMdGlobe></IoMdGlobe>
-                                        </IconContext.Provider>
+                                    <div className='dets'>
+                                    <p >{profile.fullName}</p>
+                                    <p>{profile.headline}</p>
+                                    <span>
+                                        <ReactTimeAgo    
+                                            date={new Date(post.createdAt)} 
+                                            locale="en" 
+                                            timeStyle="mini-minute-now" 
+                                        />
+                                        <span>{post.createdAt !== post.updatedAt ? "・Edited":''}</span>
+                                        <span>・
+                                            <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.6px' } }}>
+                                                <IoMdGlobe></IoMdGlobe>
+                                            </IconContext.Provider>
+                                        </span>
                                     </span>
-                                </span>
+                                    </div>
                                 </div>
-                            </div>
                             </Link>
                             
                                 <div
