@@ -9,6 +9,7 @@ export default class Network extends React.Component {
         this.state = {expLogos: {}}
         this.done = false;
         this.companies = [];
+        this.count = 0;
     }
     
     componentDidMount() {
@@ -21,7 +22,8 @@ export default class Network extends React.Component {
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
-                this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png']}})
+                if (data[0]) this.companies.push(id)
+                this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : []}})
             })
     };
 
@@ -43,7 +45,10 @@ export default class Network extends React.Component {
     render() {
         
         if (!this.done) this.props.experiences.forEach((experience,i) => {
-            if (this.companies.length >= 36) return;
+            if (this.companies.length >= 36) {
+                this.done=true;
+                return;
+            }
             if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
             if (i === this.props.experiences.length-1) {
                 if (this.state.expLogos[experience.id]) this.done = true;
@@ -63,7 +68,6 @@ export default class Network extends React.Component {
                         let domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
                         if (experience.company === 'OptIn') domain = 'https://optin-ntwrk.herokuapp.com/';
                         if (!domain) return;
-                        this.companies.push(experience.id);
                         return(
                             <div className='exp-block' key={experience.id}>
                                 <img className='cover' src={window.company_cover} alt="" />
