@@ -6,10 +6,8 @@ export default class Network extends React.Component {
     constructor(props) {
         super(props);
         this.props.clearProfileItems();
-        this.state = {expLogos: {}}
+        this.state = {expLogos: {},companies: []}
         this.done = false;
-        this.companies = [];
-        this.count = 0;
     }
     
     componentDidMount() {
@@ -22,8 +20,8 @@ export default class Network extends React.Component {
             url: `https://autocomplete.clearbit.com/v1/companies/suggest?query=${institution.split(' ').join('').toLowerCase()}`,
         })
             .then((data) => {
-                if (this.companies.length>=36) this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : []}})
-                if (data[0]) this.companies.push(id)
+                if (this.state.companies.length >= 36) this.setState({expLogos: {...this.state.expLogos, [id]: data[0] ? [data[0]['logo'],data[0]['domain']] : []}})
+                if (data[0] || institution in NBATEAMS) this.setState({companies: [...this.state.companies, id]});
             })
     };
 
@@ -45,7 +43,7 @@ export default class Network extends React.Component {
     render() {
         
         if (!this.done) this.props.experiences.forEach((experience,i) => {
-            if (this.companies.length >= 36) {
+            if (this.state.companies.length >= 36) {
                 this.done=true;
                 return;
             }
@@ -63,7 +61,7 @@ export default class Network extends React.Component {
                 <div className={'connected'}> 
                 <h1>Companies within your network</h1>
                     {!this.done ? this.loading() : this.props.experiences.map((experience) => {
-                        if (!this.companies.includes(experience.id) && this.companies.length >= 36) return;
+                        if (!this.state.companies.includes(experience.id) && this.state.companies.length >= 36) return;
                         const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
                         let domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
                         if (experience.company === 'OptIn') domain = 'https://optin-ntwrk.herokuapp.com/';
