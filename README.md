@@ -6,6 +6,8 @@
 
 OptIn is a full stack clone of LinkedIn, where users can create their own profiles/resumes, connect with other users, view companies within their network, and make posts and comments on a news feed.
 
+<img src="app/assets/images/project_view.gif?raw=true" width="700">
+
 ## Technologies
 * React
 * Redux
