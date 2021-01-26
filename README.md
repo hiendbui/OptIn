@@ -18,16 +18,16 @@ OptIn is a full stack clone of LinkedIn, where users can create their own profil
 * AWS S3
 ## Features
 * Profile where users can upload a profile pic and add/update work experience, education, achievements, and more.
-<!-- <img src="app/assets/images/optin_logo.png?raw=true" width="700"> -->
+<img src="app/assets/images/profile.gif?raw=true" width="700">
 
 * News Feed for making/editing posts and comments on posts. Allows for users to attach a picture to a post.
-<!-- <img src="app/assets/images/optin_logo.png?raw=true" width="700"> -->
+<img src="app/assets/images/news_feed.gif?raw=true" width="700">
 
 * Network page to display connections and other OptIn users to connect with. Users can navigate to other profiles from here. 
-<!-- <img src="app/assets/images/optin_logo.png?raw=true" width="700"> -->
+<img src="app/assets/images/network.gif?raw=true" width="700">
 
 * Index of companies where OptIn users have worked at, with logos and links to each company's domain.
-<!-- <img src="app/assets/images/optin_logo.png?raw=true" width="700"> -->
+<img src="app/assets/images/jobs_feed.png?raw=true" width="700">
 
 ## Code
 In order to duplicate the experience of filling out one's LinkedIn profile, I ensured that the logos for companies would be immediately fetched (using ClearBit's logo API) and displayed once a user has added a work experience. If no logo was fetched for the company, then a default picture is used instead. I also did the same for schools that users upload as part of their education. 
