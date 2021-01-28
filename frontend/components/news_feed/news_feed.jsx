@@ -245,7 +245,7 @@ export default class NewsFeed extends React.Component {
                                             locale="en" 
                                             timeStyle="mini-minute-now" 
                                         />
-                                        <span>{post.createdAt !== post.updatedAt ? "・Edited":''}</span>
+                                        <span>{Date.parse(post.updatedAt) - Date.parse(post.createdAt) > 1000 ? "・Edited":''}</span>
                                         <span>・
                                             <IconContext.Provider value={{ style: { fontSize:"15px",position:'relative',top:'3.6px' } }}>
                                                 <IoMdGlobe></IoMdGlobe>
