@@ -7,7 +7,7 @@ import { fetchCurrentProfConnections } from '../../actions/connection_actions/co
 
 
 const mapStateToProps = state => ({
-    currentUser: state.entities.users[state.session.id],
+    profile:  state.entities.profiles[state.entities.users[state.session.id].profile?.id],
     postsArr: Object.values(state.entities.posts),
     posts: state.entities.posts,
     comments: Object.values(state.entities.comments),

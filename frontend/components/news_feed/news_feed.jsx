@@ -21,7 +21,7 @@ export default class NewsFeed extends React.Component {
         this.commentRefs = {};
         TimeAgo.addLocale(en)
 
-        this.profile = this.props.currentUser.profile
+        // this.props.profile = this.props.profile
         this.handleFile = this.handleFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -154,18 +154,18 @@ export default class NewsFeed extends React.Component {
                 <div className='user-profile'>
                     <img className='cover' src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt="" />
                     <div className='link'>
-                        <Link to={{ pathname: `/in/${this.profile?.fullName.toLowerCase().split(' ').join('-')}-${this.profile?.id}` } }>
+                        <Link to={{ pathname: `/in/${this.props.profile?.fullName.toLowerCase().split(' ').join('-')}-${this.props.profile?.id}` } }>
                     <div> 
                     <img className='profile-img' 
                         src={
-                            this.profile?.photoUrl ?
-                            this.profile.photoUrl :
+                            this.props.profile?.photoUrl ?
+                            this.props.profile.photoUrl :
                             'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'
                         }
                         width="75"
                         height="75" /> 
-                    <p className='name'>{this.profile?.fullName}</p></div></Link>
-                    <p className='headline'>{this.profile?.headline}</p>
+                    <p className='name'>{this.props.profile?.fullName}</p></div></Link>
+                    <p className='headline'>{this.props.profile?.headline}</p>
                     <br/>
                         
                         <Link  to='/mynetwork'>
@@ -211,7 +211,7 @@ export default class NewsFeed extends React.Component {
                         const edit = this.state.postEditId === post.id
                         if (profile)
                         return <div className="post" key={post.id}>
-                            {profile?.id === this.profile?.id ? 
+                            {profile?.id === this.props.profile?.id ? 
                                 <button onClick={this.showDropdown(post.id)} className='edit-btn'><BsThreeDots /></button> : ''
                             }
                             <div className={this.postId === post.id ? this.state.dropdown : 'hidden'}>
@@ -304,7 +304,7 @@ export default class NewsFeed extends React.Component {
                                                         />
                                                         {comment.createdAt !== comment.updatedAt ? " (edited)":''}
                                                     </span>
-                                                    {profile?.id === this.profile?.id ? 
+                                                    {profile?.id === this.props.profile?.id ? 
                                                         <button onClick={this.showCmtDropdown(comment.id)} className='edit-cmt-btn'><BsThreeDots /></button> : ''
                                                     }
                                                 </div>
@@ -347,8 +347,8 @@ export default class NewsFeed extends React.Component {
                                 }))}
                             <div className='add-cmmt'>
                                 <img className='img-comment' src={
-                                    this.profile?.photoUrl ?
-                                        this.profile.photoUrl :
+                                    this.props.profile?.photoUrl ?
+                                        this.props.profile.photoUrl :
                                         'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}
                                      />
                                 <form ref={this.commentRef(post.id)}  onSubmit={this.handleComment(post.id)}>
