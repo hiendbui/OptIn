@@ -99,16 +99,21 @@
             display: inline-block;
             left: 250px;
             width: 570px;
+            padding-top: 1.5px;
             #line {
                 border-bottom:.5px solid rgb(202, 202, 202);
                 margin-bottom: 15px;
+                width: 567px;
+                margin-left: 1.5px;
             }
         }
         .create-post {
             background: white;
             display:inline-block;
-            width: 570px;
-            height: 183px;
+            width: 567px;
+            margin: auto;
+            height: 185px;
+            
             -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
             box-shadow: 0 0 1.5px rgb(167, 167, 167);
             border-radius: 10px;
@@ -170,7 +175,8 @@
         }
         .post {
             background: white;
-            width: 570px;
+            width:567px;
+            margin-left: 1.5px;
             -webkit-box-shadow: 0 0 1.5px rgb(167, 167, 167);
             box-shadow: 0 0 1.5px rgb(167, 167, 167);
             border-radius: 7.5px;
