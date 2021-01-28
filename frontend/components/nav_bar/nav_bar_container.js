@@ -7,7 +7,8 @@ const mapStateToProps = (state,ownProps) => ({
     session: state.session,
     users: state.entities.users,
     profiles: state.entities.profiles,
-    history: ownProps.history
+    history: ownProps.history,
+    profile: state.entities.profiles[state.entities.users[state.session.id].profile?.id]
 })
 
 const mapDispatchToProps = dispatch => ({

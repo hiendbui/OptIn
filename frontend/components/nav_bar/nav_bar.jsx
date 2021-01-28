@@ -10,7 +10,7 @@ export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.resize;
-        this.state = { profile: this.props.users[this.props.session.id].profile, dropdown: 'hidden', width: window.innerWidth};
+        this.state = { dropdown: 'hidden', width: window.innerWidth};
         this.handleClick = this.handleClick.bind(this);
         this.props.fetchAllProfiles();
         this.goToMyProfile = this.goToMyProfile.bind(this);
@@ -19,14 +19,13 @@ export default class NavBar extends React.Component {
     handleClick(e) {
         e.preventDefault()
         this.state.dropdown === 'hidden' ? this.setState({ dropdown: 'revealed'}) : this.setState({ dropdown: 'hidden'})
-        this.setState({ profile: this.props.users[this.props.session.id].profile})
     }
 
     goToMyProfile() {
         const curProfId = this.props.users[this.props.session.id].profile.id;
         this.props.clearProfileItems();
         this.props.fetchProfile({id: curProfId});
-        this.props.history.push(`/in/${this.state.profile?.fullName.toLowerCase().split(' ').join('-')}-${curProfId}`);
+        this.props.history.push(`/in/${this.props.profile?.fullName.toLowerCase().split(' ').join('-')}-${curProfId}`);
     }
     render() {
         window.addEventListener('resize', (e) =>{
@@ -38,11 +37,11 @@ export default class NavBar extends React.Component {
         let fullName = ""
         let headline = ""
         
-        if (this.state.profile) {
-            fullName = this.state.profile.fullName;
-            headline = this.state.profile.headline
+        if (this.props.profile) {
+            fullName = this.props.profile.fullName;
+            headline = this.props.profile.headline
         }
-        const url = this.props.session && this.state.profile && this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'
+        const url = this.props.profile?.photoUrl ? this.props.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'
         return (
             <div>
             <div className={'nav-bar' +` ${this.resize}`}>
