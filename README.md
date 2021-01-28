@@ -30,7 +30,7 @@ OptIn is a full stack clone of LinkedIn, where users can create their own profil
 <img src="app/assets/images/jobs_feed.png?raw=true" width="700">
 
 ## Code
-In order to duplicate the experience of filling out one's LinkedIn profile, I ensured that the logos for companies would be immediately fetched (using ClearBit's logo API) and displayed once a user has added a work experience. If no logo was fetched for the company, then a default picture is used instead. I also did the same for schools that users upload as part of their education. 
+In order to duplicate the experience of filling out one's LinkedIn profile, I ensured that the logos for companies would be immediately fetched (using ClearBit's logo API) and displayed once a user has added a work experience. Each logo is also a link to the company's domain. If no logo was fetched for the company, then a default picture is used instead. I also did the same for schools that users upload as part of their education. 
 
 ```javascript
 // profile.jsx
