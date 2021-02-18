@@ -6,6 +6,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import SideBarContainer from '../sidebar/sidebar_container';
 import Main from './main';
 import Experience from './experience';
+import Education from './education';
 
 
 
@@ -327,58 +328,48 @@ export default class Profile extends React.Component {
                         <div className='experiences'>
                             <label>Experience
                             <div className={this.myProfile() ? 'reveal' : 'hide'}>  
-                            <div className='add' onClick={this.showItemForm('modalExp','add-exp')}><AiOutlinePlus /></div>
+                            <div className='add' onClick={this.showItemForm('modalExp','add-exp')}>
+                                <AiOutlinePlus />
+                            </div>
                             </div>  
                             </label>
                             {!this.done ? this.loading() : 
-                            this.state.experiences?.sort((a, b) => {
-                                return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
-                                    return <Experience
-                                                key={experience.id}
-                                                experience={experience}
-                                                logos={this.state.expLogos}
-                                                fetchLogo={this.fetchExpLogo.bind(this)}
-                                                myProfile={this.myProfile}
-                                                showForm={this.showItemForm}
-                                            />    
-                                })
+                                this.state.experiences?.sort((a, b) => {
+                                    return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
+                                        return <Experience
+                                                    key={experience.id}
+                                                    experience={experience}
+                                                    logos={this.state.expLogos}
+                                                    fetchLogo={this.fetchExpLogo.bind(this)}
+                                                    myProfile={this.myProfile}
+                                                    showForm={this.showItemForm}
+                                                />    
+                                    })
                             }
                         </div>
                         <div className='border'></div>
                         <div className='educations'>
                             <label>Education
                             <div className={this.myProfile() ? 'reveal' : 'hide'}>  
-                                <div className='add' onClick={this.showItemForm('modalEdu', 'add-edu')}><AiOutlinePlus /></div>
+                                <div className='add' onClick={this.showItemForm('modalEdu', 'add-edu')}>
+                                    <AiOutlinePlus />
+                                </div>
                             </div>
                             </label>
                  
-                            {!this.done ? this.loading() : this.state.educations?.sort((a, b) => { return b.endYear - a.endYear })?.map((education) => {
-                                if (!this.state.eduLogos[education.id]) this.fetchEduLogo(education.school, education.id);
-                                const domain = this.state.eduLogos[education.id]?.length > 1 ? `https://www.${this.state.eduLogos[education.id][1]}`: '' 
-                                const cursor = !domain ? 'default' : '';
-                                const event = !domain ? 'none' : '';
-                                return (
-                                <div key={education.id}>
-                                    <div></div>
-                                    <a href={domain} target="_blank" style={{cursor:cursor, pointerEvents:event }} >
-                                        <img src={education.photoUrl ? education.photoUrl : 
-                                            this.state.eduLogos[education.id] ? this.state.eduLogos[education.id][0] : 
-                                            this.fetchEduLogo(education.school, education.id)} width='60px' height='60px' 
-                                        />
-                                    </a>
-                                    <div className="education">
-                                        <div className='school'>{education.school}
-                                        <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
-                                            <div  onClick={this.showItemForm('modalEdu', 'edit-edu', education)}><ImPencil /></div>
-                                        </div>
-                                        </div>
-                                        <p className='degree-subject' >{education.degree ? education.degree : ""}{education.degree && education.subject ? ", " : ""}{education.subject}</p>
-                                        <p className='years'>{education.startYear} {education.startYear && education.endYear ? '-' : ''} {education.endYear}</p>
-                                        <p className='description'>{education.description}</p>
-                                        <br />
-                                    </div>
-                                </div>
-                            )})}
+                            {!this.done ? this.loading() : 
+                                this.state.educations?.sort((a, b) => {
+                                     return b.endYear - a.endYear })?.map((education) => {
+                                         return <Education
+                                                    key={education.id}
+                                                    education={education}
+                                                    logos={this.state.eduLogos}
+                                                    fetchLogo={this.fetchEduLogo.bind(this)}
+                                                    myProfile={this.myProfile}
+                                                    showForm={this.showItemForm}
+                                                />    
+                                    })
+                            }
                         </div>
                     </div>
                     <div className='ach-container'>
