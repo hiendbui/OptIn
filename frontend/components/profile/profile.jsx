@@ -5,6 +5,7 @@ import { GrClose } from 'react-icons/gr';
 import { AiOutlinePlus } from 'react-icons/ai';
 import SideBarContainer from '../sidebar/sidebar_container';
 import NBATEAMS from '../../util/nba_teams';
+import Main from './main';
 
 
 
@@ -28,9 +29,10 @@ export default class Profile extends React.Component {
             status:  ''
         };
         
-     
+        this.myProfile = this.myProfile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);  
         this.handleFile = this.handleFile.bind(this);
+        this.showForm = this.showForm.bind(this);
         this.showItemForm = this.showItemForm.bind(this);
         this.handleCreateExp = this.handleCreateExp.bind(this);
         this.handleEditExp = this.handleEditExp.bind(this);
@@ -298,22 +300,16 @@ export default class Profile extends React.Component {
        
         return (
             <div className='profile'>
-                <div className='main-profile'>
-                    <img src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" alt=""/>
-                    <div className='profile-info'>
-                        <img  
-                        src={this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'}/>
-                        <p>{this.state.profile.fullName}</p>
-                        <p>{this.state.profile.location}{this.state.profile.location ? this.props.connections && this.done ? this.props.connections > 1 ? ` · ${this.props.connections} connections` : ' · 1 connection' : '' : ''}</p>
-                        <p>{this.state.profile.headline}</p>
-                    </div>
-                    <div className={this.myProfile() ? 'reveal' : 'hide'}>
-                    <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
-                            <div onClick={this.showForm('modalMain')}><ImPencil /></div>
-                    </IconContext.Provider>
-                    </div>
-                    <button className={this.myProfile() ? 'hide' : 'connect'} onClick={this.handleConnect(this.props.profileId)}>{this.state.status}</button>
-                </div>
+                <Main
+                    profile={this.state.profile}
+                    profileId={this.props.profileId}
+                    myProfile={this.myProfile}
+                    showForm={this.showForm}
+                    handleConnect={this.handleConnect}
+                    connections={this.props.connections}
+                    status={this.state.status}
+                    done={this.done}
+                />
                 <div className='prof-details'>
                     <div className='about'>
                         <br/>
