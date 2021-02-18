@@ -4,8 +4,8 @@ import { IconContext } from "react-icons"
 import { GrClose } from 'react-icons/gr';
 import { AiOutlinePlus } from 'react-icons/ai';
 import SideBarContainer from '../sidebar/sidebar_container';
-import NBATEAMS from '../../util/nba_teams';
 import Main from './main';
+import Experience from './experience';
 
 
 
@@ -331,43 +331,18 @@ export default class Profile extends React.Component {
                             </div>  
                             </label>
                             {!this.done ? this.loading() : 
-                            this.state.experiences?.sort((a, b) => { return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
-                                if (!this.state.expLogos[experience.id]) this.fetchExpLogo(experience.company, experience.id);
-                                const company = experience.company === 'Philadelphia 76ers' ? 'sixers' : experience.company;
-                                let domain = experience.company in NBATEAMS ? `https://www.nba.com/${company.split(' ').slice(-1)[0].toLowerCase()}`: this.state.expLogos[experience.id]?.length > 1 ? `https://www.${this.state.expLogos[experience.id][1]}`: '' 
-                                if (experience.company === 'OptIn') domain = 'https://optin-ntwrk.herokuapp.com/';
-                                const cursor = !domain ? 'default' : '';
-                                const event = !domain ? 'none' : '';
-                                return (<div key={experience.id}>
-                                    <p fontSize="5px">{'\xa0'}</p>
-                                    <a href={domain} target="_blank" style={{cursor:cursor, pointerEvents:event }} >
-                                        <img src={
-                                        experience.company in NBATEAMS ? 
-                                            `https://sportsfly.cbsistatic.com/fly-62/bundles/sportsmediacss/images/team-logos/nba/${NBATEAMS[experience.company]}.svg` 
-                                            : experience.company === 'LinkedIn' || experience.company === 'OptIn' ? 'https://www.flaticon.com/svg/static/icons/svg/174/174857.svg' 
-                                            : experience.photoUrl ? experience.photoUrl : this.state.expLogos[experience.id] ? this.state.expLogos[experience.id][0] : 
-                                            '' }  width='60px' height='60px'>
-                                        </img>
-                                    </a>
-                                    <div className="experience">
-                                        <div className='title'>
-                                            <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
-                                                <div  onClick={this.showItemForm('modalExp', 'edit-exp', experience)}>
-                                                        <ImPencil />
-                                                </div>
-                                            </div>
-                                            {experience.title}
-                                        </div>
-                                        <p className='company'>{experience.company}</p>
-                                        <p className='dates'>{experience.startDate} - {experience.endDate}</p>
-                                        <p className='location'>{experience.location}</p>
-                                        <p className='description'>{experience.description}</p>
-                                        <br/>
-                                    </div>
-                                </div>
-                                )
-                             
-                            })}
+                            this.state.experiences?.sort((a, b) => {
+                                return this.orderDates(b.endDate) - this.orderDates(a.endDate)})?.map((experience) => {
+                                    return <Experience
+                                                key={experience.id}
+                                                experience={experience}
+                                                logos={this.state.expLogos}
+                                                fetchLogo={this.fetchExpLogo.bind(this)}
+                                                myProfile={this.myProfile}
+                                                showForm={this.showItemForm}
+                                            />    
+                                })
+                            }
                         </div>
                         <div className='border'></div>
                         <div className='educations'>
