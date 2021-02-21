@@ -7,6 +7,7 @@ import SideBarContainer from '../sidebar/sidebar_container';
 import Main from './main';
 import Experience from './experience';
 import Education from './education';
+import Achievement from './achievement';
 
 
 
@@ -376,22 +377,18 @@ export default class Profile extends React.Component {
                     <div className='achievements'>
                         <label>Achievements
                             <div className={this.myProfile() ? 'reveal' : 'hide'}> 
-                                <div className='add' onClick={this.showItemForm('modalAch', 'add-ach')}><AiOutlinePlus /></div>
+                                <div className='add' onClick={this.showItemForm('modalAch', 'add-ach')}>
+                                    <AiOutlinePlus />
+                                </div>
                             </div>
                         </label>
                         {!this.done ? this.loading() : this.state.achievements?.map((achievement) => (
-                            <div key={achievement.id}>
-                                <div className="achievement">
-                                    <div className='title'>{achievement.title}
-                                    <div id='edit' className={this.myProfile() ? 'reveal' : 'hide'}>
-                                         <div  onClick={this.showItemForm('modalAch', 'edit-ach', achievement)}><ImPencil /></div>
-                                    </div>
-                                    </div>
-                                    <p className='issuer-year' >{achievement.issuer ? achievement.issuer : ""}{achievement.issuer && achievement.year ? " · " : ""}{achievement.year}</p>
-                                    <p className='description'>{achievement.description}</p>
-                                    <br />
-                                </div>
-                            </div>
+                            <Achievement
+                                key={achievement.id}
+                                achievement={achievement}
+                                myProfile={this.myProfile}
+                                showForm={this.showItemForm}
+                            />    
                         ))}
                     </div>
                     </div>
