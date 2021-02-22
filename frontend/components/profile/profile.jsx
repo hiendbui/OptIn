@@ -5,6 +5,7 @@ import { GrClose } from 'react-icons/gr';
 import { AiOutlinePlus } from 'react-icons/ai';
 import SideBarContainer from '../sidebar/sidebar_container';
 import Main from './main';
+import MainForm from './main_form';
 import Experience from './experience';
 import Education from './education';
 import Achievement from './achievement';
@@ -32,10 +33,13 @@ export default class Profile extends React.Component {
         };
         
         this.myProfile = this.myProfile.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);  
         this.handleFile = this.handleFile.bind(this);
+        this.setRef = this.setRef.bind(this);
         this.showForm = this.showForm.bind(this);
         this.showItemForm = this.showItemForm.bind(this);
+        this.closeForm = this.closeForm.bind(this);
         this.handleCreateExp = this.handleCreateExp.bind(this);
         this.handleEditExp = this.handleEditExp.bind(this);
         this.handleDeleteExp = this.handleDeleteExp.bind(this);
@@ -283,6 +287,10 @@ export default class Profile extends React.Component {
         )
     }
 
+    setRef(el, ref) {
+        this[ref] = el;
+    }
+
     render() {
         if (!this.props.profile) {
             this.state.profile = {
@@ -311,6 +319,16 @@ export default class Profile extends React.Component {
                     connections={this.props.connections}
                     status={this.state.status}
                     done={this.done}
+                />
+                <MainForm
+                    modalMain={this.state.modalMain}
+                    modalAbout={this.state.modalAbout}  
+                    closeForm={this.closeForm} 
+                    profile={this.state.profile} 
+                    handleSubmit={this.handleSubmit} 
+                    handleFile={this.handleFile} 
+                    handleChange={this.handleChange}
+                    setRef={this.setRef}
                 />
                 <div className='prof-details'>
                     <div className='about'>
@@ -393,85 +411,6 @@ export default class Profile extends React.Component {
                     </div>
                     </div>
                 </div>
-                <div className={`${this.state.modalMain}`}>
-
-                    <div className='modal-screen'>
-
-                    </div>
-                    <div className='modal-form'>
-                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
-                            <div className='close' onClick={this.closeForm('modalMain','mainRef')}><GrClose /></div>
-                        </IconContext.Provider>
-                       <h1>Edit intro</h1>
-                    <img src="https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm" width='100%' />
-                        <div>
-                        <img
-                            src={this.state.profile.photoUrl ? this.state.profile.photoUrl : 'https://optin-dev.s3-us-west-1.amazonaws.com/default_profile.png'} 
-                            width='120px'
-                            height='120px'
-                            className='profile-pic'
-                            />
-                        </div>
-                       <br/>
-                       <br/>
-                       <br/>
-                        <form ref={(el) => this['mainRef'] = el} onSubmit={this.handleSubmit}>
-                            <label>Update Profile Pic</label>
-                             <br />
-                            <input className='img-input' type="file" onChange={this.handleFile} />
-                            <br />
-                            <br/>
-                            <div >
-                                <label>Full Name *
-                                </label>
-                                <br/>
-                                <input defaultValue={this.state.profile.fullName} required="required" type="text" onChange={this.handleChange('fullName')}/>    
-                            </div>
-                             <br />
-                            <div >
-                                <label>Headline *
-                                </label>
-                                 <br />
-                                <input defaultValue={this.state.profile.headline} required="required" type="text" onChange={this.handleChange('headline')}/>
-                            </div>
-                             <br />
-                             <div >
-                                 <label>Location *
-                                </label>
-                                 <br />
-                                <input defaultValue={this.state.profile.location} required="required" type="text" onChange={this.handleChange('location')} />
-                             </div>
-                             <br />
-                            <div className="submit">
-                                <button type="submit">Save</button>
-                             </div>
-                             <br/>
-                        </form>
-                    </div>
-                </div>
-                
-                <div className={`${this.state.modalAbout}`}>
-                    <div className='modal-screen'>
-
-                    </div>
-
-                    <div className='modal-about-form'>
-                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '15px' } }}>
-                            <div className='close' onClick={this.closeForm('modalAbout')}><GrClose /></div>
-                        </IconContext.Provider>
-                        
-                        <h1>Edit about</h1>
-                        <form ref={(el) => this['aboutRef'] = el} onSubmit={this.handleSubmit}>
-                            <label>Summary</label>
-                            <br/>
-                            <textarea defaultValue={this.state.profile.description} cols="30" rows="10" onChange={this.handleChange('description')}></textarea>
-                            <div className="submit">
-                                <button type="submit">Save</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
                 
                 <div className={`${this.state.modalExp}`}>
                     <div className='modal-screen'>
