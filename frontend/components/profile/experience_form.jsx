@@ -11,7 +11,9 @@ export default ({ modal, experience, closeForm,  handleCreate, handleEdit, handl
 
             <div className='modal-exp-form'>
                 <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
-                    <div className='close' onClick={closeForm('modal','expRef')}><GrClose /></div>
+                    <div className='close' onClick={closeForm('modalExp','expRef')}>
+                        <GrClose />
+                    </div>
                 </IconContext.Provider>
                         
                 <h1>{`${modal.split('-')[0].charAt(0).toUpperCase() + modal.split('-')[0].slice(1)}`} experience</h1>
@@ -21,42 +23,70 @@ export default ({ modal, experience, closeForm,  handleCreate, handleEdit, handl
                             <label>Title *
                         </label>
                             <br />
-                        <input defaultValue={experience ? experience.title : ""} required="required" type="text" onChange={handleChange('title')} />
+                        <input 
+                            defaultValue={experience ? experience.title : ""} 
+                            required="required" 
+                            type="text" 
+                            onChange={handleChange('title')} 
+                        />
                         </div>
                         <br />
                         <div >
                             <label>Company *
                         </label>
                             <br />
-                        <input defaultValue={experience ? experience.company : ""} required="required" type="text" onChange={handleChange('company')} />
+                        <input 
+                            defaultValue={experience ? experience.company : ""} 
+                            required="required" 
+                            type="text" 
+                            onChange={handleChange('company')} />
                         </div>
                         <br />
                         <div >
                             <label>Start Date (e.g. Jun 2018) *
                         </label>
                             <br />
-                        <input defaultValue={experience ? experience.startDate : ""} required="required" type="text" onChange={handleChange('start_date')} />
+                        <input 
+                            defaultValue={experience ? experience.startDate : ""} 
+                            required="required" 
+                            type="text" 
+                            onChange={handleChange('start_date')} />
                         </div>
                         <br />
                         <div >
                             <label>End Date (if current position, state 'Present') *
                             </label>
                             <br />
-                        <input defaultValue={experience ? experience.endDate : ""} required="required" type="text" onChange={handleChange('end_date')} />
+                        <input 
+                            defaultValue={experience ? experience.endDate : ""} 
+                            required="required" 
+                            type="text" 
+                            onChange={handleChange('end_date')} 
+                        />
                         </div>
                         <br/>
                         <div >
                             <label>Location
                                 </label>
                             <br />
-                        <input defaultValue={experience ? experience.location : ""}  type="text" onChange={handleChange('location')} />
+                        <input 
+                            defaultValue={experience ? experience.location : ""}  
+                            type="text" 
+                            onChange={handleChange('location')} 
+                        />
                         </div>
                         <br/>
                         <div > 
                             <label>Description
                                 </label>
                             <br /> 
-                        <textarea cols="30" rows="5" defaultValue={experience ? experience.description : ""} type="textarea" onChange={handleChange('description')}></textarea>
+                        <textarea 
+                            cols="30" 
+                            rows="5" 
+                            defaultValue={experience ? experience.description : ""} 
+                            type="textarea"
+                            onChange={handleChange('description')}>
+                        </textarea>
                         </div>
                         <br/>
                         <div className='delete'>
