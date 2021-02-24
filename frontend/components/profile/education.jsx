@@ -23,8 +23,12 @@ export default ({ education, logos, fetchLogo, myProfile, showForm } ) => {
                     </div>
                 </div>
                 </div>
-                <p className='degree-subject'>{education.degree} {education.degree && education.subject ? `, ` : ""} {education.subject}</p>
-                <p className='years'>{education.startYear} {education.startYear && education.endYear ? '-' : ''} {education.endYear}</p>
+                <p className='degree-subject'>
+                    {education.degree}{education.degree && education.subject ? `, ` : ""}{education.subject}
+                </p>
+                <p className='years'>
+                    {education.startYear} {education.startYear && education.endYear ? '-' : ''} {education.endYear}
+                </p>
                 <p className='description'>{education.description}</p>
                 <br />
             </div>

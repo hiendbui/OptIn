@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 export default ({ modal, experience, closeForm,  handleCreate, handleEdit, handleChange, handleDelete, setRef}) => {
 
     return (
-        <div className={`${modal}`}>
+        <div className={modal}>
             <div className='modal-screen'>
             </div>
 

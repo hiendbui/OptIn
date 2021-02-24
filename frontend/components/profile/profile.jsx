@@ -11,6 +11,7 @@ import ExperienceForm from './experience_form';
 import Education from './education';
 import EducationForm from './education_form';
 import Achievement from './achievement';
+import AchievementForm from './achievement_form';
 
 
 
@@ -39,9 +40,6 @@ export default class Profile extends React.Component {
         this.showForm = this.showForm.bind(this);
         this.showItemForm = this.showItemForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
-        this.handleCreateAch = this.handleCreateAch.bind(this);
-        this.handleEditAch = this.handleEditAch.bind(this);
-        this.handleDeleteAch = this.handleDeleteAch.bind(this);
         this.handleConnect = this.handleConnect.bind(this);
         this.defaultPic = ['https://optin-dev.s3-us-west-1.amazonaws.com/default_company.png']
     }
@@ -423,62 +421,16 @@ export default class Profile extends React.Component {
                             />    
                         ))}
                     </div>
-                    </div>
-                </div>
-                
-                
-                
-
-                <div className={`${this.state.modalAch}`}>
-                    <div className='modal-screen'>
-
-                    </div>
-
-                    <div className='modal-ach-form'>
-                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
-                            <div className='close' onClick={this.closeForm('modalAch', 'achRef')}><GrClose /></div>
-                        </IconContext.Provider>
-
-                        <h1>{`${this.state.modalAch.split('-')[0].charAt(0).toUpperCase() + this.state.modalAch.split('-')[0].slice(1)}`} achievement</h1>
-                        <form ref={(el) => this['achRef'] = el}
-                            onSubmit={!this.state.achievement ? this.handleCreateAch : this.state.achievement.id ? this.handleEditAch : this.handleCreateAch}>
-                            <div >
-                                <label>Title *
-                                </label>
-                                <br />
-                                <input defaultValue={this.state.achievement ? this.state.achievement.title : ""} required="required" type="text" onChange={this.handleAchChange('title')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>Issuer
-                                </label>
-                                <br />
-                                <input defaultValue={this.state.achievement ? this.state.achievement.issuer : ""} type="text" onChange={this.handleAchChange('issuer')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>Year(s)
-                                </label>
-                                <br />
-                                <input defaultValue={this.state.achievement ? this.state.achievement.year : ""} type="text" onChange={this.handleAchChange('year')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>Description
-                                        </label>
-                                <br />
-
-                                <textarea cols="30" rows="5" defaultValue={this.state.achievement ? this.state.achievement.description : ""} type="textarea" onChange={this.handleAchChange('description')}></textarea>
-                            </div>
-                            <br />
-                            <div className='delete'>
-                                <button onClick={this.handleDeleteAch(this.state.achievement)} type="submit">Delete</button>
-                            </div>
-                            <div className="submit">
-                                <button type="submit">Save</button>
-                            </div>
-                            <br />
-                        </form>
+                    <AchievementForm
+                        modal={this.state.modalAch} 
+                        achievement={this.state.achievement} 
+                        closeForm={this.closeForm} 
+                        handleCreate={this.handleCreateAch.bind(this)} 
+                        handleEdit={this.handleEditAch.bind(this)} 
+                        handleChange={this.handleAchChange.bind(this)} 
+                        handleDelete={this.handleDeleteAch.bind(this)} 
+                        setRef={this.setRef}
+                    />
                     </div>
                 </div>
                 <br/>
