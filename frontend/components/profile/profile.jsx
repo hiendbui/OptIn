@@ -9,6 +9,7 @@ import MainForm from './main_form';
 import Experience from './experience';
 import ExperienceForm from './experience_form';
 import Education from './education';
+import EducationForm from './education_form';
 import Achievement from './achievement';
 
 
@@ -38,9 +39,6 @@ export default class Profile extends React.Component {
         this.showForm = this.showForm.bind(this);
         this.showItemForm = this.showItemForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
-        this.handleCreateEdu = this.handleCreateEdu.bind(this);
-        this.handleEditEdu = this.handleEditEdu.bind(this);
-        this.handleDeleteEdu = this.handleDeleteEdu.bind(this);
         this.handleCreateAch = this.handleCreateAch.bind(this);
         this.handleEditAch = this.handleEditAch.bind(this);
         this.handleDeleteAch = this.handleDeleteAch.bind(this);
@@ -396,6 +394,16 @@ export default class Profile extends React.Component {
                                     })
                             }
                         </div>
+                        <EducationForm
+                            modal={this.state.modalEdu} 
+                            education={this.state.education} 
+                            closeForm={this.closeForm} 
+                            handleCreate={this.handleCreateEdu.bind(this)} 
+                            handleEdit={this.handleEditEdu.bind(this)} 
+                            handleChange={this.handleEduChange.bind(this)} 
+                            handleDelete={this.handleDeleteEdu.bind(this)} 
+                            setRef={this.setRef}
+                        />
                     </div>
                     <div className='ach-container'>
                     <div className='achievements'>
@@ -419,73 +427,7 @@ export default class Profile extends React.Component {
                 </div>
                 
                 
-                {/* Modal Form for education */}
-                <div className={`${this.state.modalEdu}`}>
-                    <div className='modal-screen'>
-
-                    </div>
-
-                    <div className='modal-edu-form'>
-                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
-                            <div className='close' onClick={this.closeForm('modalEdu', 'eduRef')}><GrClose /></div>
-                        </IconContext.Provider>
-
-                        <h1>{`${this.state.modalEdu.split('-')[0].charAt(0).toUpperCase() + this.state.modalEdu.split('-')[0].slice(1)}`} education</h1>
-                        <form ref={(el) => this['eduRef'] = el}
-                            onSubmit={!this.state.education ? this.handleCreateEdu : this.state.education.id ? this.handleEditEdu : this.handleCreateEdu}>
-                            <div >
-                                <label>School *
-                                </label>
-                                <br />
-                                <input defaultValue={this.state.education ? this.state.education.school : ""} required="required" type="text" onChange={this.handleEduChange('school')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>Degree 
-                                </label>
-                                <br />
-                                <input defaultValue={this.state.education ? this.state.education.degree : ""}  type="text" onChange={this.handleEduChange('degree')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>Subject 
-                                </label>
-                                <br />
-                                <input defaultValue={this.state.education ? this.state.education.subject : ""}  type="text" onChange={this.handleEduChange('subject')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>Start Year
-                                    </label>
-                                <br />
-                                <input defaultValue={this.state.education ? this.state.education.startYear : ""}  type="text" onChange={this.handleEduChange('start_year')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>End Year
-                                        </label>
-                                <br />
-                                <input defaultValue={this.state.education ? this.state.education.endYear : ""} type="text" onChange={this.handleEduChange('end_year')} />
-                            </div>
-                            <br />
-                            <div >
-                                <label>Description
-                                        </label>
-                                <br />
-
-                                <textarea cols="30" rows="5" defaultValue={this.state.education ? this.state.education.description : ""} type="textarea" onChange={this.handleEduChange('description')}></textarea>
-                            </div>
-                            <br />
-                            <div className='delete'>
-                                <button onClick={this.handleDeleteEdu(this.state.education)} type="submit">Delete</button>
-                            </div>
-                            <div className="submit">
-                                <button type="submit">Save</button>
-                            </div>
-                            <br />
-                        </form>
-                    </div>
-                </div>
+                
 
                 <div className={`${this.state.modalAch}`}>
                     <div className='modal-screen'>

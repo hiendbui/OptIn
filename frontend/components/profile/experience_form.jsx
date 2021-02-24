@@ -39,7 +39,8 @@ export default ({ modal, experience, closeForm,  handleCreate, handleEdit, handl
                             defaultValue={experience ? experience.company : ""} 
                             required="required" 
                             type="text" 
-                            onChange={handleChange('company')} />
+                            onChange={handleChange('company')} 
+                        />
                         </div>
                         <br />
                         <div >
@@ -50,7 +51,8 @@ export default ({ modal, experience, closeForm,  handleCreate, handleEdit, handl
                             defaultValue={experience ? experience.startDate : ""} 
                             required="required" 
                             type="text" 
-                            onChange={handleChange('start_date')} />
+                            onChange={handleChange('start_date')} 
+                        />
                         </div>
                         <br />
                         <div >
