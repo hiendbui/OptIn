@@ -7,6 +7,7 @@ import SideBarContainer from '../sidebar/sidebar_container';
 import Main from './main';
 import MainForm from './main_form';
 import Experience from './experience';
+import ExperienceForm from './experience_form';
 import Education from './education';
 import Achievement from './achievement';
 
@@ -33,16 +34,10 @@ export default class Profile extends React.Component {
         };
         
         this.myProfile = this.myProfile.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);  
-        this.handleFile = this.handleFile.bind(this);
         this.setRef = this.setRef.bind(this);
         this.showForm = this.showForm.bind(this);
         this.showItemForm = this.showItemForm.bind(this);
         this.closeForm = this.closeForm.bind(this);
-        this.handleCreateExp = this.handleCreateExp.bind(this);
-        this.handleEditExp = this.handleEditExp.bind(this);
-        this.handleDeleteExp = this.handleDeleteExp.bind(this);
         this.handleCreateEdu = this.handleCreateEdu.bind(this);
         this.handleEditEdu = this.handleEditEdu.bind(this);
         this.handleDeleteEdu = this.handleDeleteEdu.bind(this);
@@ -325,9 +320,9 @@ export default class Profile extends React.Component {
                     modalAbout={this.state.modalAbout}  
                     closeForm={this.closeForm} 
                     profile={this.state.profile} 
-                    handleSubmit={this.handleSubmit} 
-                    handleFile={this.handleFile} 
-                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit.bind(this)} 
+                    handleFile={this.handleFile.bind(this)} 
+                    handleChange={this.handleChange.bind(this)}
                     setRef={this.setRef}
                 />
                 <div className='prof-details'>
@@ -366,6 +361,17 @@ export default class Profile extends React.Component {
                                     })
                             }
                         </div>
+                        <ExperienceForm
+                            modal={this.state.modalExp} 
+                            experience={this.state.experience} 
+                            closeForm={this.closeForm} 
+                            handleCreate={this.handleCreateExp.bind(this)} 
+                            handleEdit={this.handleEditExp.bind(this)} 
+                            handleChange={this.handleExpChange.bind(this)} 
+                            handleDelete={this.handleDeleteExp.bind(this)} 
+                            setRef={this.setRef}
+                        />
+    
                         <div className='border'></div>
                         <div className='educations'>
                             <label>Education
@@ -412,72 +418,7 @@ export default class Profile extends React.Component {
                     </div>
                 </div>
                 
-                <div className={`${this.state.modalExp}`}>
-                    <div className='modal-screen'>
-
-                    </div>
-
-                    <div className='modal-exp-form'>
-                        <IconContext.Provider value={{ style: { fontSize: '20px', float: 'right', margin: '5px' } }}>
-                            <div className='close' onClick={this.closeForm('modalExp','expRef')}><GrClose /></div>
-                        </IconContext.Provider>
-                        
-                        <h1>{`${this.state.modalExp.split('-')[0].charAt(0).toUpperCase() + this.state.modalExp.split('-')[0].slice(1)}`} experience</h1>
-                        <form ref={(el) => this['expRef'] = el} 
-                            onSubmit={!this.state.experience ? this.handleCreateExp : this.state.experience.id ? this.handleEditExp : this.handleCreateExp}>                                
-                                <div >
-                                    <label>Title *
-                                </label>
-                                    <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.title : ""} required="required" type="text" onChange={this.handleExpChange('title')} />
-                                </div>
-                                <br />
-                                <div >
-                                    <label>Company *
-                                </label>
-                                    <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.company : ""} required="required" type="text" onChange={this.handleExpChange('company')} />
-                                </div>
-                                <br />
-                                <div >
-                                    <label>Start Date (e.g. Jun 2018) *
-                                </label>
-                                    <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.startDate : ""} required="required" type="text" onChange={this.handleExpChange('start_date')} />
-                                </div>
-                                <br />
-                                <div >
-                                    <label>End Date (if current position, state 'Present') *
-                                    </label>
-                                    <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.endDate : ""} required="required" type="text" onChange={this.handleExpChange('end_date')} />
-                                </div>
-                                <br/>
-                                <div >
-                                    <label>Location
-                                        </label>
-                                    <br />
-                                <input defaultValue={this.state.experience ? this.state.experience.location : ""}  type="text" onChange={this.handleExpChange('location')} />
-                                </div>
-                                <br/>
-                                <div > 
-                                    <label>Description
-                                        </label>
-                                    <br /> 
-
-                                <textarea cols="30" rows="5" defaultValue={this.state.experience ? this.state.experience.description : ""} type="textarea" onChange={this.handleExpChange('description')}></textarea>
-                                </div>
-                                <br/>
-                                <div className='delete'>
-                                    <button onClick={this.handleDeleteExp(this.state.experience)} type="submit">Delete</button>
-                                </div>
-                                <div className="submit">
-                                <button type="submit">Save</button>
-                                </div>
-                                <br />
-                        </form>
-                    </div>
-                </div>
+                
                 {/* Modal Form for education */}
                 <div className={`${this.state.modalEdu}`}>
                     <div className='modal-screen'>
